@@ -15,6 +15,43 @@
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(8px);
         }
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(24px);
+            animation: fadeInUp 0.9s ease-out forwards;
+        }
+        .feature-card {
+            opacity: 0;
+            transform: translateY(16px);
+            animation: fadeInUp 0.9s ease-out forwards;
+        }
+        .btn-raise {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .btn-raise:hover {
+            transform: translateY(-4px);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in,
+            .fade-in-up,
+            .feature-card,
+            .btn-raise {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
     </style>
 <!-- Tailwind Configuration -->
 <script id="tailwind-config">
@@ -120,10 +157,10 @@
 <div class="flex justify-between items-center px-margin-desktop h-16 w-full max-w-max-width mx-auto">
 <div class="font-headline-md text-headline-md font-bold text-primary">a4u.com</div>
 <div class="hidden md:flex gap-8 items-center h-full">
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors h-full flex items-center" href="#">대시보드</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors h-full flex items-center" href="#">이력서 생성기</a>
-<a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1 h-full flex items-center" href="#">채용 트래커</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors h-full flex items-center" href="#">프로필 관리</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors h-full flex items-center" href="dashboard.html">대시보드</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors h-full flex items-center" href="select.html">이력서 생성기</a>
+<a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1 h-full flex items-center" href="timeline.html">채용 트래커</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors h-full flex items-center" href="main.html">프로필 관리</a>
 </div>
 <div class="flex items-center gap-4">
 <button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full transition-all" data-icon="notifications">notifications</button>
@@ -169,9 +206,9 @@
 </div>
 </aside>
 <!-- Main Content -->
-<main class="pt-24 pb-12 lg:pl-64 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
+<main class="pt-24 pb-12 lg:pl-64 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto fade-in">
 <!-- Header Section -->
-<header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6 fade-in-up" style="animation-delay:0.12s;">
 <div>
 <h1 class="font-headline-lg text-headline-lg text-on-background mb-2">나의 커리어 여정</h1>
 <p class="font-body-md text-body-md text-on-surface-variant">경력의 주요 이정표와 성과를 시각적으로 확인하세요.</p>
@@ -185,7 +222,7 @@
 </div>
 </header>
 <!-- Timeline Container -->
-<div class="relative">
+<div class="relative fade-in-up" style="animation-delay:0.18s;">
 <!-- Continuous Timeline Line -->
 <div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 timeline-line transform md:-translate-x-1/2 opacity-20"></div>
 <div class="space-y-12 relative">
@@ -201,7 +238,7 @@
 </div>
 <!-- Add Entry Button -->
 <div class="mt-16 flex justify-center">
-<button class="flex items-center gap-2 px-8 py-3 bg-white border border-dashed border-primary text-primary rounded-xl font-label-md text-label-md hover:bg-primary/5 transition-colors active:scale-95 group">
+<button class="flex items-center gap-2 px-8 py-3 bg-white border border-dashed border-primary text-primary rounded-xl font-label-md text-label-md hover:bg-primary/5 transition-colors active:scale-95 group btn-raise">
 <span class="material-symbols-outlined group-hover:rotate-90 transition-transform" data-icon="add">add</span>
             경력 항목 추가
         </button>

@@ -31,6 +31,43 @@
         .form-section.active {
             display: block;
         }
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(24px);
+            animation: fadeInUp 0.9s ease-out forwards;
+        }
+        .feature-card {
+            opacity: 0;
+            transform: translateY(16px);
+            animation: fadeInUp 0.9s ease-out forwards;
+        }
+        .btn-raise {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .btn-raise:hover {
+            transform: translateY(-4px);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in,
+            .fade-in-up,
+            .feature-card,
+            .btn-raise {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
     </style>
 <script id="tailwind-config">
         tailwind.config = {
@@ -135,10 +172,10 @@
 <div class="flex items-center gap-8">
 <span class="font-headline-md text-headline-md font-bold text-primary">a4u.com</span>
 <nav class="hidden md:flex gap-6">
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">대시보드</a>
-<a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1" href="#">이력서 빌더</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">채용 추적</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">내 프로필</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="dashboard.html">대시보드</a>
+<a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1" href="builder.html">이력서 빌더</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="timeline.html">채용 추적</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="main.html">내 프로필</a>
 </nav>
 </div>
 <div class="flex items-center gap-4">
@@ -149,7 +186,7 @@
 </div>
 </header>
 <!-- Toolbar (Contextual) -->
-<div class="fixed top-16 left-0 right-0 h-14 bg-white border-b border-border-subtle z-40 px-margin-desktop flex items-center justify-between">
+<div class="fixed top-16 left-0 right-0 h-14 bg-white border-b border-border-subtle z-40 px-margin-desktop flex items-center justify-between fade-in-up" style="animation-delay:0.12s;">
 <div class="flex items-center gap-4">
 <button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors font-label-md text-label-md">
 <span class="material-symbols-outlined" style="font-variation-settings: 'opsz' 20">dashboard_customize</span>
@@ -169,9 +206,9 @@
 </div>
 </div>
 <!-- Main Content Shell -->
-<main class="flex min-h-screen pt-[120px]">
+<main class="flex min-h-screen pt-[120px] fade-in">
 <!-- SideNavBar -->
-<aside class="h-screen w-64 fixed left-0 top-0 pt-20 bg-surface-gray flex flex-col gap-2 py-4">
+<aside class="h-screen w-64 fixed left-0 top-0 pt-20 bg-surface-gray flex flex-col gap-2 py-4 fade-in-up" style="animation-delay:0.18s;">
 <div class="px-6 py-4 flex items-center gap-3">
 <div class="w-10 h-12 bg-white rounded shadow-sm flex items-center justify-center overflow-hidden">
 <div class="w-full h-1 bg-primary mb-6"></div>
@@ -206,17 +243,17 @@
             </button>
 </div>
 <div class="mt-auto px-4 pb-8">
-<button class="w-full flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-dashed border-outline-variant text-outline hover:border-primary hover:text-primary transition-all font-label-md text-label-md">
+<a class="w-full flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-dashed border-outline-variant text-outline hover:border-primary hover:text-primary transition-all font-label-md text-label-md" href="select.html">
 <span class="material-symbols-outlined">add</span>
                 새 이력서 만들기
-            </button>
+            </a>
 </div>
 </aside>
 <!-- Builder Interface -->
 <div class="ml-64 w-full flex">
 <!-- Form Side -->
 <div class="w-1/2 p-margin-desktop overflow-y-auto max-h-[calc(100vh-120px)]">
-<div class="form-section active" id="Personal Info">
+<div class="form-section active fade-in-up" id="Personal Info" style="animation-delay:0.2s;">
 <h1 class="font-headline-lg text-headline-lg mb-8">인적 사항</h1>
 <div class="space-y-6">
 <div class="grid grid-cols-2 gap-4">

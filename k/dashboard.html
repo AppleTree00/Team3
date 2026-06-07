@@ -15,6 +15,43 @@
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(8px);
         }
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(24px);
+            animation: fadeInUp 0.9s ease-out forwards;
+        }
+        .feature-card {
+            opacity: 0;
+            transform: translateY(16px);
+            animation: fadeInUp 0.9s ease-out forwards;
+        }
+        .btn-raise {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .btn-raise:hover {
+            transform: translateY(-4px);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in,
+            .fade-in-up,
+            .feature-card,
+            .btn-raise {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -127,10 +164,10 @@
 <div class="flex items-center gap-8">
 <span class="font-headline-md text-headline-md font-bold text-primary">a4u.com</span>
 <nav class="hidden md:flex items-center gap-6">
-<a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1" href="#">대시보드</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">이력서 작성기</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">채용 트래커</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">내 프로필</a>
+<a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1" href="dashboard.html">대시보드</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="select.html">이력서 작성기</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="timeline.html">채용 트래커</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="main.html">내 프로필</a>
 </nav>
 </div>
 <div class="flex items-center gap-4">
@@ -147,16 +184,16 @@
 </div>
 </div>
 </header>
-<main class="pt-24 pb-12 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
+<main class="pt-24 pb-12 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto fade-in">
 <!-- Welcome Section -->
-<section class="mb-8">
+<section class="mb-8 fade-in-up" style="animation-delay:0.12s;">
 <h1 class="font-headline-lg text-headline-lg text-on-background mb-2">다시 오신 것을 환영합니다, 알렉산더님</h1>
 <p class="font-body-md text-body-md text-on-surface-variant">이번 주에 2개의 인터뷰 일정이 있습니다. 행운을 빌어요!</p>
 </section>
 <!-- Bento Grid: Main Insights -->
 <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-gutter">
 <!-- Resume Strength Card -->
-<div class="md:col-span-4 bg-surface-container-lowest rounded-xl p-6 shadow-[0px_4px_12px_rgba(30,41,59,0.05)] border border-border-subtle flex flex-col justify-between">
+<div class="md:col-span-4 bg-surface-container-lowest rounded-xl p-6 shadow-[0px_4px_12px_rgba(30,41,59,0.05)] border border-border-subtle flex flex-col justify-between feature-card" style="animation-delay:0.16s;">
 <div>
 <div class="flex justify-between items-start mb-4">
 <h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">이력서 경쟁력</h3>
@@ -171,10 +208,10 @@
 </div>
 </div>
 <p class="mt-6 text-body-sm text-on-surface-variant">"프로젝트" 섹션을 추가하여 점수를 12점 더 높여보세요.</p>
-<button class="mt-4 w-full py-3 rounded-lg border border-primary text-primary font-label-md hover:bg-primary-fixed transition-colors">이력서 보완하기</button>
+<button class="mt-4 w-full py-3 rounded-lg border border-primary text-primary font-label-md hover:bg-primary-fixed transition-colors btn-raise">이력서 보완하기</button>
 </div>
 <!-- Quick Actions -->
-<div class="md:col-span-4 bg-primary-container text-on-primary-container rounded-xl p-6 shadow-lg flex flex-col gap-4 relative overflow-hidden">
+<div class="md:col-span-4 bg-primary-container text-on-primary-container rounded-xl p-6 shadow-lg flex flex-col gap-4 relative overflow-hidden feature-card" style="animation-delay:0.22s;">
 <div class="relative z-10">
 <h3 class="font-headline-md text-headline-md font-bold mb-2">빠른 작업</h3>
 <p class="font-body-sm mb-6 opacity-90">맞춤형 도구로 커리어 기회를 극대화하세요.</p>
@@ -193,7 +230,7 @@
 <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl"></div>
 </div>
 <!-- Upcoming Interviews -->
-<div class="md:col-span-4 bg-surface-container-lowest rounded-xl p-6 shadow-[0px_4px_12px_rgba(30,41,59,0.05)] border border-border-subtle">
+<div class="md:col-span-4 bg-surface-container-lowest rounded-xl p-6 shadow-[0px_4px_12px_rgba(30,41,59,0.05)] border border-border-subtle feature-card" style="animation-delay:0.28s;">
 <h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-4">예정된 인터뷰</h3>
 <div class="space-y-4">
 <div class="flex items-center gap-4 p-3 bg-surface-container-low rounded-lg border-l-4 border-secondary">
@@ -217,7 +254,7 @@
 <span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">arrow_forward_ios</span>
 </div>
 </div>
-<a class="block mt-4 text-center font-label-md text-primary hover:underline transition-all" href="#">모든 일정 보기</a>
+<a class="block mt-4 text-center font-label-md text-primary hover:underline transition-all" href="timeline.html">모든 일정 보기</a>
 </div>
 </div>
 <!-- Kanban Job Tracker -->
@@ -228,7 +265,7 @@
 <button class="p-2 bg-surface-container-lowest border border-border-subtle rounded-lg text-on-surface-variant hover:text-primary transition-all">
 <span class="material-symbols-outlined">filter_list</span>
 </button>
-<button class="px-4 py-2 bg-primary text-on-primary font-label-md rounded-lg shadow-md hover:opacity-90 transition-all flex items-center gap-2">
+<button class="px-4 py-2 bg-primary text-on-primary font-label-md rounded-lg shadow-md hover:opacity-90 transition-all btn-raise flex items-center gap-2">
 <span class="material-symbols-outlined text-[20px]">add</span>
                         새로 추가
                     </button>
