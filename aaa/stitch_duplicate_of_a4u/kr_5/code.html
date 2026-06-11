@@ -1,0 +1,239 @@
+<!DOCTYPE html><html class="light" lang="ko"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>경력 타임라인 | a4u.com</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .timeline-line {
+            background: linear-gradient(180deg, #3525cd 0%, #006a61 50%, #004598 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "surface-gray": "#F8FAFC",
+                        "outline-variant": "#c7c4d8",
+                        "on-background": "#111c2d",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#86f2e4",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "surface-tint": "#4d44e3",
+                        "surface-container-highest": "#d8e3fb",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#263143",
+                        "on-primary": "#ffffff",
+                        "success-mint": "#F0FDFA",
+                        "primary": "#3525cd",
+                        "inverse-on-surface": "#ecf1ff",
+                        "surface-dim": "#cfdaf2",
+                        "surface": "#f9f9ff",
+                        "background": "#f9f9ff",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#001a42",
+                        "tertiary-fixed": "#d8e2ff",
+                        "inverse-primary": "#c3c0ff",
+                        "secondary-fixed": "#89f5e7",
+                        "border-subtle": "#E2E8F0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#e7eeff",
+                        "on-surface-variant": "#464555",
+                        "on-secondary-fixed": "#00201d",
+                        "surface-container-low": "#f0f3ff",
+                        "surface-container-high": "#dee8ff",
+                        "tertiary-container": "#005cc6",
+                        "tertiary-fixed-dim": "#adc6ff",
+                        "on-surface": "#111c2d",
+                        "primary-container": "#4f46e5",
+                        "on-tertiary-container": "#cedbff",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#e2dfff",
+                        "tertiary": "#004598",
+                        "on-primary-container": "#dad7ff",
+                        "secondary": "#006a61",
+                        "outline": "#777587",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-secondary-container": "#006f66",
+                        "surface-variant": "#d8e3fb",
+                        "on-primary-fixed": "#0f0069",
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-tertiary-fixed-variant": "#004395",
+                        "surface-bright": "#f9f9ff",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "base": "4px",
+                        "margin-desktop": "40px",
+                        "max-width": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface-gray text-on-surface font-body-md antialiased">
+<!-- Top Navigation -->
+<nav class="bg-surface-container-lowest fixed top-0 w-full z-50 shadow-sm">
+<div class="flex justify-between items-center px-margin-desktop h-16 w-full max-w-max-width mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary">a4u.com</div>
+<div class="hidden md:flex gap-8 items-center h-full">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors h-full flex items-center" href="#">대시보드</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors h-full flex items-center" href="#">이력서 생성기</a>
+<a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1 h-full flex items-center" href="#">채용 트래커</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors h-full flex items-center" href="#">프로필 관리</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full transition-all" data-icon="notifications">notifications</button>
+<div class="w-10 h-10 rounded-full bg-primary-fixed overflow-hidden border border-border-subtle">
+<img alt="홍길동 님의 프로필 사진" class="w-full h-full object-cover" data-alt="전문적인 경력 관리 플랫폼에 어울리는, 부드러운 사무실 배경의 웃고 있는 직장인의 전문적인 헤드샷. 밝고 깨끗한 조명으로 신뢰감 있고 현대적인 분위기입니다." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxwwKXra4hcPBiH3pXp_xRPsXdRfTvs4AbFLpTRfDOLUG-TTYT2vobYF_G4XE8BKF6PKeaIu3yeFQ4KsWjNEdYA37hATyQZkvZlhNcZ5wvnbKkJ1JtFGsuotJGQPJ7KprzvcahMYOT8s19p03SBUB8x3cVBAXDfaJfpZ63fr2THV_E01ms6JZHotOkKoOHxY6zJY_oqsN3uFqdPkYtPVlGjARYfn1MgMJqLIOoUAjyA99GJaiXPDjcfFV7btzHEI0ZmxoDaG6yQ-L0">
+</div>
+</div>
+</div>
+</nav>
+<!-- Side Navigation -->
+<aside class="hidden lg:flex flex-col gap-2 py-4 h-screen w-64 fixed left-0 top-0 pt-20 bg-surface-gray">
+<div class="px-6 py-4 border-b border-border-subtle mb-4">
+<div class="text-label-md font-label-md text-primary uppercase tracking-wider mb-1">커리어 관리</div>
+<div class="text-headline-md font-headline-md text-on-surface">타임라인</div>
+</div>
+<div class="flex flex-col gap-1 px-2">
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span class="font-label-md text-label-md">전문 경력</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md">개인 정보</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-label-md text-label-md">학력 사항</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span class="font-label-md text-label-md">보유 기술</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+<span class="font-label-md text-label-md">자격 증명</span>
+</a>
+</div>
+<div class="mt-auto px-4 py-6">
+<button class="w-full bg-primary text-white py-3 rounded-xl font-label-md text-label-md hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+            새 이력서 작성
+        </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="pt-24 pb-12 lg:pl-64 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
+<!-- Header Section -->
+<header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-background mb-2">나의 커리어 여정</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">경력의 주요 이정표와 성과를 시각적으로 확인하세요.</p>
+</div>
+<!-- Filters -->
+<div class="flex flex-wrap gap-2 bg-surface-container-low p-1.5 rounded-xl border border-border-subtle">
+<button class="px-5 py-2 rounded-lg text-label-md font-label-md bg-white shadow-sm text-primary transition-all">전체 내역</button>
+<button class="px-5 py-2 rounded-lg text-label-md font-label-md text-on-surface-variant hover:bg-white/50 transition-all">경력</button>
+<button class="px-5 py-2 rounded-lg text-label-md font-label-md text-on-surface-variant hover:bg-white/50 transition-all">학력</button>
+<button class="px-5 py-2 rounded-lg text-label-md font-label-md text-on-surface-variant hover:bg-white/50 transition-all">마일스톤</button>
+</div>
+</header>
+<!-- Timeline Container -->
+<div class="relative">
+<!-- Continuous Timeline Line -->
+<div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 timeline-line transform md:-translate-x-1/2 opacity-20"></div>
+<div class="space-y-12 relative">
+<!-- Entry 1: Current Role (Work) -->
+<div class="relative flex flex-col md:flex-row items-center justify-between group"><div class="hidden md:block w-[45%] text-right pr-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300"><span class="inline-block px-3 py-1 rounded-full bg-success-mint text-secondary text-label-sm font-label-sm">현재 재직 중</span></div><div class="absolute left-6 md:left-1/2 w-4 h-4 rounded-full bg-primary border-4 border-white shadow-md transform md:-translate-x-1/2 z-10 transition-transform group-hover:scale-125"></div><div class="w-full md:w-[45%] pl-16 md:pl-0"><div class="glass-card border border-border-subtle rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"><div class="flex items-center gap-4 mb-4"><div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center p-2"><span class="material-symbols-outlined text-primary text-3xl">terminal</span></div><div><h3 class="font-headline-md text-headline-md text-on-surface">수석 개발자 / PM</h3><p class="text-label-md font-label-md text-primary">(주)미래정보시스템 (SI 중소기업)</p></div></div><div class="flex items-center gap-2 text-on-surface-variant mb-4"><span class="material-symbols-outlined text-sm">calendar_month</span><span class="font-label-sm text-label-sm">2010년 3월 — 현재 (14년 2개월)</span></div><ul class="space-y-2 mb-4"><li class="flex gap-3 text-body-sm font-body-sm text-on-surface-variant"><span class="text-secondary">•</span> 공공기관 차세대 시스템 구축 프로젝트 PM 및 아키텍처 설계 주도</li><li class="flex gap-3 text-body-sm font-body-sm text-on-surface-variant"><span class="text-secondary">•</span> Java/Spring 기반 레거시 시스템 고도화 및 유지보수 총괄</li></ul><div class="flex flex-wrap gap-2"><span class="px-3 py-1 bg-surface-gray rounded-full text-label-sm font-label-sm text-on-surface-variant">Java</span><span class="px-3 py-1 bg-surface-gray rounded-full text-label-sm font-label-sm text-on-surface-variant">Spring</span><span class="px-3 py-1 bg-surface-gray rounded-full text-label-sm font-label-sm text-on-surface-variant">Oracle</span></div></div></div></div>
+<!-- Entry 2: Previous Role (Work) -->
+<div class="relative flex flex-col md:flex-row-reverse items-center justify-between group"><div class="hidden md:block w-[45%] text-left pl-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300"><span class="inline-block px-3 py-1 rounded-full bg-surface-container-highest text-tertiary text-label-sm font-label-sm">경력 도약기</span></div><div class="absolute left-6 md:left-1/2 w-4 h-4 rounded-full bg-secondary border-4 border-white shadow-md transform md:-translate-x-1/2 z-10 transition-transform group-hover:scale-125"></div><div class="w-full md:w-[45%] pl-16 md:pl-0"><div class="glass-card border border-border-subtle rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"><div class="flex items-center gap-4 mb-4"><div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center p-2"><span class="material-symbols-outlined text-secondary text-3xl">code</span></div><div><h3 class="font-headline-md text-headline-md text-on-surface">차장 / 시니어 개발자</h3><p class="text-label-md font-label-md text-secondary">한울소프트웨어</p></div></div><div class="flex items-center gap-2 text-on-surface-variant mb-4"><span class="material-symbols-outlined text-sm">calendar_month</span><span class="font-label-sm text-label-sm">2002년 5월 — 2010년 2월 (7년 10개월)</span></div><ul class="space-y-2 mb-4"><li class="flex gap-3 text-body-sm font-body-sm text-on-surface-variant"><span class="text-tertiary">•</span> 금융권 ERP 시스템 Java 전환 프로젝트 핵심 개발 참여</li><li class="flex gap-3 text-body-sm font-body-sm text-on-surface-variant"><span class="text-tertiary">•</span> 대규모 트래픽 처리를 위한 DB 쿼리 최적화 및 튜닝 수행</li></ul><div class="flex flex-wrap gap-2"><span class="px-3 py-1 bg-surface-gray rounded-full text-label-sm font-label-sm text-on-surface-variant">J2EE</span><span class="px-3 py-1 bg-surface-gray rounded-full text-label-sm font-label-sm text-on-surface-variant">Struts</span><span class="px-3 py-1 bg-surface-gray rounded-full text-label-sm font-label-sm text-on-surface-variant">SQL</span></div></div></div></div>
+<!-- Entry 3: Education -->
+<div class="relative flex flex-col md:flex-row items-center justify-between group"><div class="hidden md:block w-[45%] text-right pr-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300"><span class="inline-block px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant text-label-sm font-label-sm">커리어 시작</span></div><div class="absolute left-6 md:left-1/2 w-4 h-4 rounded-full bg-tertiary border-4 border-white shadow-md transform md:-translate-x-1/2 z-10 transition-transform group-hover:scale-125"></div><div class="w-full md:w-[45%] pl-16 md:pl-0"><div class="glass-card border border-border-subtle rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"><div class="flex items-center gap-4 mb-4"><div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center p-2"><span class="material-symbols-outlined text-tertiary text-3xl">developer_board</span></div><div><h3 class="font-headline-md text-headline-md text-on-surface">사원 / 주니어 개발자</h3><p class="text-label-md font-label-md text-tertiary">대성정보기술</p></div></div><div class="flex items-center gap-2 text-on-surface-variant mb-4"><span class="material-symbols-outlined text-sm">calendar_month</span><span class="font-label-sm text-label-sm">1998년 1월 — 2002년 4월 (4년 4개월)</span></div><p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">C/C++ 및 Java 초기 버전을 이용한 제조 공정 관리 시스템 개발. 윈도우 기반 클라이언트/서버 프로그램 유지보수 담당.</p></div></div></div>
+<!-- Entry 4: Milestone -->
+<div class="relative flex flex-col md:flex-row-reverse items-center justify-between group"><div class="hidden md:block w-[45%] text-left pl-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300"><span class="inline-block px-3 py-1 rounded-full bg-error-container text-on-error-container text-label-sm font-label-sm">학업 성취</span></div><div class="absolute left-6 md:left-1/2 w-4 h-4 rounded-full bg-error border-4 border-white shadow-md transform md:-translate-x-1/2 z-10 transition-transform group-hover:scale-125"></div><div class="w-full md:w-[45%] pl-16 md:pl-0"><div class="glass-card border border-border-subtle rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"><div class="flex items-center gap-4 mb-4"><div class="w-12 h-12 rounded-lg bg-error-container flex items-center justify-center p-2"><span class="material-symbols-outlined text-error text-3xl">school</span></div><div><h3 class="font-headline-md text-headline-md text-on-surface">전자계산학 학사</h3><p class="text-label-md font-label-md text-on-surface-variant">한국대학교</p></div></div><div class="flex items-center gap-2 text-on-surface-variant mb-4"><span class="material-symbols-outlined text-sm">calendar_month</span><span class="font-label-sm text-label-sm">1991년 — 1998년</span></div><p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed italic">컴퓨터 구조 및 알고리즘 전공. 군 복무 기간 포함.</p></div></div></div>
+</div>
+</div>
+<!-- Add Entry Button -->
+<div class="mt-16 flex justify-center">
+<button class="flex items-center gap-2 px-8 py-3 bg-white border border-dashed border-primary text-primary rounded-xl font-label-md text-label-md hover:bg-primary/5 transition-colors active:scale-95 group">
+<span class="material-symbols-outlined group-hover:rotate-90 transition-transform" data-icon="add">add</span>
+            경력 항목 추가
+        </button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-border-subtle mt-12 w-full">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-gutter max-w-max-width mx-auto gap-6">
+<div class="flex flex-col gap-2">
+<div class="font-headline-md text-headline-md text-primary font-bold">a4u.com</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant">© 2024 a4u.com 커리어 매니지먼트</p>
+</div>
+<div class="flex gap-8">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">정보</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">개인정보 처리방침</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">이용약관</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">고객센터</a>
+</div>
+</div>
+</footer>
+<!-- Interactive Layer: Tooltip / Hover Effect Script -->
+<script>
+    // Simple micro-interaction for entry cards
+    document.querySelectorAll('.glass-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-4px)';
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0)';
+        });
+    });
+</script>
+
+
+</body></html>

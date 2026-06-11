@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>a4u.com - 인공지능으로 커리어의 가치를 높이세요</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#6bd8cb",
+                    "surface-gray": "#F8FAFC",
+                    "outline-variant": "#c7c4d8",
+                    "on-background": "#111c2d",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#86f2e4",
+                    "on-primary-fixed-variant": "#3323cc",
+                    "surface-tint": "#4d44e3",
+                    "surface-container-highest": "#d8e3fb",
+                    "on-secondary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "inverse-surface": "#263143",
+                    "on-primary": "#ffffff",
+                    "success-mint": "#F0FDFA",
+                    "primary": "#3525cd",
+                    "inverse-on-surface": "#ecf1ff",
+                    "surface-dim": "#cfdaf2",
+                    "surface": "#f9f9ff",
+                    "background": "#f9f9ff",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed": "#001a42",
+                    "on-tertiary-fixed-variant": "#004395",
+                    "tertiary-fixed": "#d8e2ff",
+                    "inverse-primary": "#c3c0ff",
+                    "secondary-fixed": "#89f5e7",
+                    "border-subtle": "#E2E8F0",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#e7eeff",
+                    "on-surface-variant": "#464555",
+                    "on-secondary-fixed": "#00201d",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-container-high": "#dee8ff",
+                    "tertiary-container": "#005cc6",
+                    "tertiary-fixed-dim": "#adc6ff",
+                    "on-surface": "#111c2d",
+                    "primary-container": "#4f46e5",
+                    "on-tertiary-container": "#cedbff",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#e2dfff",
+                    "tertiary": "#004598",
+                    "on-primary-container": "#dad7ff",
+                    "secondary": "#006a61",
+                    "outline": "#777587",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "on-secondary-container": "#006f66",
+                    "surface-variant": "#d8e3fb",
+                    "on-primary-fixed": "#0f0069",
+                    "on-secondary-fixed-variant": "#005049",
+                    "surface-bright": "#f9f9ff",
+                    "on-error-container": "#93000a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "base": "4px",
+                    "margin-desktop": "40px",
+                    "max-width": "1280px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-elevation {
+            box-shadow: 0px 4px 12px rgba(30, 41, 59, 0.05);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="bg-surface-gray text-on-surface font-body-md overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-surface-container-lowest shadow-sm h-16">
+<div class="flex justify-between items-center px-margin-desktop h-full w-full max-w-max-width mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold text-primary">a4u.com</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">대시보드</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">이력서 빌더</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">지원 현황 관리</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">내 프로필</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-border-subtle">
+<img alt="User profile avatar" data-alt="A professional headshot of a confident executive smiling subtly, set against a clean, blurred office background. The lighting is soft and natural, emphasizing clarity and professionalism. The color palette is composed of muted blues and warm skin tones, aligning with a sophisticated corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG8VImKTuowN3uHVy1cKnRoUpmpTuMMUenzMrZqKtbpAMPaIXew3MXLAUGDKWAI8jb3EWkpZCw0H_TNEBgq-n-UlNfNvE2CdiZaHoYqQkYTG7MeHLtYXa2hEmoloIAbTX6j1NkzZtyHuKYZdNFgHUYGSftJiqpsdmZsGf4HFFzmucm6jIuCERGu85b-nbvFsAPIyaXXb3RYS1AMLPvlmOpMNarU6oa1we4VIFGiTLt9IKGvz9PG8zOtGkRMQmgheGFYfY_L_sxVHzy"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="pt-16">
+<!-- Hero Section -->
+<section class="relative min-h-[870px] flex items-center overflow-hidden">
+<!-- Background Decorative Elements -->
+<div class="absolute top-0 right-0 -z-10 w-1/2 h-full bg-surface-container-high opacity-30 rounded-bl-[200px]"></div>
+<div class="max-w-max-width mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-6 space-y-6">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-primary-fixed text-on-primary-fixed rounded-full text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+                        AI 기반 커리어 인텔리전스
+                    </div>
+<h1 class="font-display-lg text-display-lg text-on-background leading-tight">
+                        데이터 <span class="text-primary">지능</span>으로 당신의 커리어를 완성하세요
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+                        전문적인 이력서 작성부터 커리어 성장 관리까지 가능한 올인원 플랫폼입니다. 데이터 기반 통찰력을 활용해 꿈의 직장을 현실로 만드세요.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4 pt-4">
+<button class="px-8 py-4 bg-primary text-on-primary rounded-xl font-label-md hover:opacity-90 transition-all shadow-lg shadow-primary/20">
+                            무료로 시작하기
+                        </button>
+<button class="px-8 py-4 bg-surface-container-lowest border border-border-subtle text-primary rounded-xl font-label-md hover:bg-surface-container-low transition-all">
+                            데모 보기
+                        </button>
+</div>
+<div class="flex items-center gap-4 pt-8 border-t border-border-subtle">
+<div class="flex -space-x-2">
+<img alt="User" class="h-8 w-8 rounded-full border-2 border-surface" data-alt="Close up of a young professional woman with a bright, welcoming smile, wearing a modern charcoal blazer. The lighting is crisp and highlights high-end professional confidence. The background is a minimalist architectural space with soft daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSTE4A2UcRZxY9oSsO0db7euf4tAg8tzLkOHLZhjjcPO7HjLcanmMp_orga0d-60i-7l_o8kHDq7aCERYvt8L4xmFqyH_y11byuI4xsey918Ar43hXajkdap6os6nULC6PmfUvMQTwBCnBzGk7o2ARacGjRElAWWKygC040JkOOGsgv6YW5Rmrkld_U8uDf4IffCIjpPDqQL_y1gOkvzZmry8cGxOhgRvd9HaASEiCloXmRsSh-4_oXmTGmpPsfeVn_GKBqOXLfWWe"/>
+<img alt="User" class="h-8 w-8 rounded-full border-2 border-surface" data-alt="Portrait of a male professional with a friendly expression, dressed in a crisp white shirt. The image is captured with shallow depth of field against a clean studio background. The overall aesthetic is trustworthy, efficient, and sophisticated, matching a career-focused UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWREEyktKn8CgRYEDoNe5YqtwwBEtdpwvwjbq08SWSzDtSvBIfwQ3DTndn27sRJhhOWlHvho9LXHQCRQcHoRjuZa514DijMJtAcxBMmzDag_LOjZdils9yXWRcGeR7pnD0emTnWpZryV1c0UQ41g4e5Y3eaVUSN88aPSRbA7Mo39o1vzDbwfZpTEXkg6Vq2G5RtzJCh3UC7txlimSLhz4k5SkETnvXniFuQvx4PmF424Hp3o3rUCjyY6z-U0ur8-V3BzfMo83f7HXG"/>
+<img alt="User" class="h-8 w-8 rounded-full border-2 border-surface" data-alt="A portrait of a diverse male professional in a light blue oxford shirt, looking directly into the camera with clarity and focus. The lighting is soft and high-key, conveying a sense of openness and professional readiness in a modern corporate setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCrxRTyhQODpQUtUmNuakwPVVOAibYir5bfqs-WojOt48KS4G8GjLYOpeZnbZzVYuU7JKgyXSANBzLtFVINGw4ZCrT0ZEzqbEb0CS3j50QPZA1l8RrBqvETfxFDoboVthEHkZukooOl2uiVToI0rc86oRo-nQnC0M2sFK7VdL2VD_whtEZHBmT_Fw_FatUSAkP3rKWhVIeKE4mVgpckks2Be7p9sVtmeiVApeL4nl88-xgLo5V6706lVz8LbgAX22HEfzHvNmAtoIp"/>
+</div>
+<p class="text-label-sm text-on-surface-variant">10,000명 이상의 야심 찬 전문가들이 함께하고 있습니다</p>
+</div>
+</div>
+<div class="md:col-span-6 relative">
+<!-- Dashboard Mockup/Visual -->
+<div class="relative z-10 p-4 bg-surface-container-lowest rounded-[24px] tonal-elevation border border-border-subtle">
+<div class="rounded-[16px] overflow-hidden">
+<img alt="Dashboard preview" class="w-full" data-alt="A high-fidelity dashboard interface displayed on a sleek laptop screen. The UI features clean data visualizations, progress trackers for job applications, and a side panel with resume editing tools. The color palette uses deep indigo and teal accents on a pristine white background, evoking a sense of calm authority and professional efficiency." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTJYgsu4ReRVek81S2faFEW-KRQrqEMHPH2LVSshsRmRXttZtRdwb1CFRpUJV-RaXO_KUGGmKoGwjvYrukpaCp3GTxzeKQPtyn-u21rH1NqrpmLWJ3a5Elhl75iMJgBEnXDRXMtZS4Re2f3xaBcBgOEKGZgZwnARPqYKJ_qBbtN746vC6PF5io-15YF585Jr6TjSPd1ck2sLSvRE_z9Wa6ApipnXvcMjIiLzUYkELETvlgbDP1goTsiCiODZIAB0wHcGgRNcyfSf7M"/>
+</div>
+<!-- Floating Card 1 -->
+<div class="absolute -top-8 -right-8 glass-card tonal-elevation p-4 rounded-xl border border-border-subtle max-w-[200px] animate-bounce-slow">
+<div class="flex items-center gap-3 mb-2">
+<div class="bg-success-mint p-2 rounded-lg">
+<span class="material-symbols-outlined text-secondary text-[20px]">check_circle</span>
+</div>
+<span class="font-label-md text-on-surface">이력서 점수</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[92%]"></div>
+</div>
+<p class="text-label-sm mt-2 text-secondary font-bold">92% 일치</p>
+</div>
+</div>
+<!-- Decorative blur -->
+<div class="absolute -bottom-10 -left-10 w-40 h-40 bg-primary/10 blur-[80px] -z-0"></div>
+</div>
+</div>
+</section>
+<!-- Features Bento Grid -->
+<section class="py-gutter bg-surface-container-low">
+<div class="max-w-max-width mx-auto px-margin-desktop">
+<div class="text-center mb-16 space-y-4">
+<h2 class="font-headline-lg text-headline-lg text-on-background">성공을 위해 설계된 도구들</h2>
+<p class="font-body-md text-on-surface-variant max-w-2xl mx-auto">
+                        정밀한 기술과 인간의 잠재력이 만났습니다. a4u의 커리어 관리 도구는 오늘날의 채용 시장에서 당신에게 독보적인 경쟁력을 제공하도록 제작되었습니다.
+                    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Feature 1: AI Resume Builder -->
+<div class="md:col-span-8 bg-surface-container-lowest p-8 rounded-[24px] tonal-elevation group hover:shadow-xl transition-all duration-300 border border-border-subtle">
+<div class="flex flex-col md:flex-row gap-8 items-center">
+<div class="space-y-4 flex-1">
+<div class="h-12 w-12 bg-primary-fixed text-primary flex items-center justify-center rounded-xl">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background">AI 이력서 빌더</h3>
+<p class="font-body-md text-on-surface-variant">
+                                    당신의 경험을 매력적인 이야기로 바꿔보세요. AI가 업계와 채용 공고에 최적화된 핵심 키워드와 전문적인 문구를 제안합니다.
+                                </p>
+<ul class="space-y-2">
+<li class="flex items-center gap-2 text-label-md text-on-surface">
+<span class="material-symbols-outlined text-secondary text-[18px]">done</span>
+                                        동적 콘텐츠 제안 기능
+                                    </li>
+<li class="flex items-center gap-2 text-label-md text-on-surface">
+<span class="material-symbols-outlined text-secondary text-[18px]">done</span>
+                                        실시간 ATS(채용 관리 시스템) 최적화
+                                    </li>
+</ul>
+</div>
+<div class="flex-1 rounded-xl overflow-hidden border border-border-subtle shadow-sm">
+<img alt="Resume interface" class="w-full group-hover:scale-105 transition-transform duration-500" data-alt="A detailed view of a minimalist resume editor on a clean digital interface. The layout shows structural sections for experience and skills, with a side panel offering AI-driven keyword suggestions. The design is modern and high-readability, utilizing soft gray backgrounds and crisp indigo typography to indicate professional organizational structure." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdsml9RNdYjygJvrNhdfEzn8mU-nu4os5jjevt4coi3pGguq28J9ywVkZu1qQ_9UpxceBQyBq7PifwZkdxzqoe5elVIc2bSrKD7rjv5UQetSkvOiUV640nA9Ct1oJ7yM-mCPwuqu4MjV_Io2l4njPprsFh0jfgqoZ5zJfDlbppibGpuIPAqHA0cajshfgXRSkCIki8RoCq1P6unGSY4JHSYDN4V6xrFS6J11joP7_jRyrT1WMUkogiwyoNHtN_C2gR1JB2zAJ7iiNG"/>
+</div>
+</div>
+</div>
+<!-- Feature 2: Application Tracker -->
+<div class="md:col-span-4 bg-surface-container-lowest p-8 rounded-[24px] tonal-elevation border border-border-subtle">
+<div class="space-y-4">
+<div class="h-12 w-12 bg-secondary-container text-secondary flex items-center justify-center rounded-xl">
+<span class="material-symbols-outlined">work</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background">지원 현황 트래커</h3>
+<p class="font-body-sm text-on-surface-variant">
+                                다시는 마감 기한을 놓치지 마세요. 지원 시작부터 최종 합격까지의 전체 파이프라인을 직관적인 대시보드에서 통합 관리할 수 있습니다.
+                            </p>
+<div class="pt-4 space-y-3">
+<div class="p-3 bg-success-mint rounded-lg flex justify-between items-center">
+<span class="text-label-sm font-label-md">Google - UX Design</span>
+<span class="text-[10px] px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed rounded-full">면접 중</span>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg flex justify-between items-center opacity-60">
+<span class="text-label-sm font-label-md">Meta - Product Lead</span>
+<span class="text-[10px] px-2 py-0.5 bg-surface-container-high text-on-surface-variant rounded-full">지원 완료</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Feature 3: Career Path Visualizer -->
+<div class="md:col-span-4 bg-surface-container-lowest p-8 rounded-[24px] tonal-elevation border border-border-subtle">
+<div class="space-y-4">
+<div class="h-12 w-12 bg-tertiary-fixed text-tertiary flex items-center justify-center rounded-xl">
+<span class="material-symbols-outlined">route</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background">커리어 패스 시각화</h3>
+<p class="font-body-sm text-on-surface-variant">
+                                당신의 전문적인 여정을 설계하세요. 부족한 기술을 파악하고 다음 단계의 커리어로 도약하기 위해 필요한 이정표를 명확히 제시해 드립니다.
+                            </p>
+</div>
+</div>
+<!-- Stats Card -->
+<div class="md:col-span-8 bg-on-background p-8 rounded-[24px] text-on-primary flex flex-col justify-center items-center md:items-start relative overflow-hidden">
+<div class="relative z-10 grid grid-cols-2 md:grid-cols-3 gap-8 w-full">
+<div>
+<p class="text-display-lg font-display-lg text-secondary-fixed-dim">45%</p>
+<p class="text-label-md text-surface-variant">면접 제안율 상승</p>
+</div>
+<div>
+<p class="text-display-lg font-display-lg text-secondary-fixed-dim">12k+</p>
+<p class="text-label-md text-surface-variant">꿈의 직장 취업 성공</p>
+</div>
+<div class="col-span-2 md:col-span-1">
+<p class="text-display-lg font-display-lg text-secondary-fixed-dim">평균 3.2</p>
+<p class="text-label-md text-surface-variant">사용자당 최종 합격 수</p>
+</div>
+</div>
+<div class="absolute right-0 bottom-0 opacity-10">
+<span class="material-symbols-outlined text-[200px]">trending_up</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-24 relative overflow-hidden">
+<div class="max-w-max-width mx-auto px-margin-desktop text-center">
+<div class="bg-primary rounded-[32px] p-12 md:p-20 relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<div class="absolute top-0 left-0 w-full h-full" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+</div>
+<div class="relative z-10 space-y-8">
+<h2 class="font-display-lg text-display-lg text-white max-w-2xl mx-auto">새로운 도약을 시작할 준비가 되셨나요?</h2>
+<p class="font-body-lg text-on-primary-container max-w-xl mx-auto">
+                            a4u.com의 지능형 도구와 함께 커리어 성장을 주도하고 있는 수천 명의 전문가들과 함께하세요.
+                        </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="px-10 py-5 bg-white text-primary rounded-xl font-label-md hover:bg-surface-container transition-all">
+                                지금 이력서 만들기
+                            </button>
+<button class="px-10 py-5 border border-white/30 text-white rounded-xl font-label-md hover:bg-white/10 transition-all">
+                                도입 문의하기
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-border-subtle mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-gutter max-w-max-width mx-auto">
+<div class="mb-6 md:mb-0 space-y-2 text-center md:text-left">
+<span class="font-headline-md text-headline-md text-primary font-bold">a4u.com</span>
+<p class="font-body-sm text-on-surface-variant">© 2024 a4u.com 커리어 매니지먼트. All rights reserved.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-body-sm text-on-surface-variant hover:text-primary underline transition-all" href="#">소개</a>
+<a class="font-body-sm text-on-surface-variant hover:text-primary underline transition-all" href="#">개인정보 처리방침</a>
+<a class="font-body-sm text-on-surface-variant hover:text-primary underline transition-all" href="#">이용약관</a>
+<a class="font-body-sm text-on-surface-variant hover:text-primary underline transition-all" href="#">고객 센터</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple micro-interactions
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.add('scale-95');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('scale-95');
+            });
+            button.addEventListener('mouseleave', () => {
+                button.classList.remove('scale-95');
+            });
+        });
+
+        // Sticky nav shadow on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-md');
+            } else {
+                nav.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body></html>

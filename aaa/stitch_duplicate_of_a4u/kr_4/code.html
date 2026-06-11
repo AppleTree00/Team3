@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>a4u.com - 데이터 지능으로 완성하는 커리어</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-primary": "#c3c0ff",
+                    "tertiary-fixed-dim": "#adc6ff",
+                    "on-secondary-fixed": "#00201d",
+                    "tertiary-container": "#005cc6",
+                    "surface-container-highest": "#d8e3fb",
+                    "secondary": "#006a61",
+                    "error": "#ba1a1a",
+                    "surface-container-high": "#dee8ff",
+                    "primary-container": "#4f46e5",
+                    "surface-variant": "#d8e3fb",
+                    "surface": "#f9f9ff",
+                    "on-tertiary-container": "#cedbff",
+                    "on-surface": "#111c2d",
+                    "surface-container": "#e7eeff",
+                    "surface-tint": "#4d44e3",
+                    "on-secondary-fixed-variant": "#005049",
+                    "tertiary-fixed": "#d8e2ff",
+                    "surface-dim": "#cfdaf2",
+                    "surface-gray": "#F8FAFC",
+                    "on-primary-fixed-variant": "#3323cc",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#86f2e4",
+                    "outline-variant": "#c7c4d8",
+                    "background": "#f9f9ff",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#89f5e7",
+                    "border-subtle": "#E2E8F0",
+                    "outline": "#777587",
+                    "primary-fixed": "#e2dfff",
+                    "on-tertiary-fixed": "#001a42",
+                    "on-primary-fixed": "#0f0069",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#006f66",
+                    "surface-container-low": "#f0f3ff",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#464555",
+                    "inverse-surface": "#263143",
+                    "secondary-fixed-dim": "#6bd8cb",
+                    "on-tertiary-fixed-variant": "#004395",
+                    "on-primary-container": "#dad7ff",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "success-mint": "#F0FDFA",
+                    "primary": "#3525cd",
+                    "surface-bright": "#f9f9ff",
+                    "tertiary": "#004598",
+                    "inverse-on-surface": "#ecf1ff",
+                    "on-background": "#111c2d",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "40px",
+                    "gutter": "24px",
+                    "max-width": "1280px",
+                    "margin-mobile": "16px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .hero-gradient { background: radial-gradient(circle at top right, #e2dfff 0%, #f9f9ff 50%); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 bg-surface dark:bg-on-surface shadow-sm">
+<nav class="flex justify-between items-center px-margin-desktop py-4 max-w-max-width mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim cursor-pointer active:scale-95 transition-transform" data-icon="menu">menu</span>
+<span class="font-display-lg text-headline-md font-bold text-primary dark:text-primary-fixed-dim">a4u.com</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-primary dark:text-primary-fixed-dim font-bold font-label-md text-label-md hover:text-primary transition-colors" href="#">홈</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">이력서</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">지원현황</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">타임라인</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden border border-border-subtle cursor-pointer active:scale-95 transition-transform">
+<img alt="사용자 프로필" data-alt="A clean, professional portrait of a modern office professional used as a profile avatar placeholder. The background is a soft, blurred studio setting with cool blue and white tones that match a high-end tech corporate identity. The lighting is soft and even, highlighting a friendly yet serious professional demeanor suited for a career platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfSYDcpMCss37UBiBYICvF1lpjZzvmubLnK9dlWwK36ymH07DXcFjblFvA9QVEHpa_jBKwriNjrWVAQd3T2kIajfSYFcvQh86d5P45h4a67r9YUI7c575Lr0a16Q5AGUwpciuJBHi8_Tcrf_oToio3VXVoSLvdEuBrUv9aqjj-bFSlUdlfRIhHzAzCe2PiHjFbUNB7d4csBkJFbHFmcuxFAPUH4Sm8bgqXEQoIL6IojOR0JU0Ox-WSa4MobnSSJXdf21jr4coPdHam"/>
+</div>
+</div>
+</nav>
+</header>
+<main class="overflow-x-hidden">
+<!-- Hero Section -->
+<section class="relative hero-gradient pt-20 pb-32 px-margin-mobile md:px-margin-desktop overflow-hidden">
+<div class="max-w-max-width mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div class="z-10 text-center lg:text-left">
+<span class="inline-block py-1 px-3 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm mb-6">
+                        AI 기반 커리어 솔루션 2.0 출시
+                    </span>
+<h1 class="font-display-lg text-headline-lg-mobile md:text-display-lg text-on-surface leading-tight mb-6">
+                        데이터 지능으로 당신의 <br class="hidden md:block"/>
+<span class="text-primary">커리어를 완성하세요</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-xl mx-auto lg:mx-0">
+                        a4u.com은 복잡한 채용 프로세스를 데이터로 분석하여 <br class="hidden md:block"/> 최적의 기회를 선점할 수 있도록 돕는 커리어 파트너입니다.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-xl font-label-md text-label-md hover:shadow-lg active:scale-95 transition-all">
+                            무료로 시작하기
+                        </button>
+<button class="border border-border-subtle bg-surface-container-lowest text-primary px-8 py-4 rounded-xl font-label-md text-label-md hover:bg-surface-container-low active:scale-95 transition-all">
+                            데모 보기
+                        </button>
+</div>
+<div class="mt-12 flex items-center justify-center lg:justify-start gap-4">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-slate-200"></div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-slate-300"></div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-slate-400"></div>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">이미 10,000+ 명의 전문가가 사용 중입니다</p>
+</div>
+</div>
+<div class="relative">
+<div class="relative z-10 glass-card rounded-2xl p-6 shadow-xl animate-float">
+<img class="rounded-lg shadow-md mb-4" data-alt="A sophisticated data dashboard showing high-tech career analytics and professional growth charts. The UI features elegant line graphs, progress rings, and clean data tables in a professional indigo and white color scheme. The atmosphere is modern and data-driven, representing efficiency and professional success in a high-stakes corporate environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDH48AE_0HSoXy7BA6ktm8geVFP-3WvfZHx_nIHMWfi0RO_ssZ3PU_jiGebB0wGlGWDBaXa16owIljPmzzmSf_4pRsvM7zvYTI2gCWL4mRSNF3SuyQjtZahZWElmGGWm5R9vXzk2u_qM_0mghmRLGEJa6JLqp-xFvdK0LxUwzVPTZd0gFn3hqBT6PJtmU_GOZfy5ASdrW0IpR0ESMbrKOoARviWGtzCCShFxH6eyHoYGItD9QROd5stjRjaiWwSIVmmP-_wOS9tvANF"/>
+<div class="flex items-center justify-between">
+<div class="flex gap-2">
+<div class="w-3 h-3 rounded-full bg-error"></div>
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+</div>
+<div class="h-2 w-32 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-2/3"></div>
+</div>
+</div>
+</div>
+<!-- Decorative Elements -->
+<div class="absolute -top-10 -right-10 w-64 h-64 bg-primary-container/20 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-10 -left-10 w-48 h-48 bg-secondary-container/20 rounded-full blur-2xl"></div>
+</div>
+</div>
+</section>
+<!-- Features Bento Grid -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-gray">
+<div class="max-w-max-width mx-auto">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">커리어 성장을 위한 데이터 도구</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">당신의 경험을 가치로 변환하는 세 가지 핵심 기능을 확인하세요.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Feature 1: AI Resume Builder (Large) -->
+<div class="md:col-span-8 bg-surface-container-lowest p-8 rounded-3xl shadow-sm border border-border-subtle group hover:shadow-lg transition-all duration-300">
+<div class="flex flex-col md:flex-row gap-8 items-center">
+<div class="flex-1">
+<div class="w-12 h-12 rounded-xl bg-primary-container flex items-center justify-center mb-6 text-on-primary-container">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">AI 이력서 빌더</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                                    데이터 분석을 통해 채용 공고의 핵심 키워드를 추출하고, <br class="hidden lg:block"/>
+                                    당신의 경험을 가장 효과적인 언어로 다듬어 드립니다.
+                                </p>
+<ul class="space-y-3 mb-8">
+<li class="flex items-center gap-2 text-label-md font-label-md text-on-surface">
+<span class="material-symbols-outlined text-secondary" data-icon="check_circle">check_circle</span>
+                                        직무별 맞춤 키워드 최적화
+                                    </li>
+<li class="flex items-center gap-2 text-label-md font-label-md text-on-surface">
+<span class="material-symbols-outlined text-secondary" data-icon="check_circle">check_circle</span>
+                                        글로벌 표준 템플릿 제공
+                                    </li>
+</ul>
+<button class="text-primary font-label-md text-label-md flex items-center gap-1 group-hover:gap-2 transition-all">
+                                    지금 작성하기 <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="flex-1 w-full">
+<div class="aspect-video bg-surface-container-low rounded-2xl overflow-hidden border border-border-subtle">
+<img class="w-full h-full object-cover" data-alt="A clean, high-resolution close-up of a professional resume layout on a high-definition computer screen. The design is minimalist with crisp typography and clear hierarchical spacing. Soft, natural lighting from a nearby window creates a calm, focused workplace environment. The color palette emphasizes clean whites, professional grays, and a touch of deep indigo." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2mliWRhylb9vSE9tMSNhMegZ4cFDG47r0aonH1OfQ7bawmhPmz-PtZGDEGdXsfx_zfgsBOfQGSuuHS7Uj_RzrW6d81mlJRDD1huRGvzIC1ChZX94s2pDiOkbAy4wM-Be1cprQzw0vqyAnG0_nK7-dXAcKYN-0BFcyxsCeL7m9JTpyn1zaOzj0DstuBwzdGvIckZqLnaB8h4E86kbeLK5YGR_kXq2AGV9YLfLmBINSIHATLXE8rXac6VsN_JR0OyL-RLfll_-uzoar"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Feature 2: Tracker (Small/Stacked) -->
+<div class="md:col-span-4 bg-primary text-on-primary p-8 rounded-3xl shadow-sm overflow-hidden relative group">
+<div class="relative z-10">
+<div class="w-12 h-12 rounded-xl bg-on-primary/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined" data-icon="assignment_turned_in">assignment_turned_in</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-4">지원 현황 트래커</h3>
+<p class="font-body-sm text-body-sm text-on-primary-container opacity-90 mb-8">
+                                수십 개의 지원 공고를 한눈에 관리하고 다음 단계를 놓치지 마세요.
+                            </p>
+<div class="space-y-4">
+<div class="bg-on-primary/10 p-3 rounded-lg border border-on-primary/20">
+<p class="text-label-sm font-label-sm">Google - 시니어 디자이너</p>
+<div class="flex justify-between mt-2">
+<span class="text-[10px] uppercase font-bold text-secondary-container">면접 대기</span>
+<span class="text-[10px]">D-2</span>
+</div>
+</div>
+<div class="bg-on-primary/10 p-3 rounded-lg border border-on-primary/20 opacity-50">
+<p class="text-label-sm font-label-sm">Naver - 프로덕트 매니저</p>
+<div class="flex justify-between mt-2">
+<span class="text-[10px] uppercase font-bold">서류 제출</span>
+<span class="text-[10px]">10.24</span>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
+</div>
+<!-- Feature 3: Career Path (Wide) -->
+<div class="md:col-span-12 bg-white p-8 rounded-3xl shadow-sm border border-border-subtle overflow-hidden relative">
+<div class="flex flex-col lg:flex-row gap-12 items-center">
+<div class="flex-1 w-full order-2 lg:order-1">
+<div class="relative py-10">
+<!-- Visual Timeline Representation -->
+<div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-surface-container-high hidden md:block"></div>
+<div class="space-y-12 relative">
+<div class="flex flex-col md:flex-row items-center gap-4 md:gap-20">
+<div class="md:w-1/2 md:text-right">
+<h4 class="font-headline-md text-headline-md text-on-surface">Associate Designer</h4>
+<p class="text-label-sm font-label-sm text-on-surface-variant">2021 - 2022</p>
+</div>
+<div class="w-4 h-4 rounded-full bg-primary border-4 border-primary-container z-10"></div>
+<div class="md:w-1/2"></div>
+</div>
+<div class="flex flex-col md:flex-row items-center gap-4 md:gap-20">
+<div class="md:w-1/2"></div>
+<div class="w-4 h-4 rounded-full bg-secondary border-4 border-secondary-container z-10"></div>
+<div class="md:w-1/2 md:text-left">
+<h4 class="font-headline-md text-headline-md text-on-surface">Product Designer</h4>
+<p class="text-label-sm font-label-sm text-on-surface-variant">2022 - 2024</p>
+</div>
+</div>
+<div class="flex flex-col md:flex-row items-center gap-4 md:gap-20">
+<div class="md:w-1/2 md:text-right">
+<h4 class="font-headline-md text-headline-md text-primary">Senior Specialist</h4>
+<p class="text-label-sm font-label-sm text-primary">Next Goal</p>
+</div>
+<div class="w-6 h-6 rounded-full bg-primary-container border-4 border-white shadow-lg z-10 animate-pulse"></div>
+<div class="md:w-1/2"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 order-1 lg:order-2">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center mb-6 text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="timeline">timeline</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">커리어 패스 시각화</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">
+                                    과거의 이력과 미래의 목표를 연결하여 맞춤형 성장 로드맵을 그려줍니다. <br class="hidden lg:block"/>
+                                    어떤 기술을 더 익혀야 할지, 어떤 경험이 부족한지 데이터가 말해줍니다.
+                                </p>
+<button class="bg-on-surface text-surface-container-lowest px-6 py-3 rounded-xl font-label-md text-label-md hover:bg-on-surface-variant transition-colors">
+                                    내 커리어 분석하기
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-20 px-margin-mobile md:px-margin-desktop bg-primary relative overflow-hidden">
+<div class="max-w-max-width mx-auto text-center relative z-10">
+<h2 class="font-display-lg text-headline-lg-mobile md:text-headline-lg text-on-primary mb-6">
+                    지금 바로 데이터 기반 커리어를 <br class="hidden md:block"/> 시작할 준비가 되셨나요?
+                </h2>
+<p class="font-body-lg text-body-lg text-on-primary-container opacity-80 mb-10 max-w-2xl mx-auto">
+                    무료 계정을 생성하고 AI가 제안하는 당신만을 위한 이력서 최적화 기능을 체험해보세요. <br class="hidden md:block"/>
+                    첫 이력서 생성은 무료입니다.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-surface-container-lowest text-primary px-10 py-4 rounded-full font-label-md text-label-md shadow-xl hover:scale-105 transition-transform">
+                        무료로 시작하기
+                    </button>
+<button class="bg-primary-container border border-on-primary-container/30 text-on-primary-container px-10 py-4 rounded-full font-label-md text-label-md hover:bg-primary-container/80 transition-colors">
+                        더 알아보기
+                    </button>
+</div>
+</div>
+<!-- Decorative Orbs -->
+<div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-[600px] h-[600px] bg-on-primary/10 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-[400px] h-[400px] bg-secondary-container/20 rounded-full blur-[100px]"></div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-surface-container dark:bg-inverse-surface border-t border-border-subtle">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-max-width mx-auto gap-8">
+<div class="flex flex-col items-center md:items-start gap-4">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">a4u.com</span>
+<p class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant opacity-70">
+                    © 2024 a4u.com. 모든 권리 보유.
+                </p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">이용약관</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">개인정보처리방침</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">고객센터</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">채용안내</a>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<div class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-surface-container-lowest dark:bg-inverse-surface shadow-[0_-4px_12px_rgba(30,41,59,0.05)] rounded-t-xl">
+<div class="flex justify-around items-center px-4 py-2 pb-safe">
+<div class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-full px-4 py-1 cursor-pointer active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-medium">홈</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant cursor-pointer active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="text-[10px] font-medium">이력서</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant cursor-pointer active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="assignment_turned_in">assignment_turned_in</span>
+<span class="text-[10px] font-medium">지원현황</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant cursor-pointer active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="timeline">timeline</span>
+<span class="text-[10px] font-medium">타임라인</span>
+</div>
+</div>
+</div>
+<script>
+        // Floating animation for hero image
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes float {
+                0% { transform: translateY(0px) rotate(0deg); }
+                50% { transform: translateY(-15px) rotate(1deg); }
+                100% { transform: translateY(0px) rotate(0deg); }
+            }
+            .animate-float {
+                animation: float 6s ease-in-out infinite;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body></html>

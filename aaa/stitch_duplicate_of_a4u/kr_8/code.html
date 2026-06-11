@@ -1,0 +1,344 @@
+<!DOCTYPE html><html class="light" lang="ko"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#c3c0ff",
+                        "tertiary-fixed-dim": "#adc6ff",
+                        "on-secondary-fixed": "#00201d",
+                        "tertiary-container": "#005cc6",
+                        "surface-container-highest": "#d8e3fb",
+                        "secondary": "#006a61",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#dee8ff",
+                        "primary-container": "#4f46e5",
+                        "surface-variant": "#d8e3fb",
+                        "surface": "#f9f9ff",
+                        "on-tertiary-container": "#cedbff",
+                        "on-surface": "#111c2d",
+                        "surface-container": "#e7eeff",
+                        "surface-tint": "#4d44e3",
+                        "on-secondary-fixed-variant": "#005049",
+                        "tertiary-fixed": "#d8e2ff",
+                        "surface-dim": "#cfdaf2",
+                        "surface-gray": "#F8FAFC",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#86f2e4",
+                        "outline-variant": "#c7c4d8",
+                        "background": "#f9f9ff",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#89f5e7",
+                        "border-subtle": "#E2E8F0",
+                        "outline": "#777587",
+                        "primary-fixed": "#e2dfff",
+                        "on-tertiary-fixed": "#001a42",
+                        "on-primary-fixed": "#0f0069",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#006f66",
+                        "surface-container-low": "#f0f3ff",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#464555",
+                        "inverse-surface": "#263143",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "on-tertiary-fixed-variant": "#004395",
+                        "on-primary-container": "#dad7ff",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "success-mint": "#F0FDFA",
+                        "primary": "#3525cd",
+                        "surface-bright": "#f9f9ff",
+                        "tertiary": "#004598",
+                        "inverse-on-surface": "#ecf1ff",
+                        "on-background": "#111c2d",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "gutter": "24px",
+                        "max-width": "1280px",
+                        "margin-mobile": "16px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #f9f9ff;
+            font-family: 'Inter', sans-serif;
+            color: #111c2d;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-24 md:pb-0">
+<!-- Top AppBar -->
+<header class="w-full top-0 sticky z-40 bg-surface shadow-sm">
+<div class="flex justify-between items-center px-4 md:px-margin-desktop py-4 max-w-max-width mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer active:scale-95 transition-transform text-primary">menu</span>
+<h1 class="font-display-lg text-headline-md md:text-display-lg font-bold text-primary">a4u.com</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center gap-6 mr-6">
+<a class="font-label-md text-label-md text-primary font-bold transition-colors" href="#">홈</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">이력서</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">지원현황</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">타임라인</a>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed cursor-pointer active:scale-95 transition-transform">
+<img alt="사용자 프로필" class="w-full h-full object-cover" data-alt="A professional studio portrait of a handsome man with a friendly, confident expression, wearing a tailored navy blazer and white shirt. The background is a clean, neutral soft gray, perfectly aligned with a professional career-focused UI. The lighting is soft and directional, highlighting textures and creating a sophisticated, high-end corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKoZoeRpZgsV3SRCgsG9N2nLA5Y7RTHfOyLhmp4cRFdXGIPqSDx9MBg94qRIshl71vBmy-TaYYqg7qHfB7IowU-vp32DIfIy9xRNdJ-ajuK0299Hr4W-tVDhxWwpvmwQgTrxBLeAcIzO4hZgHJ0uax_sc1e9WswR5X8fft4dYEGbxbRIkISuAFIi3bTAa89KcWrzY2NxqdcFN0ITur4tcwVZ5lut3tHhQ0-1n33mXF51se0tSiKNWS-Fd2Yzw8unEikMen-Ttm8BoF">
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-max-width mx-auto px-4 md:px-margin-desktop py-8">
+<!-- Welcome Header -->
+<section class="mb-10">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">즐거운 오후입니다, 홍길동님</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">오늘도 당신의 꿈을 향한 여정을 a4u와 함께 시작해보세요.</p>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Resume Strength Card (Large) -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-xl p-8 shadow-[0_4px_12px_rgba(30,41,59,0.05)] border border-border-subtle relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">description</span>
+</div>
+<div class="relative z-10">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">이력서 완성도</h3>
+<div class="flex items-end gap-2 mb-6">
+<span class="font-display-lg text-display-lg text-primary leading-none">82</span>
+<span class="font-headline-md text-headline-md text-outline mb-2">/ 100</span>
+</div>
+<div class="w-full max-w-md bg-surface-container rounded-full h-3 mb-4">
+<div class="bg-primary h-3 rounded-full transition-all duration-1000" style="width: 82%"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+<span class="text-secondary font-bold">인터뷰 제안 확률이 15% 더 높습니다!</span><br>
+                                몇 가지만 더 추가하면 완벽한 100점에 도달할 수 있어요.
+                            </p>
+</div>
+<div class="flex flex-col gap-3">
+<button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label-md text-label-md shadow-lg active:scale-95 transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">auto_fix_high</span>
+                                AI 이력서 진단하기
+                            </button>
+<button class="bg-surface-container-lowest border border-border-subtle text-primary px-6 py-3 rounded-lg font-label-md text-label-md active:scale-95 transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">visibility</span>
+                                미리보기
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Actions (Medium) -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<div class="flex-1 bg-primary text-on-primary rounded-xl p-6 shadow-lg active:scale-95 transition-transform cursor-pointer group">
+<div class="flex items-start justify-between mb-8">
+<div class="p-3 bg-white/20 rounded-lg">
+<span class="material-symbols-outlined text-white">edit_note</span>
+</div>
+<span class="material-symbols-outlined text-white/50 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-1">새 이력서 작성</h3>
+<p class="font-label-sm text-label-sm text-on-primary/80">당신의 새로운 경력을 기록하세요</p>
+</div>
+<div class="flex-1 bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_12px_rgba(30,41,59,0.05)] border border-border-subtle active:scale-95 transition-transform cursor-pointer group">
+<div class="flex items-start justify-between mb-8">
+<div class="p-3 bg-primary-container rounded-lg">
+<span class="material-symbols-outlined text-on-primary-container">account_circle</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">프로필 업데이트</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">더 많은 기회를 만나보세요</p>
+</div>
+</div>
+<!-- Job Application Tracker (Large Sidebar Style) -->
+<div class="md:col-span-7 bg-surface-container-lowest rounded-xl p-0 shadow-[0_4px_12px_rgba(30,41,59,0.05)] border border-border-subtle flex flex-col h-[500px]">
+<div class="p-6 border-b border-border-subtle flex flex-col md:flex-row md:items-center justify-between gap-4">
+<h3 class="font-headline-md text-headline-md text-on-surface">지원 현황 트래커</h3>
+<div class="flex p-1 bg-surface-container rounded-lg gap-1">
+<button class="px-4 py-1.5 rounded-md text-label-sm font-label-md bg-surface-container-lowest shadow-sm text-primary">지원 완료</button>
+<button class="px-4 py-1.5 rounded-md text-label-sm font-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors">인터뷰 진행 중</button>
+<button class="px-4 py-1.5 rounded-md text-label-sm font-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors">최종 합격</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-4">
+<!-- Tracker Item -->
+<div class="p-4 rounded-xl border border-border-subtle hover:border-primary/30 hover:bg-surface-container-low transition-all group flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-white rounded-lg border border-border-subtle flex items-center justify-center p-2">
+<img alt="Google" class="w-full h-full object-contain" data-alt="A minimalist tech corporate logo of a world-renowned technology company, rendered in a crisp, high-resolution graphic style against a pure white circular background. The style is clean, modern, and high-stakes corporate, reflecting a prestigious work environment in the heart of Silicon Valley." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9Vpt3WgbYndr3oOnKzxOASGpC9P5uEk5p7j-hhAiE9KFa6-BXWkhwTC4_RK9f7gaPC1-AC0vgG_reiwl7JtYNCUb4yv160JK4x04gWmzz1CxdOW1ZoXv4r8iB7NhKLzJqt6lDKTF4BmmNgQqAjZ-qPV8OZNwi2oVWLw6hWsM3Nr4Y-3yJvHRkU6B5EKlIqvvURfwW0sGRt7OU91ChPIudRZsAHGxHnjeywFV5L_1Ka4rCnjeITBqtLfa8w9ukwhHz7o9KFfwE0dXb">
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Senior Product Designer</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Google Korea • 2일 전 지원</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 bg-success-mint text-secondary text-label-sm rounded-full font-label-sm">서류 검토중</span>
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary transition-colors">more_vert</span>
+</div>
+</div>
+<!-- Tracker Item -->
+<div class="p-4 rounded-xl border border-border-subtle hover:border-primary/30 hover:bg-surface-container-low transition-all group flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-white rounded-lg border border-border-subtle flex items-center justify-center p-2">
+<img alt="Netflix" class="w-full h-full object-contain" data-alt="A clean, flat vector logo for a leading global entertainment and streaming service, displayed prominently on a white background. The visual language is sophisticated and high-contrast, symbolizing innovation and a creative professional atmosphere. The lighting is even and bright, mimicking a modern digital dashboard interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtt07mTIhkpsUiVRXaPaipzmAfGR7beS4cEHKELwzwj911fiWZ26pvt4Kz3ARR8y3zZ_dB9D5DqpKStLmyeCAxQ9D0m1wJnuN81WtowXFs63it-sXOy1jeIPff9iiaemNX8tTkGbA4HzLFosHMB-tW3J6aITwn_Y5BuG-Oo4mq-UkaWM2e7zl8U5bpMNZwAe0DXtTe5RCxMWDLF0uoEAY3M2H6Oh0swexShDDkXFofwCf1PGDgqJeQRUAlBs3ZSJynjkCw-Ed4kkt7">
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">UX Researcher</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Netflix Korea • 5일 전 지원</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-label-sm rounded-full font-label-sm">지원 완료</span>
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary transition-colors">more_vert</span>
+</div>
+</div>
+<!-- Tracker Item -->
+<div class="p-4 rounded-xl border border-border-subtle hover:border-primary/30 hover:bg-surface-container-low transition-all group flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-white rounded-lg border border-border-subtle flex items-center justify-center p-2">
+<img alt="Toss" class="w-full h-full object-contain" data-alt="The corporate emblem of a leading fintech unicorn based in Seoul, known for its minimalist and bold blue branding. The logo is sharp and centered in a bright, modern square frame. The overall mood conveys trustworthiness, speed, and high-end digital innovation in the financial technology sector." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZWzziB4DF2i1MzYvDDuwx2rGdFHeva4g-OlEV_PTwokgtK1pmu_jJnUxMwUw7b_dAoeNMFHkDdeyE8HLmurWlRrRQFs354dfWW_kUv1yoj7n0nA-iHlzUV2fFrCiaStXHMsPMcQcsGzNIh8CQoQV_yq4N4LKbV95P6npscf01B4cWB4YY47vsGUS9vcFesPrGKt4Cw4bUKD-Ljkb7Y__wBSx27LHfATe9Ur9W_NVzi-r9nzgkzzxuFGiyqEFNFDUM_4mC8RD5QGV8">
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Lead UI Designer</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Toss • 1주일 전 지원</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-label-sm rounded-full font-label-sm">지원 완료</span>
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary transition-colors">more_vert</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity (Narrow Sidebar) -->
+<div class="md:col-span-5 bg-surface-container-lowest rounded-xl p-8 shadow-[0_4px_12px_rgba(30,41,59,0.05)] border border-border-subtle flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6">최근 활동</h3>
+<div class="space-y-6 relative before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-surface-container-high">
+<!-- Activity Item -->
+<div class="relative pl-10"><div class="absolute left-0 top-1 w-[24px] h-[24px] bg-secondary-container rounded-full flex items-center justify-center z-10 border-4 border-surface-container-lowest"><div class="w-2 h-2 bg-secondary rounded-full"></div></div><h4 class="font-label-md text-label-md text-on-surface">차세대 금융 시스템 구축 완료</h4><p class="font-body-sm text-body-sm text-on-surface-variant mb-1">25년 경력의 Java 개발자로서 마지막 대규모 SI 프로젝트를 성공적으로 마무리했습니다.</p><span class="text-xs text-outline">오늘 오후 2:30</span></div>
+<!-- Activity Item -->
+<div class="relative pl-10"><div class="absolute left-0 top-1 w-[24px] h-[24px] bg-primary-container rounded-full flex items-center justify-center z-10 border-4 border-surface-container-lowest"><div class="w-2 h-2 bg-white rounded-full"></div></div><h4 class="font-label-md text-label-md text-on-surface">기술 고문 제안 수락</h4><p class="font-body-sm text-body-sm text-on-surface-variant mb-1">중소 SI 업체의 기술 고문직 제안을 검토하고 수락했습니다.</p><span class="text-xs text-outline">어제 오전 10:15</span></div>
+<!-- Activity Item -->
+<div class="relative pl-10"><div class="absolute left-0 top-1 w-[24px] h-[24px] bg-tertiary-container rounded-full flex items-center justify-center z-10 border-4 border-surface-container-lowest"><div class="w-2 h-2 bg-white rounded-full"></div></div><h4 class="font-label-md text-label-md text-on-surface">퇴직 연금 정산 확인</h4><p class="font-body-sm text-body-sm text-on-surface-variant mb-1">정년 퇴임을 앞두고 지난 20년간의 근속 연수 및 퇴직금을 확인했습니다.</p><span class="text-xs text-outline">3일 전</span></div>
+</div>
+<button class="mt-8 text-primary font-label-md text-label-md flex items-center justify-center gap-2 hover:underline">
+                    전체 활동 보기
+                    <span class="material-symbols-outlined text-sm">keyboard_arrow_right</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Footer (Desktop) -->
+<footer class="hidden md:block w-full py-12 bg-surface-container mt-12 border-t border-border-subtle">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-max-width mx-auto">
+<div class="mb-6 md:mb-0">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">a4u.com</span>
+<p class="text-on-surface-variant font-label-md text-label-md mt-2">© 2024 a4u.com. 모든 권리 보유.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">이용약관</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">개인정보처리방침</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">고객센터</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">채용안내</a>
+</div>
+</div>
+</footer>
+<!-- Bottom Navigation Bar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-2 pb-safe bg-surface-container-lowest shadow-[0_-4px_12px_rgba(30,41,59,0.05)] z-50 rounded-t-xl">
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-sm text-[10px]">홈</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant active:scale-90 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-sm text-[10px]">이력서</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant active:scale-90 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+<span class="font-label-sm text-[10px]">지원현황</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant active:scale-90 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined">timeline</span>
+<span class="font-label-sm text-[10px]">타임라인</span>
+</div>
+</nav>
+<script>
+        // Simple Interaction Logic
+        document.querySelectorAll('button, .cursor-pointer').forEach(el => {
+            el.addEventListener('click', function() {
+                // Haptic feedback simulation or navigation could go here
+                console.log('Action triggered:', this.innerText || 'Icon Click');
+            });
+        });
+
+        // Dynamic greeting based on time of day (Atmospheric Interaction)
+        const hours = new Date().getHours();
+        const welcomeText = document.querySelector('h2');
+        if (hours < 12) {
+            welcomeText.innerText = "좋은 아침입니다, 알렉산더님";
+        } else if (hours < 18) {
+            welcomeText.innerText = "즐거운 오후입니다, 알렉산더님";
+        } else {
+            welcomeText.innerText = "평온한 저녁입니다, 알렉산더님";
+        }
+    </script>
+
+
+</body></html>

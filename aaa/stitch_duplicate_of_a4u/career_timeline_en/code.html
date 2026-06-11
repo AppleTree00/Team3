@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Career Timeline | a4u.com</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .timeline-line {
+            background: linear-gradient(180deg, #3525cd 0%, #006a61 50%, #004598 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "surface-gray": "#F8FAFC",
+                        "outline-variant": "#c7c4d8",
+                        "on-background": "#111c2d",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#86f2e4",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "surface-tint": "#4d44e3",
+                        "surface-container-highest": "#d8e3fb",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#263143",
+                        "on-primary": "#ffffff",
+                        "success-mint": "#F0FDFA",
+                        "primary": "#3525cd",
+                        "inverse-on-surface": "#ecf1ff",
+                        "surface-dim": "#cfdaf2",
+                        "surface": "#f9f9ff",
+                        "background": "#f9f9ff",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#001a42",
+                        "tertiary-fixed": "#d8e2ff",
+                        "inverse-primary": "#c3c0ff",
+                        "secondary-fixed": "#89f5e7",
+                        "border-subtle": "#E2E8F0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#e7eeff",
+                        "on-surface-variant": "#464555",
+                        "on-secondary-fixed": "#00201d",
+                        "surface-container-low": "#f0f3ff",
+                        "surface-container-high": "#dee8ff",
+                        "tertiary-container": "#005cc6",
+                        "tertiary-fixed-dim": "#adc6ff",
+                        "on-surface": "#111c2d",
+                        "primary-container": "#4f46e5",
+                        "on-tertiary-container": "#cedbff",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#e2dfff",
+                        "tertiary": "#004598",
+                        "on-primary-container": "#dad7ff",
+                        "secondary": "#006a61",
+                        "outline": "#777587",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-secondary-container": "#006f66",
+                        "surface-variant": "#d8e3fb",
+                        "on-primary-fixed": "#0f0069",
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-tertiary-fixed-variant": "#004395",
+                        "surface-bright": "#f9f9ff",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "base": "4px",
+                        "margin-desktop": "40px",
+                        "max-width": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface-gray text-on-surface font-body-md antialiased">
+<!-- Top Navigation -->
+<nav class="bg-surface-container-lowest fixed top-0 w-full z-50 shadow-sm">
+<div class="flex justify-between items-center px-margin-desktop h-16 w-full max-w-max-width mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary">a4u.com</div>
+<div class="hidden md:flex gap-8 items-center h-full">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors h-full flex items-center" href="#">Dashboard</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors h-full flex items-center" href="#">Resume Builder</a>
+<a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1 h-full flex items-center" href="#">Job Tracker</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors h-full flex items-center" href="#">Profile Settings</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full transition-all" data-icon="notifications">notifications</button>
+<div class="w-10 h-10 rounded-full bg-primary-fixed overflow-hidden border border-border-subtle">
+<img alt="Hong Gil-dong's Profile Picture" class="w-full h-full object-cover" data-alt="Professional headshot of a smiling professional in a soft office setting, suitable for a career management platform. Bright, clean lighting conveys trust and a modern atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxwwKXra4hcPBiH3pXp_xRPsXdRfTvs4AbFLpTRfDOLUG-TTYT2vobYF_G4XE8BKF6PKeaIu3yeFQ4KsWjNEdYA37hATyQZkvZlhNcZ5wvnbKkJ1JtFGsuotJGQPJ7KprzvcahMYOT8s19p03SBUB8x3cVBAXDfaJfpZ63fr2THV_E01ms6JZHotOkKoOHxY6zJY_oqsN3uFqdPkYtPVlGjARYfn1MgMJqLIOoUAjyA99GJaiXPDjcfFV7btzHEI0ZmxoDaG6yQ-L0"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- Side Navigation -->
+<aside class="hidden lg:flex flex-col gap-2 py-4 h-screen w-64 fixed left-0 top-0 pt-20 bg-surface-gray">
+<div class="px-6 py-4 border-b border-border-subtle mb-4">
+<div class="text-label-md font-label-md text-primary uppercase tracking-wider mb-1">Career Management</div>
+<div class="text-headline-md font-headline-md text-on-surface">Timeline</div>
+</div>
+<div class="flex flex-col gap-1 px-2">
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span class="font-label-md text-label-md">Experience</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md">Personal Info</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-label-md text-label-md">Education</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span class="font-label-md text-label-md">Skills</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+<span class="font-label-md text-label-md">Certifications</span>
+</a>
+</div>
+<div class="mt-auto px-4 py-6">
+<button class="w-full bg-primary text-white py-3 rounded-xl font-label-md text-label-md hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+            Create New Resume
+        </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="pt-24 pb-12 lg:pl-64 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
+<!-- Header Section -->
+<header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-background mb-2">My Career Journey</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Visualize your professional milestones and achievements.</p>
+</div>
+<!-- Filters -->
+<div class="flex flex-wrap gap-2 bg-surface-container-low p-1.5 rounded-xl border border-border-subtle">
+<button class="px-5 py-2 rounded-lg text-label-md font-label-md bg-white shadow-sm text-primary transition-all">All Milestones</button>
+<button class="px-5 py-2 rounded-lg text-label-md font-label-md text-on-surface-variant hover:bg-white/50 transition-all">Experience</button>
+<button class="px-5 py-2 rounded-lg text-label-md font-label-md text-on-surface-variant hover:bg-white/50 transition-all">Education</button>
+<button class="px-5 py-2 rounded-lg text-label-md font-label-md text-on-surface-variant hover:bg-white/50 transition-all">Milestones</button>
+</div>
+</header>
+<!-- Timeline Container -->
+<div class="relative">
+<!-- Continuous Timeline Line -->
+<div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 timeline-line transform md:-translate-x-1/2 opacity-20"></div>
+<div class="space-y-12 relative">
+<!-- Entry 1: Current Role (Work) -->
+<div class="relative flex flex-col md:flex-row items-center justify-between group"><div class="hidden md:block w-[45%] text-right pr-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300"><span class="inline-block px-3 py-1 rounded-full bg-success-mint text-secondary text-label-sm font-label-sm">Currently Active</span></div><div class="absolute left-6 md:left-1/2 w-4 h-4 rounded-full bg-primary border-4 border-white shadow-md transform md:-translate-x-1/2 z-10 transition-transform group-hover:scale-125"></div><div class="w-full md:w-[45%] pl-16 md:pl-0"><div class="glass-card border border-border-subtle rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"><div class="flex items-center gap-4 mb-4"><div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center p-2"><span class="material-symbols-outlined text-primary text-3xl">terminal</span></div><div><h3 class="font-headline-md text-headline-md text-on-surface">Project Manager - Global Solutions</h3><p class="text-label-md font-label-md text-primary">Future Info Systems (SI Tech)</p></div></div><div class="flex items-center gap-2 text-on-surface-variant mb-4"><span class="material-symbols-outlined text-sm">calendar_month</span><span class="font-label-sm text-label-sm">March 2010 — Present (14 years 2 months)</span></div><ul class="space-y-2 mb-4"><li class="flex gap-3 text-body-sm font-body-sm text-on-surface-variant"><span class="text-secondary">•</span> Led next-gen system projects and architectural design for public institutions</li><li class="flex gap-3 text-body-sm font-body-sm text-on-surface-variant"><span class="text-secondary">•</span> Managed high-level maintenance and modernization of Java/Spring legacy systems</li></ul><div class="flex flex-wrap gap-2"><span class="px-3 py-1 bg-surface-gray rounded-full text-label-sm font-label-sm text-on-surface-variant">Java</span><span class="px-3 py-1 bg-surface-gray rounded-full text-label-sm font-label-sm text-on-surface-variant">Spring</span><span class="px-3 py-1 bg-surface-gray rounded-full text-label-sm font-label-sm text-on-surface-variant">Oracle</span></div></div></div></div>
+<!-- Entry 2: Previous Role (Work) -->
+<div class="relative flex flex-col md:flex-row-reverse items-center justify-between group"><div class="hidden md:block w-[45%] text-left pl-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300"><span class="inline-block px-3 py-1 rounded-full bg-surface-container-highest text-tertiary text-label-sm font-label-sm">Career Growth</span></div><div class="absolute left-6 md:left-1/2 w-4 h-4 rounded-full bg-secondary border-4 border-white shadow-md transform md:-translate-x-1/2 z-10 transition-transform group-hover:scale-125"></div><div class="w-full md:w-[45%] pl-16 md:pl-0"><div class="glass-card border border-border-subtle rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"><div class="flex items-center gap-4 mb-4"><div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center p-2"><span class="material-symbols-outlined text-secondary text-3xl">code</span></div><div><h3 class="font-headline-md text-headline-md text-on-surface">Senior Software Engineer - FinTech Corp</h3><p class="text-label-md font-label-md text-secondary">Hanul Software</p></div></div><div class="flex items-center gap-2 text-on-surface-variant mb-4"><span class="material-symbols-outlined text-sm">calendar_month</span><span class="font-label-sm text-label-sm">May 2002 — February 2010 (7 years 10 months)</span></div><ul class="space-y-2 mb-4"><li class="flex gap-3 text-body-sm font-body-sm text-on-surface-variant"><span class="text-tertiary">•</span> Key developer in financial sector ERP system migration to Java</li><li class="flex gap-3 text-body-sm font-body-sm text-on-surface-variant"><span class="text-tertiary">•</span> Conducted DB query optimization and tuning for high-traffic environments</li></ul><div class="flex flex-wrap gap-2"><span class="px-3 py-1 bg-surface-gray rounded-full text-label-sm font-label-sm text-on-surface-variant">J2EE</span><span class="px-3 py-1 bg-surface-gray rounded-full text-label-sm font-label-sm text-on-surface-variant">Struts</span><span class="px-3 py-1 bg-surface-gray rounded-full text-label-sm font-label-sm text-on-surface-variant">SQL</span></div></div></div></div>
+<!-- Entry 3: Education -->
+<div class="relative flex flex-col md:flex-row items-center justify-between group"><div class="hidden md:block w-[45%] text-right pr-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300"><span class="inline-block px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant text-label-sm font-label-sm">Career Start</span></div><div class="absolute left-6 md:left-1/2 w-4 h-4 rounded-full bg-tertiary border-4 border-white shadow-md transform md:-translate-x-1/2 z-10 transition-transform group-hover:scale-125"></div><div class="w-full md:w-[45%] pl-16 md:pl-0"><div class="glass-card border border-border-subtle rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"><div class="flex items-center gap-4 mb-4"><div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center p-2"><span class="material-symbols-outlined text-tertiary text-3xl">developer_board</span></div><div><h3 class="font-headline-md text-headline-md text-on-surface">Associate / Junior Developer</h3><p class="text-label-md font-label-md text-tertiary">Daesung IT</p></div></div><div class="flex items-center gap-2 text-on-surface-variant mb-4"><span class="material-symbols-outlined text-sm">calendar_month</span><span class="font-label-sm text-label-sm">January 1998 — April 2002 (4 years 4 months)</span></div><p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">Developed manufacturing process management systems using C/C++ and early Java versions. Maintained Windows-based client/server programs.</p></div></div></div>
+<!-- Entry 4: Milestone -->
+<div class="relative flex flex-col md:flex-row-reverse items-center justify-between group"><div class="hidden md:block w-[45%] text-left pl-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300"><span class="inline-block px-3 py-1 rounded-full bg-error-container text-on-error-container text-label-sm font-label-sm">Academic Achievement</span></div><div class="absolute left-6 md:left-1/2 w-4 h-4 rounded-full bg-error border-4 border-white shadow-md transform md:-translate-x-1/2 z-10 transition-transform group-hover:scale-125"></div><div class="w-full md:w-[45%] pl-16 md:pl-0"><div class="glass-card border border-border-subtle rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"><div class="flex items-center gap-4 mb-4"><div class="w-12 h-12 rounded-lg bg-error-container flex items-center justify-center p-2"><span class="material-symbols-outlined text-error text-3xl">school</span></div><div><h3 class="font-headline-md text-headline-md text-on-surface">Computer Science - Bachelor's Degree</h3><p class="text-label-md font-label-md text-on-surface-variant">Hankuk University</p></div></div><div class="flex items-center gap-2 text-on-surface-variant mb-4"><span class="material-symbols-outlined text-sm">calendar_month</span><span class="font-label-sm text-label-sm">1991 — 1998</span></div><p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed italic">Majored in Computer Architecture and Algorithms. Includes period of military service.</p></div></div></div>
+</div>
+</div>
+<!-- Add Entry Button -->
+<div class="mt-16 flex justify-center">
+<button class="flex items-center gap-2 px-8 py-3 bg-white border border-dashed border-primary text-primary rounded-xl font-label-md text-label-md hover:bg-primary/5 transition-colors active:scale-95 group">
+<span class="material-symbols-outlined group-hover:rotate-90 transition-transform" data-icon="add">add</span>
+            Add Career Item
+        </button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-border-subtle mt-12 w-full">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-gutter max-w-max-width mx-auto gap-6">
+<div class="flex flex-col gap-2">
+<div class="font-headline-md text-headline-md text-primary font-bold">a4u.com</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant">© 2024 a4u.com Career Management</p>
+</div>
+<div class="flex gap-8">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Info</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Privacy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Terms</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+<!-- Interactive Layer: Tooltip / Hover Effect Script -->
+<script>
+    // Simple micro-interaction for entry cards
+    document.querySelectorAll('.glass-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-4px)';
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0)';
+        });
+    });
+</script>
+</body></html>
