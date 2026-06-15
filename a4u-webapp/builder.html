@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-
-<html class="light" lang="ko"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!DOCTYPE html><html class="light" lang="ko"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>이력서 빌더 - a4u.com</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -175,7 +173,7 @@
 <span class="font-headline-md text-headline-md font-bold text-primary">a4u.com</span>
 <nav class="hidden md:flex gap-6">
 <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="dashboard.html">대시보드</a>
-<a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1" href="select.html">이력서 빌더</a>
+<a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1" href="builder.html">이력서 빌더</a>
 <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="timeline.html">채용 추적</a>
 <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="main.html">내 프로필</a>
 </nav>
@@ -183,11 +181,29 @@
 <div class="flex items-center gap-4">
 <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
 <div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container">
-<img alt="User profile avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOtBgHjz4tapkgY97LD6GjyWEaXTodvpDxaiGLEeRwrhTEjJ-Y85Yy795zpiR_irFcYDsGKnp7PktPXnVrsCEPzF3JVs28b12CzPQEuYG71RRGMYPLnkJB5bMvYuLg4HDE8ec1fuGiRKIco20JOYihbsXIZ1W9ISPH-o95ONErefViqhZ2aTrDyCjPTv3OuTEFRekKXiNJ5FDh8n8pRSNqSUJzqTy6g_2vcT28ltn2xzJJcZaxIXCOhUnvTCu9LabHVP0gpp4znK8d"/>
+<img alt="User profile avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOtBgHjz4tapkgY97LD6GjyWEaXTodvpDxaiGLEeRwrhTEjJ-Y85Yy795zpiR_irFcYDsGKnp7PktPXnVrsCEPzF3JVs28b12CzPQEuYG71RRGMYPLnkJB5bMvYuLg4HDE8ec1fuGiRKIco20JOYihbsXIZ1W9ISPH-o95ONErefViqhZ2aTrDyCjPTv3OuTEFRekKXiNJ5FDh8n8pRSNqSUJzqTy6g_2vcT28ltn2xzJJcZaxIXCOhUnvTCu9LabHVP0gpp4znK8d">
 </div>
 </div>
 </header>
 <!-- Toolbar (Contextual) -->
+/your-project-name/
+|-- app.py                 # Flask 메인 애플리케이션 파일
+|-- /static/
+|   |-- /css/
+|   |   |-- input.css      # Tailwind 소스 CSS
+|   |   `-- output.css     # 컴파일된 최종 CSS
+|   |-- /js/               # JavaScript 파일 (필요시)
+|   `-- /images/           # 이미지 파일
+|-- /templates/
+|   |-- dashboard.html
+|   |-- main.html
+|   |-- select.html
+|   |-- timeline.html
+|   |-- builder.html
+|   `-- profile-menu.html
+|-- tailwind.config.js     # Tailwind 설정 파일
+|-- package.json           # Node.js 프로젝트 설정
+`-- requirements.txt       # Python 의존성 목록
 <div class="fixed top-16 left-0 right-0 h-14 bg-white border-b border-border-subtle z-40 px-margin-desktop flex items-center justify-between">
 <div class="flex items-center gap-4">
 <button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors font-label-md text-label-md">
@@ -208,77 +224,7 @@
 </div>
 </div>
 <!-- Main Content Shell -->
-<main class="flex min-h-screen pt-[120px] fade-in"><div class="fixed inset-0 z-[60] bg-surface-gray flex flex-col items-center justify-center p-margin-desktop fade-in-up" id="start-selection-overlay" style="animation-delay:0.12s;"><button class="absolute top-8 left-8 flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-border-subtle hover:bg-surface-container-low transition-colors font-label-md text-label-md text-on-surface-variant btn-raise" onclick="document.getElementById('start-selection-overlay').classList.add('hidden')"><span class="material-symbols-outlined text-[20px]">arrow_back</span>작성기로 돌아가기</button>
-<div class="text-center mb-12">
-<div class="flex items-center justify-center gap-3 mb-4">
-<h1 class="font-display-lg text-display-lg text-on-surface">이력서 업데이트 방식 선택</h1>
-</div>
-<p class="text-body-lg text-on-surface-variant mb-2">어떤 양식이든 자유롭게 생성하는 마스터 커리어 데이터베이스.</p>
-<p class="text-label-md text-outline">프로필 등록 방식을 선택해주세요.</p>
-</div>
-<div class="grid md:grid-cols-2 gap-8 max-w-4xl w-full fade-in-up" style="animation-delay:0.18s;">
-<!-- Option 1: Upload -->
-<div class="bg-white p-12 rounded-xl shadow-sm border border-border-subtle hover:border-primary hover:shadow-xl transition-all group flex flex-col items-center text-center">
-<div class="w-20 h-20 rounded-full bg-surface-container flex items-center justify-center mb-8 group-hover:bg-primary-container transition-colors">
-<span class="material-symbols-outlined text-primary text-[32px] group-hover:text-white">upload_file</span>
-</div>
-<h2 class="font-headline-md text-headline-md mb-4">기존 이력서 업로드</h2>
-<p class="text-body-md text-on-surface-variant mb-8">PDF, WORD 파일만 올리세요.<br/>AI가 스킬과 직무를 자동 추출합니다.</p>
-<div id="uploadDropZone" class="w-full rounded-3xl border border-dashed border-border-subtle bg-surface-container p-6 flex flex-col items-center gap-4">
-<label for="resumeFileInput" class="cursor-pointer w-full h-40 flex flex-col items-center justify-center border-2 border-border-subtle border-dashed rounded-3xl hover:border-primary transition-colors">
-<span class="material-symbols-outlined text-[32px] text-primary mb-3">cloud_upload</span>
-<span class="text-body-md text-on-surface-variant">여기에 파일을 드래그하거나 클릭해서 선택</span>
-<input id="resumeFileInput" name="resumeFile" type="file" accept=".pdf,.doc,.docx" class="hidden" />
-</label>
-<div class="text-sm text-on-surface-variant">지원서 파일을 업로드하면 AI가 내용을 분석합니다.</div>
-</div>
-<button id="uploadResumeButton" type="button" class="mt-6 px-8 py-4 bg-primary text-white rounded-xl font-label-md hover:opacity-90 transition-all btn-raise disabled:opacity-50 disabled:cursor-not-allowed" disabled>업로드 시작</button>
-<p id="uploadStatusText" class="mt-3 text-sm text-on-surface-variant">PDF, DOC, DOCX 파일을 업로드하세요.</p>
-<div id="uploadResultCard" class="hidden w-full mt-6 rounded-3xl border border-primary/20 bg-primary/5 p-6 text-left">
-<div class="flex items-start gap-4 mb-4">
-<span class="material-symbols-outlined text-primary text-[28px]">analytics</span>
-<div>
-<p class="font-label-md text-label-md text-on-background mb-1">AI 분석 완료</p>
-<p class="text-body-sm text-on-surface-variant">업로드된 이력서에서 추출된 핵심 항목을 미리보기로 확인할 수 있습니다.</p>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-<div class="rounded-2xl bg-white p-4 border border-border-subtle">
-<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mb-2">이름</p>
-<p id="parsedName" class="font-body-md text-body-md text-on-background">홍길동</p>
-</div>
-<div class="rounded-2xl bg-white p-4 border border-border-subtle">
-<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mb-2">직무</p>
-<p id="parsedTitle" class="font-body-md text-body-md text-on-background">시니어 Java 개발자 / SI 전문가</p>
-</div>
-<div class="rounded-2xl bg-white p-4 border border-border-subtle">
-<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mb-2">파일</p>
-<p id="parsedFileName" class="font-body-md text-body-md text-on-background">resume.pdf</p>
-</div>
-</div>
-<div class="bg-white rounded-2xl border border-border-subtle p-4 mb-4">
-<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mb-2">요약</p>
-<p id="parsedSummary" class="text-body-sm text-on-surface-variant">AI가 핵심 경력 및 성과를 분석하여 요약합니다...</p>
-</div>
-<div class="bg-white rounded-2xl border border-border-subtle p-4">
-<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mb-3">추출된 기술</p>
-<div id="parsedSkills" class="flex flex-wrap gap-2"></div>
-</div>
-<button id="uploadContinueButton" type="button" disabled class="mt-5 px-6 py-3 rounded-lg bg-primary text-white hover:opacity-90 transition-all font-label-md text-label-md disabled:opacity-50 disabled:cursor-not-allowed">분석 결과로 이어가기</button>
-</div>
-<span class="px-4 py-2 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm">가장 빠름 (AI 파싱)</span>
-</div>
-<!-- Option 2: Direct Entry -->
-<div class="bg-white p-12 rounded-xl shadow-sm border border-border-subtle hover:border-primary hover:shadow-xl transition-all cursor-pointer group flex flex-col items-center text-center" onclick="document.getElementById('start-selection-overlay').remove()">
-<div class="w-20 h-20 rounded-full bg-surface-container flex items-center justify-center mb-8 group-hover:bg-primary-container transition-colors">
-<span class="material-symbols-outlined text-primary text-[32px] group-hover:text-white">edit_note</span>
-</div>
-<h2 class="font-headline-md text-headline-md mb-4">마스터 폼 직접 입력</h2>
-<p class="text-body-md text-on-surface-variant mb-8">상세한 프로젝트와 자기소개서를<br/>통합 양식에 꼼꼼하게 작성합니다.</p>
-<span class="px-4 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">AI 자소서 보조 지원</span>
-</div>
-</div>
-<div class="absolute top-8 right-8 flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-container/10 border border-primary/20"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span><span class="text-label-sm font-label-sm text-primary uppercase tracking-wider">수정 모드</span></div></div>
+<main class="flex min-h-screen pt-[120px]">
 <!-- SideNavBar -->
 <aside class="h-screen w-64 fixed left-0 top-0 pt-20 bg-surface-gray flex flex-col gap-2 py-4">
 <div class="px-6 py-4 flex items-center gap-3">
@@ -315,10 +261,10 @@
             </button>
 </div>
 <div class="mt-auto px-4 pb-8">
-<button class="w-full flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-dashed border-outline-variant text-outline hover:border-primary hover:text-primary transition-all font-label-md text-label-md">
+<a class="w-full flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-dashed border-outline-variant text-outline hover:border-primary hover:text-primary transition-all font-label-md text-label-md" href="select.html">
 <span class="material-symbols-outlined">add</span>
                 새 이력서 만들기
-            </button>
+            </a>
 </div>
 </aside>
 <!-- Builder Interface -->
@@ -331,25 +277,25 @@
 <div class="grid grid-cols-2 gap-4">
 <div>
 <label class="block font-label-md text-label-md text-on-surface mb-2">이름</label>
-<input id="personalFirstName" class="w-full px-4 py-3 rounded-lg border border-border-subtle focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="text" value="길동"/>
+<input class="w-full px-4 py-3 rounded-lg border border-border-subtle focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="text" value="길동">
 </div>
 <div>
 <label class="block font-label-md text-label-md text-on-surface mb-2">성</label>
-<input id="personalLastName" class="w-full px-4 py-3 rounded-lg border border-border-subtle focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="text" value="홍"/>
+<input class="w-full px-4 py-3 rounded-lg border border-border-subtle focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="text" value="홍">
 </div>
 </div>
 <div>
 <label class="block font-label-md text-label-md text-on-surface mb-2">전문가 요약</label>
-<textarea id="personalSummary" class="w-full px-4 py-3 rounded-lg border border-border-subtle focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" rows="4">25년 경력의 Java 전문 개발자로서, 다수의 공공 및 금융 SI 프로젝트를 성공적으로 수행해 왔습니다. 대규모 시스템 아키텍처 설계부터 유지보수까지 전 과정을 아우르는 풍부한 경험을 보유하고 있으며, 현재는 은퇴를 앞두고 후배 개발자 양성과 기술 고도화에 전념하고 있습니다.</textarea>
+<textarea class="w-full px-4 py-3 rounded-lg border border-border-subtle focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" rows="4">25년 경력의 Java 전문 개발자로서, 다수의 공공 및 금융 SI 프로젝트를 성공적으로 수행해 왔습니다. 대규모 시스템 아키텍처 설계부터 유지보수까지 전 과정을 아우르는 풍부한 경험을 보유하고 있으며, 현재는 은퇴를 앞두고 후배 개발자 양성과 기술 고도화에 전념하고 있습니다.</textarea>
 </div>
 <div class="grid grid-cols-2 gap-4">
 <div>
 <label class="block font-label-md text-label-md text-on-surface mb-2">이메일</label>
-<input id="personalEmail" class="w-full px-4 py-3 rounded-lg border border-border-subtle focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="email" value="alex.r@design.com"/>
+<input class="w-full px-4 py-3 rounded-lg border border-border-subtle focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="email" value="alex.r@design.com">
 </div>
 <div>
 <label class="block font-label-md text-label-md text-on-surface mb-2">전화번호</label>
-<input id="personalPhone" class="w-full px-4 py-3 rounded-lg border border-border-subtle focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="text" value="+1 (555) 000-1234"/>
+<input class="w-full px-4 py-3 rounded-lg border border-border-subtle focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="text" value="+1 (555) 000-1234">
 </div>
 </div>
 </div>
@@ -369,21 +315,21 @@
 <div class="grid grid-cols-2 gap-4">
 <div>
 <label class="block font-label-md text-label-md text-on-surface mb-2">직책</label>
-<input class="w-full px-4 py-2 rounded-lg border border-border-subtle focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="text" value="시니어 프로덕트 디자이너"/>
+<input class="w-full px-4 py-2 rounded-lg border border-border-subtle focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="text" value="시니어 프로덕트 디자이너">
 </div>
 <div>
 <label class="block font-label-md text-label-md text-on-surface mb-2">회사명</label>
-<input class="w-full px-4 py-2 rounded-lg border border-border-subtle focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="text" value="InnovateTech Inc."/>
+<input class="w-full px-4 py-2 rounded-lg border border-border-subtle focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="text" value="InnovateTech Inc.">
 </div>
 </div>
 <div class="grid grid-cols-2 gap-4">
 <div>
 <label class="block font-label-md text-label-md text-on-surface mb-2">시작일</label>
-<input class="w-full px-4 py-2 rounded-lg border border-border-subtle" type="month"/>
+<input class="w-full px-4 py-2 rounded-lg border border-border-subtle" type="month">
 </div>
 <div>
 <label class="block font-label-md text-label-md text-on-surface mb-2">종료일</label>
-<input class="w-full px-4 py-2 rounded-lg border border-border-subtle" type="month"/>
+<input class="w-full px-4 py-2 rounded-lg border border-border-subtle" type="month">
 </div>
 </div>
 <div>
@@ -411,7 +357,7 @@
 </span>
 </div>
 <div class="relative">
-<input class="w-full pl-4 pr-12 py-3 rounded-lg border border-border-subtle focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="기술 추가..." type="text"/>
+<input class="w-full pl-4 pr-12 py-3 rounded-lg border border-border-subtle focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="기술 추가..." type="text">
 <button class="absolute right-2 top-2 w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center">
 <span class="material-symbols-outlined">add</span>
 </button>
@@ -438,12 +384,12 @@
                 </div>
 <!-- Resume Header -->
 <div class="border-b-4 border-primary pb-8 mb-8">
-<h1 id="parsedNamePreview" class="font-display-lg text-display-lg uppercase tracking-tight text-on-background">홍길동</h1>
-<p id="parsedTitlePreview" class="font-headline-md text-headline-md text-primary mt-2">시니어 Java 개발자 / PM</p>
+<h1 class="font-display-lg text-display-lg uppercase tracking-tight text-on-background">홍길동</h1>
+<p class="font-headline-md text-headline-md text-primary mt-2">시니어 Java 개발자 / PM</p>
 <div class="flex gap-4 mt-4 text-label-sm text-outline font-label-sm">
-<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">mail</span> <span id="parsedEmailPreview">alex.r@design.com</span></span>
-<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">phone</span> <span id="parsedPhonePreview">+1 (555) 000-1234</span></span>
-<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">location_on</span> <span id="parsedLocationPreview">미국, 뉴욕</span></span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">mail</span> alex.r@design.com</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">phone</span> +1 (555) 000-1234</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">location_on</span> 미국, 뉴욕</span>
 </div>
 </div>
 <!-- Resume Content Grid -->
@@ -536,203 +482,7 @@
             // Focus ring handled by Tailwind, but could trigger preview highlights here
         });
     });
-
-    const uploadInput = document.getElementById('resumeFileInput');
-    const uploadButton = document.getElementById('uploadResumeButton');
-    const uploadStatusText = document.getElementById('uploadStatusText');
-    const uploadDropZone = document.getElementById('uploadDropZone');
-    const personalFirstName = document.getElementById('personalFirstName');
-    const personalLastName = document.getElementById('personalLastName');
-    const personalSummary = document.getElementById('personalSummary');
-    const personalEmail = document.getElementById('personalEmail');
-    const personalPhone = document.getElementById('personalPhone');
-    const uploadResultCard = document.getElementById('uploadResultCard');
-    const uploadContinueButton = document.getElementById('uploadContinueButton');
-    const parsedNamePreview = document.getElementById('parsedNamePreview');
-    const parsedTitlePreview = document.getElementById('parsedTitlePreview');
-    const parsedEmailPreview = document.getElementById('parsedEmailPreview');
-    const parsedPhonePreview = document.getElementById('parsedPhonePreview');
-    const parsedLocationPreview = document.getElementById('parsedLocationPreview');
-    let selectedResumeFile = null;
-
-    function saveResumeState() {
-        const state = {
-            firstName: personalFirstName.value,
-            lastName: personalLastName.value,
-            summary: personalSummary.value,
-            email: personalEmail.value,
-            phone: personalPhone.value,
-            previewName: parsedNamePreview.textContent,
-            previewTitle: parsedTitlePreview.textContent,
-            previewEmail: parsedEmailPreview.textContent,
-            previewPhone: parsedPhonePreview.textContent,
-            previewLocation: parsedLocationPreview.textContent
-        };
-        localStorage.setItem('a4uResumeState', JSON.stringify(state));
-    }
-
-    function loadResumeState() {
-        const stored = localStorage.getItem('a4uResumeState');
-        if (!stored) {
-            return;
-        }
-        try {
-            const state = JSON.parse(stored);
-            if (state.firstName) personalFirstName.value = state.firstName;
-            if (state.lastName) personalLastName.value = state.lastName;
-            if (state.summary) personalSummary.value = state.summary;
-            if (state.email) personalEmail.value = state.email;
-            if (state.phone) personalPhone.value = state.phone;
-            if (state.previewName) parsedNamePreview.textContent = state.previewName;
-            if (state.previewTitle) parsedTitlePreview.textContent = state.previewTitle;
-            if (state.previewEmail) parsedEmailPreview.textContent = state.previewEmail;
-            if (state.previewPhone) parsedPhonePreview.textContent = state.previewPhone;
-            if (state.previewLocation) parsedLocationPreview.textContent = state.previewLocation;
-        } catch (e) {
-            console.warn('Resume state load failed', e);
-        }
-    }
-
-    function setUploadReady(file) {
-        if (!file) {
-            uploadStatusText.textContent = '파일을 선택하거나 드래그하세요.';
-            uploadButton.disabled = true;
-            selectedResumeFile = null;
-            return;
-        }
-
-        const validTypes = [
-            'application/pdf',
-            'application/msword',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-        ];
-        const validName = /\.(pdf|doc|docx)$/i.test(file.name);
-        if (!validTypes.includes(file.type) && !validName) {
-            uploadStatusText.textContent = '지원서 파일은 PDF 또는 DOC/DOCX만 허용됩니다.';
-            uploadButton.disabled = true;
-            selectedResumeFile = null;
-            return;
-        }
-
-        selectedResumeFile = file;
-        uploadStatusText.textContent = `${file.name} 선택됨. 업로드 버튼을 눌러주세요.`;
-        uploadButton.disabled = false;
-    }
-
-    uploadInput.addEventListener('change', event => {
-        setUploadReady(event.target.files[0]);
-    });
-
-    ['dragenter', 'dragover'].forEach(eventName => {
-        uploadDropZone.addEventListener(eventName, event => {
-            event.preventDefault();
-            uploadDropZone.classList.add('border-primary', 'bg-primary/5');
-        });
-    });
-
-    ['dragleave', 'drop'].forEach(eventName => {
-        uploadDropZone.addEventListener(eventName, event => {
-            event.preventDefault();
-            uploadDropZone.classList.remove('border-primary', 'bg-primary/5');
-        });
-    });
-
-    uploadDropZone.addEventListener('drop', event => {
-        const files = event.dataTransfer.files;
-        if (files.length > 0) {
-            uploadInput.files = files;
-            setUploadReady(files[0]);
-        }
-    });
-
-    uploadButton.addEventListener('click', () => {
-        if (!selectedResumeFile) {
-            uploadStatusText.textContent = '업로드할 파일을 선택해주세요.';
-            return;
-        }
-
-        uploadButton.disabled = true;
-        uploadStatusText.textContent = '업로드 중... 잠시만 기다려주세요.';
-
-        const formData = new FormData();
-        formData.append('resumeFile', selectedResumeFile);
-
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/upload-resume');
-        xhr.upload.addEventListener('progress', event => {
-            if (event.lengthComputable) {
-                const percent = Math.round((event.loaded / event.total) * 100);
-                uploadStatusText.textContent = `업로드 진행 중: ${percent}%`;
-            }
-        });
-
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState !== XMLHttpRequest.DONE) {
-                return;
-            }
-            uploadButton.disabled = false;
-            if (xhr.status === 200) {
-                const response = JSON.parse(xhr.responseText);
-                uploadStatusText.textContent = `업로드 완료: ${response.originalName}`;
-                uploadResultCard.classList.remove('hidden');
-                document.getElementById('parsedFileName').textContent = response.originalName;
-                document.getElementById('parsedSummary').textContent = 'AI가 업로드된 이력서를 분석하여 주력 역량, 경력 요약, 기술 스택을 자동 생성했습니다.';
-                document.getElementById('parsedSkills').innerHTML = `
-                    <span class="px-3 py-2 rounded-full bg-surface-gray text-[12px] font-bold text-on-surface-variant">Java</span>
-                    <span class="px-3 py-2 rounded-full bg-surface-gray text-[12px] font-bold text-on-surface-variant">Spring</span>
-                    <span class="px-3 py-2 rounded-full bg-surface-gray text-[12px] font-bold text-on-surface-variant">Oracle</span>
-                    <span class="px-3 py-2 rounded-full bg-surface-gray text-[12px] font-bold text-on-surface-variant">시스템 아키텍처</span>
-                    <span class="px-3 py-2 rounded-full bg-surface-gray text-[12px] font-bold text-on-surface-variant">PM</span>
-                `;
-                document.getElementById('parsedName').textContent = '홍길동';
-                document.getElementById('parsedTitle').textContent = '시니어 Java 개발자 / SI 전문가';
-                uploadContinueButton.disabled = false;
-                uploadContinueButton.textContent = '분석 내용을 빌더로 적용';
-            } else {
-                let errorMessage = '업로드에 실패했습니다. 다시 시도해주세요.';
-                try {
-                    const response = JSON.parse(xhr.responseText);
-                    if (response && response.message) {
-                        errorMessage = response.message;
-                    }
-                } catch (e) {}
-                uploadStatusText.textContent = errorMessage;
-            }
-        };
-
-        xhr.send(formData);
-    });
-
-    function persistFormChanges() {
-        [personalFirstName, personalLastName, personalSummary, personalEmail, personalPhone].forEach(el => {
-            el.addEventListener('input', saveResumeState);
-        });
-    }
-
-    function applyParsedResumeData() {
-        personalFirstName.value = '길동';
-        personalLastName.value = '홍';
-        personalSummary.value = '25년 이상의 SI 경력을 바탕으로 Java 기반 아키텍처 설계 및 운영, 대규모 프로젝트 PM 역량을 전문적으로 보유하고 있습니다.';
-        personalEmail.value = 'hong.gildong@example.com';
-        personalPhone.value = '+82 10-1234-5678';
-        parsedNamePreview.textContent = '홍길동';
-        parsedTitlePreview.textContent = '시니어 Java 개발자 / SI 전문가';
-        parsedEmailPreview.textContent = personalEmail.value;
-        parsedPhonePreview.textContent = personalPhone.value;
-        parsedLocationPreview.textContent = '서울, 대한민국';
-        saveResumeState();
-    }
-
-    uploadContinueButton.addEventListener('click', () => {
-        if (uploadResultCard.classList.contains('hidden')) {
-            return;
-        }
-        applyParsedResumeData();
-        const overlay = document.getElementById('start-selection-overlay');
-        if (overlay) overlay.remove();
-    });
-
-    persistFormChanges();
-    loadResumeState();
 </script>
+
+
 </body></html>
