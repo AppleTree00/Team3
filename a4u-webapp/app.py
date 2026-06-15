@@ -4,7 +4,7 @@ import time
 from datetime import datetime, timezone
 from flask import Flask, request, jsonify, redirect
 from flask_cors import CORS
-from werkzeug.exceptions import RequestEntityTooLarge
+from werkzeug.exceptions import RequestEntityTooLarge, HTTPException
 
 # 프로젝트 루트 디렉토리를 기준으로 static 폴더를 설정하여
 # 현재 디렉토리('.')를 정적 파일 폴더로 사용하고, URL 경로를 루트('')로 설정합니다.
@@ -85,6 +85,11 @@ def handle_request_entity_too_large(e):
 @app.errorhandler(Exception)
 def handle_generic_exception(e):
     """그 외 모든 예외를 처리합니다."""
+    # HTTP 관련 오류는 Flask의 기본 핸들러가 처리하도록 하여
+    # 브라우저에 적절한 오류 페이지(예: 404 Not Found)가 표시되게 합니다.
+    if isinstance(e, HTTPException):
+        return e
+
     # 운영 환경에서는 오류 로깅이 필요합니다.
     print(f"An error occurred: {e}")
     return jsonify(success=False, message='알 수 없는 오류가 발생했습니다.'), 500
