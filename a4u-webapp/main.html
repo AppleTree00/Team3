@@ -163,26 +163,50 @@
 </head>
 <body class="bg-surface-gray text-on-surface font-body-md overflow-x-hidden">
 <!-- Top Navigation Bar -->
-<nav class="fixed top-0 w-full z-50 bg-surface-container-lowest shadow-sm h-16">
-<div class="flex justify-between items-center px-margin-desktop h-full w-full max-w-max-width mx-auto">
-<div class="flex items-center gap-8">
-<span class="font-headline-md text-headline-md font-bold text-primary">a4u</span>
-<div class="hidden md:flex gap-6 items-center">
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="dashboard.html">대시보드</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="select.html">이력서 빌더</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="timeline.html">지원 현황 관리</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="main.html">내 프로필</a>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
-<span class="material-symbols-outlined">notifications</span>
-</button>
-<div class="h-8 w-8 rounded-full overflow-hidden border border-border-subtle">
-<img alt="User profile avatar" data-alt="A professional headshot of a confident executive smiling subtly, set against a clean, blurred office background. The lighting is soft and natural, emphasizing clarity and professionalism. The color palette is composed of muted blues and warm skin tones, aligning with a sophisticated corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG8VImKTuowN3uHVy1cKnRoUpmpTuMMUenzMrZqKtbpAMPaIXew3MXLAUGDKWAI8jb3EWkpZCw0H_TNEBgq-n-UlNfNvE2CdiZaHoYqQkYTG7MeHLtYXa2hEmoloIAbTX6j1NkzZtyHuKYZdNFgHUYGSftJiqpsdmZsGf4HFFzmucm6jIuCERGu85b-nbvFsAPIyaXXb3RYS1AMLPvlmOpMNarU6oa1we4VIFGiTLt9IKGvz9PG8zOtGkRMQmgheGFYfY_L_sxVHzy"/>
-</div>
-</div>
-</div>
+<nav class="bg-surface-container-lowest shadow-sm fixed top-0 w-full z-50">
+    <div class="max-w-max-width mx-auto px-margin-desktop">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center gap-8">
+                <a href="main.html" class="font-headline-md text-headline-md font-bold text-primary">a4u</a>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="main.html" class="nav-link font-body-md text-on-surface-variant hover:text-primary transition-colors">메인</a>
+                    <a href="dashboard.html" class="nav-link font-body-md text-on-surface-variant hover:text-primary transition-colors">대시보드</a>
+                    <a href="resume.html" class="nav-link font-body-md text-on-surface-variant hover:text-primary transition-colors">이력서 관리</a>
+                    <a href="timeline.html" class="nav-link font-body-md text-on-surface-variant hover:text-primary transition-colors">커리어 관리</a>
+                    <a href="select.html" class="nav-link font-body-md text-on-surface-variant hover:text-primary transition-colors">제출 관리</a>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button class="p-2 text-on-surface-variant hover:text-primary transition-colors hidden sm:block">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+                <a href="profile-menu.html">
+                    <div class="h-8 w-8 rounded-full overflow-hidden border border-border-subtle">
+                        <img alt="User profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG8VImKTuowN3uHVy1cKnRoUpmpTuMMUenzMrZqKtbpAMPaIXew3MXLAUGDKWAI8jb3EWkpZCw0H_TNEBgq-n-UlNfNvE2CdiZaHoYqQkYTG7MeHLtYXa2hEmoloIAbTX6j1NkzZtyHuKYZdNFgHUYGSftJiqpsdmZsGf4HFFzmucm6jIuCERGu85b-nbvFsAPIyaXXb3RYS1AMLPvlmOpMNarU6oa1we4VIFGiTLt9IKGvz9PG8zOtGkRMQmgheGFYfY_L_sxVHzy"/>
+                    </div>
+                </a>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-surface-container-lowest border-t border-border-subtle">
+        <div class="px-4 pt-2 pb-4 space-y-1">
+            <a href="main.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-on-surface-variant hover:text-primary hover:bg-surface-container">메인</a>
+            <a href="dashboard.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-on-surface-variant hover:text-primary hover:bg-surface-container">대시보드</a>
+            <a href="resume.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-on-surface-variant hover:text-primary hover:bg-surface-container">이력서 관리</a>
+            <a href="timeline.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-on-surface-variant hover:text-primary hover:bg-surface-container">커리어 관리</a>
+            <a href="select.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-on-surface-variant hover:text-primary hover:bg-surface-container">제출 관리</a>
+        </div>
+    </div>
 </nav>
 <main class="pt-16">
 <!-- Hero Section -->
@@ -378,27 +402,34 @@
 </div>
 </footer>
 <script>
-        // Simple micro-interactions
-        document.querySelectorAll('button').forEach(button => {
-            button.addEventListener('mousedown', () => {
-                button.classList.add('scale-95');
-            });
-            button.addEventListener('mouseup', () => {
-                button.classList.remove('scale-95');
-            });
-            button.addEventListener('mouseleave', () => {
-                button.classList.remove('scale-95');
-            });
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
         });
+    }
 
-        // Sticky nav shadow on scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 20) {
-                nav.classList.add('shadow-md');
+    // Set active navigation link
+    const currentPath = window.location.pathname.split('/').pop();
+    const navLinks = document.querySelectorAll('.nav-link');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    const setActiveLink = (links) => {
+        links.forEach(link => {
+            const linkPath = link.getAttribute('href');
+            if (linkPath === currentPath || (currentPath === '' && linkPath === 'main.html')) {
+                link.classList.add('text-primary', 'font-bold');
+                link.classList.remove('text-on-surface-variant');
             } else {
-                nav.classList.remove('shadow-md');
+                link.classList.remove('text-primary', 'font-bold');
+                link.classList.add('text-on-surface-variant');
             }
         });
-    </script>
+    };
+
+    setActiveLink(navLinks);
+    setActiveLink(mobileNavLinks);
+</script>
 </body></html>

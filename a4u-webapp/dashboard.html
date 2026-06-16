@@ -159,31 +159,51 @@
 </head>
 <body class="bg-surface-gray text-on-surface font-body-md overflow-x-hidden">
 <!-- TopNavBar -->
-<header class="fixed top-0 w-full z-50 bg-surface-container-lowest shadow-sm h-16 flex items-center">
-<div class="flex justify-between items-center px-margin-desktop w-full max-w-max-width mx-auto">
-<div class="flex items-center gap-8">
-<span class="font-headline-md text-headline-md font-bold text-primary">a4u</span>
-<nav class="hidden md:flex items-center gap-6">
-<a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1" href="dashboard.html">대시보드</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="select.html">이력서 작성기</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="timeline.html">채용 트래커</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="main.html">내 프로필</a>
+<nav class="bg-surface-container-lowest shadow-sm fixed top-0 w-full z-50">
+    <div class="max-w-max-width mx-auto px-margin-desktop">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center gap-8">
+                <a href="main.html" class="font-headline-md text-headline-md font-bold text-primary">a4u</a>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="main.html" class="nav-link font-body-md text-on-surface-variant hover:text-primary transition-colors">메인</a>
+                    <a href="dashboard.html" class="nav-link font-body-md text-on-surface-variant hover:text-primary transition-colors">대시보드</a>
+                    <a href="resume.html" class="nav-link font-body-md text-on-surface-variant hover:text-primary transition-colors">이력서 관리</a>
+                    <a href="timeline.html" class="nav-link font-body-md text-on-surface-variant hover:text-primary transition-colors">커리어 관리</a>
+                    <a href="select.html" class="nav-link font-body-md text-on-surface-variant hover:text-primary transition-colors">제출 관리</a>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button class="p-2 text-on-surface-variant hover:text-primary transition-colors hidden sm:block">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+                <a href="profile-menu.html">
+                    <div class="h-8 w-8 rounded-full overflow-hidden border border-border-subtle">
+                        <img alt="User profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG8VImKTuowN3uHVy1cKnRoUpmpTuMMUenzMrZqKtbpAMPaIXew3MXLAUGDKWAI8jb3EWkpZCw0H_TNEBgq-n-UlNfNvE2CdiZaHoYqQkYTG7MeHLtYXa2hEmoloIAbTX6j1NkzZtyHuKYZdNFgHUYGSftJiqpsdmZsGf4HFFzmucm6jIuCERGu85b-nbvFsAPIyaXXb3RYS1AMLPvlmOpMNarU6oa1we4VIFGiTLt9IKGvz9PG8zOtGkRMQmgheGFYfY_L_sxVHzy"/>
+                    </div>
+                </a>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-surface-container-lowest border-t border-border-subtle">
+        <div class="px-4 pt-2 pb-4 space-y-1">
+            <a href="main.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-on-surface-variant hover:text-primary hover:bg-surface-container">메인</a>
+            <a href="dashboard.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-on-surface-variant hover:text-primary hover:bg-surface-container">대시보드</a>
+            <a href="resume.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-on-surface-variant hover:text-primary hover:bg-surface-container">이력서 관리</a>
+            <a href="timeline.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-on-surface-variant hover:text-primary hover:bg-surface-container">커리어 관리</a>
+            <a href="select.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-on-surface-variant hover:text-primary hover:bg-surface-container">제출 관리</a>
+        </div>
+    </div>
 </nav>
-</div>
-<div class="flex items-center gap-4">
-<div class="relative hidden sm:block">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-<input class="pl-10 pr-4 py-2 rounded-full border border-border-subtle bg-surface-container-low text-label-md focus:outline-none focus:border-primary w-64" placeholder="채용 공고 검색..." type="text"/>
-</div>
-<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-all">
-<span class="material-symbols-outlined">notifications</span>
-</button>
-<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container cursor-pointer">
-<img alt="사용자 프로필 아바타" data-alt="세련된 네이비 수트를 입은 젊은 남성 전문가의 인물 사진. 깔끔하고 부드러운 조명의 미니멀한 건축적 배경에서 포즈를 취하고 있다. 조명은 밝고 고르며, 현대적인 라이트 모드 인터페이스 미학을 반영한다. 그의 자신감 있는 표정에 초점이 맞춰져 있으며, a4u.com 커리어 매니지먼트의 세련되고 효율적인 브랜드 아이덴티티를 구현하고 있다." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA00NrHtQH3np0XfOimshPuzbL3MdrpEbiZ3WAjP0RvsIE9g4XPjubvXTU0gxKXBawJgh7ryayQPvej1UkmpQmCdaqHmm_NozTcE5cTFg3LOWeAqdrWVwUtFXGF4BJhezZyI2F5ksOYrfwXC3lr3jK5JSrmtooOMrx60eGyDhJIlYmJB_p7WOCdqRBunahBNRFstG17g_GPG7UYNQmaAGTcoHfn9eVbRYxgrFSi-gtbFYPWDDpo1g4xwU6cQPwIcZ_2wb6-LT1e50nd"/>
-</div>
-</div>
-</div>
-</header>
 <main class="pt-24 pb-12 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
 <!-- Welcome Section -->
 <section class="mb-8">
@@ -448,29 +468,6 @@
 <p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 a4u 커리어 매니지먼트</p>
 </div>
 </footer>
-<!-- Mobile Bottom Navigation Shell -->
-<div class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-lowest border-t border-border-subtle grid grid-cols-4 py-2 z-50">
-<a class="flex flex-col items-center gap-1 text-primary" href="#">
-<span class="material-symbols-outlined" data-weight="fill">dashboard</span>
-<span class="text-[10px] font-bold">대시보드</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
-<span class="material-symbols-outlined">edit_document</span>
-<span class="text-[10px]">이력서</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
-<span class="material-symbols-outlined">analytics</span>
-<span class="text-[10px]">트래커</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
-<span class="material-symbols-outlined">person</span>
-<span class="text-[10px]">프로필</span>
-</a>
-</div>
-<!-- Floating Action Button (FAB) - Contextual to Home/Dashboard -->
-<button class="fixed bottom-24 right-6 md:bottom-12 md:right-12 w-14 h-14 bg-primary text-on-primary rounded-full shadow-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-40">
-<span class="material-symbols-outlined">add</span>
-</button>
 <script>
         // Micro-interactions for hover states and cards
         document.querySelectorAll('.kanban-card').forEach(card => {
@@ -500,5 +497,32 @@
                 searchInput.parentElement.classList.remove('ring-2', 'ring-primary/20');
             });
         }
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Set active navigation link
+        const currentPath = window.location.pathname.split('/').pop();
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        const setActiveLink = (links) => {
+            links.forEach(link => {
+                const linkPath = link.getAttribute('href');
+                if (linkPath === currentPath || (currentPath === '' && linkPath === 'main.html')) {
+                    link.classList.add('text-primary', 'font-bold');
+                    link.classList.remove('text-on-surface-variant');
+                }
+            });
+        };
+
+        setActiveLink(navLinks);
+        setActiveLink(mobileNavLinks);
     </script>
 </body></html>

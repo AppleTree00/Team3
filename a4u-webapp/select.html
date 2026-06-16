@@ -170,89 +170,55 @@
 </head>
 <body class="bg-surface-gray font-body-md text-on-surface">
 <!-- TopNavBar -->
-<header class="fixed top-0 w-full z-50 bg-surface-container-lowest shadow-sm h-16 flex justify-between items-center px-margin-desktop max-w-max-width mx-auto left-0 right-0">
-<div class="flex items-center gap-8">
-<span class="font-headline-md text-headline-md font-bold text-primary">a4u</span>
-<nav class="hidden md:flex gap-6">
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="dashboard.html">대시보드</a>
-<a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1" href="select.html">이력서 빌더</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="timeline.html">채용 추적</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="main.html">내 프로필</a>
+<nav class="bg-surface-container-lowest shadow-sm fixed top-0 w-full z-50">
+    <div class="max-w-max-width mx-auto px-margin-desktop">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center gap-8">
+                <a href="main.html" class="font-headline-md text-headline-md font-bold text-primary">a4u</a>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="main.html" class="nav-link font-body-md text-on-surface-variant hover:text-primary transition-colors">메인</a>
+                    <a href="dashboard.html" class="nav-link font-body-md text-on-surface-variant hover:text-primary transition-colors">대시보드</a>
+                    <a href="resume.html" class="nav-link font-body-md text-on-surface-variant hover:text-primary transition-colors">이력서 관리</a>
+                    <a href="timeline.html" class="nav-link font-body-md text-on-surface-variant hover:text-primary transition-colors">커리어 관리</a>
+                    <a href="select.html" class="nav-link font-body-md text-on-surface-variant hover:text-primary transition-colors">제출 관리</a>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button class="p-2 text-on-surface-variant hover:text-primary transition-colors hidden sm:block">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+                <a href="profile-menu.html">
+                    <div class="h-8 w-8 rounded-full overflow-hidden border border-border-subtle">
+                        <img alt="User profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG8VImKTuowN3uHVy1cKnRoUpmpTuMMUenzMrZqKtbpAMPaIXew3MXLAUGDKWAI8jb3EWkpZCw0H_TNEBgq-n-UlNfNvE2CdiZaHoYqQkYTG7MeHLtYXa2hEmoloIAbTX6j1NkzZtyHuKYZdNFgHUYGSftJiqpsdmZsGf4HFFzmucm6jIuCERGu85b-nbvFsAPIyaXXb3RYS1AMLPvlmOpMNarU6oa1we4VIFGiTLt9IKGvz9PG8zOtGkRMQmgheGFYfY_L_sxVHzy"/>
+                    </div>
+                </a>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-surface-container-lowest border-t border-border-subtle">
+        <div class="px-4 pt-2 pb-4 space-y-1">
+            <a href="main.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-on-surface-variant hover:text-primary hover:bg-surface-container">메인</a>
+            <a href="dashboard.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-on-surface-variant hover:text-primary hover:bg-surface-container">대시보드</a>
+            <a href="resume.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-on-surface-variant hover:text-primary hover:bg-surface-container">이력서 관리</a>
+            <a href="timeline.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-on-surface-variant hover:text-primary hover:bg-surface-container">커리어 관리</a>
+            <a href="select.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-on-surface-variant hover:text-primary hover:bg-surface-container">제출 관리</a>
+        </div>
+    </div>
 </nav>
-</div>
-<div class="flex items-center gap-4">
-<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
-<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container">
-<img alt="User profile avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOtBgHjz4tapkgY97LD6GjyWEaXTodvpDxaiGLEeRwrhTEjJ-Y85Yy795zpiR_irFcYDsGKnp7PktPXnVrsCEPzF3JVs28b12CzPQEuYG71RRGMYPLnkJB5bMvYuLg4HDE8ec1fuGiRKIco20JOYihbsXIZ1W9ISPH-o95ONErefViqhZ2aTrDyCjPTv3OuTEFRekKXiNJ5FDh8n8pRSNqSUJzqTy6g_2vcT28ltn2xzJJcZaxIXCOhUnvTCu9LabHVP0gpp4znK8d"/>
-</div>
-</div>
-</header>
-<!-- Toolbar (Contextual) -->
-<div class="fixed top-16 left-0 right-0 h-14 bg-white border-b border-border-subtle z-40 px-margin-desktop flex items-center justify-between">
-<div class="flex items-center gap-4">
-<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors font-label-md text-label-md">
-<span class="material-symbols-outlined" style="font-variation-settings: 'opsz' 20">dashboard_customize</span>
-            템플릿
-        </button>
-<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-tertiary-container text-on-tertiary-container hover:opacity-90 transition-all font-label-md text-label-md">
-<span class="material-symbols-outlined" style="font-variation-settings: 'opsz' 20">auto_awesome</span>
-            AI 추천
-        </button>
-</div>
-<div class="flex items-center gap-3">
-<span class="text-label-sm text-outline font-label-sm uppercase tracking-wider">변경사항 저장됨</span>
-<button class="flex items-center gap-2 px-6 py-2 rounded-lg bg-primary text-white hover:opacity-90 transition-all font-label-md text-label-md shadow-sm">
-<span class="material-symbols-outlined" style="font-variation-settings: 'opsz' 20">download</span>
-            PDF 다운로드
-        </button>
-</div>
-</div>
 <!-- Main Content Shell -->
-<main class="flex min-h-screen pt-[120px]">
-<!-- SideNavBar -->
-<aside class="h-screen w-64 fixed left-0 top-0 pt-20 bg-surface-gray flex flex-col gap-2 py-4">
-<div class="px-6 py-4 flex items-center gap-3">
-<div class="w-10 h-12 bg-white rounded shadow-sm flex items-center justify-center overflow-hidden">
-<div class="w-full h-1 bg-primary mb-6"></div>
-<div class="w-6 h-0.5 bg-outline-variant mb-1"></div>
-<div class="w-4 h-0.5 bg-outline-variant"></div>
-</div>
-<div>
-<h3 class="font-label-md text-label-md text-on-surface">현재 이력서</h3>
-<p class="text-[10px] text-outline">최종 수정 2시간 전</p>
-</div>
-</div>
-<div class="mt-4 flex flex-col gap-1">
-<button class="nav-tab flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 mx-2 font-label-md text-label-md transition-all active:scale-95" data-tab="Personal Info" onclick="switchTab('Personal Info')">
-<span class="material-symbols-outlined">person</span>
-                인적 사항
-            </button>
-<button class="nav-tab flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 font-label-md text-label-md hover:bg-surface-container-high transition-colors active:scale-95" data-tab="Experience" onclick="switchTab('Experience')">
-<span class="material-symbols-outlined">work</span>
-                경력 사항
-            </button>
-<button class="nav-tab flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 font-label-md text-label-md hover:bg-surface-container-high transition-colors active:scale-95" data-tab="Education" onclick="switchTab('Education')">
-<span class="material-symbols-outlined">school</span>
-                학력 사항
-            </button>
-<button class="nav-tab flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 font-label-md text-label-md hover:bg-surface-container-high transition-colors active:scale-95" data-tab="Skills" onclick="switchTab('Skills')">
-<span class="material-symbols-outlined">psychology</span>
-                보유 기술
-            </button>
-<button class="nav-tab flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 font-label-md text-label-md hover:bg-surface-container-high transition-colors active:scale-95" data-tab="Certifications" onclick="switchTab('Certifications')">
-<span class="material-symbols-outlined">verified</span>
-                자격증
-            </button>
-</div>
-<div class="mt-auto px-4 pb-8">
-<button class="w-full flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-dashed border-outline-variant text-outline hover:border-primary hover:text-primary transition-all font-label-md text-label-md">
-<span class="material-symbols-outlined">add</span>
-                새 이력서 만들기
-            </button>
-</div>
-</aside>
+<main class="flex min-h-screen pt-24">
 <!-- Builder Interface -->
-<div class="ml-64 w-full flex">
+<div class="w-full flex">
 <!-- Form Side -->
 <div class="w-1/2 p-margin-desktop overflow-y-auto max-h-[calc(100vh-120px)]">
 <div class="form-section active" id="Personal Info">
@@ -466,6 +432,33 @@
             // Focus ring handled by Tailwind, but could trigger preview highlights here
         });
     });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Set active navigation link
+        const currentPath = window.location.pathname.split('/').pop();
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        const setActiveLink = (links) => {
+            links.forEach(link => {
+                const linkPath = link.getAttribute('href');
+                if (linkPath === currentPath || (currentPath === '' && linkPath === 'main.html')) {
+                    link.classList.add('text-primary', 'font-bold');
+                    link.classList.remove('text-on-surface-variant');
+                }
+            });
+        };
+
+        setActiveLink(navLinks);
+        setActiveLink(mobileNavLinks);
 
     const uploadInput = document.getElementById('resumeFileInput');
     const uploadButton = document.getElementById('uploadResumeButton');
