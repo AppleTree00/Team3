@@ -208,77 +208,7 @@
 </div>
 </div>
 <!-- Main Content Shell -->
-<main class="flex min-h-screen pt-[120px]"><div class="fixed inset-0 z-[60] bg-surface-gray flex flex-col items-center justify-center p-margin-desktop" id="start-selection-overlay"><button class="absolute top-8 left-8 flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-border-subtle hover:bg-surface-container-low transition-colors font-label-md text-label-md text-on-surface-variant btn-raise" onclick="document.getElementById('start-selection-overlay').classList.add('hidden')"><span class="material-symbols-outlined text-[20px]">arrow_back</span>작성기로 돌아가기</button>
-<div class="text-center mb-12">
-<div class="flex items-center justify-center gap-3 mb-4">
-<h1 class="font-display-lg text-display-lg text-on-surface">이력서 업데이트 방식 선택</h1>
-</div>
-<p class="text-body-lg text-on-surface-variant mb-2">어떤 양식이든 자유롭게 생성하는 마스터 커리어 데이터베이스.</p>
-<p class="text-label-md text-outline">프로필 등록 방식을 선택해주세요.</p>
-</div>
-<div class="grid md:grid-cols-2 gap-8 max-w-4xl w-full">
-<!-- Option 1: Upload -->
-<div class="bg-white p-12 rounded-xl shadow-sm border border-border-subtle hover:border-primary hover:shadow-xl transition-all group flex flex-col items-center text-center">
-<div class="w-20 h-20 rounded-full bg-surface-container flex items-center justify-center mb-8 group-hover:bg-primary-container transition-colors">
-<span class="material-symbols-outlined text-primary text-[32px] group-hover:text-white">upload_file</span>
-</div>
-<h2 class="font-headline-md text-headline-md mb-4">기존 이력서 업로드</h2>
-<p class="text-body-md text-on-surface-variant mb-8">PDF, WORD 파일만 올리세요.<br/>AI가 스킬과 직무를 자동 추출합니다.</p>
-<div id="uploadDropZone" class="w-full rounded-3xl border border-dashed border-border-subtle bg-surface-container p-6 flex flex-col items-center gap-4">
-<label for="resumeFileInput" class="cursor-pointer w-full h-40 flex flex-col items-center justify-center border-2 border-border-subtle border-dashed rounded-3xl hover:border-primary transition-colors">
-<span class="material-symbols-outlined text-[32px] text-primary mb-3">cloud_upload</span>
-<span class="text-body-md text-on-surface-variant">여기에 파일을 드래그하거나 클릭해서 선택</span>
-<input id="resumeFileInput" name="resumeFile" type="file" accept=".pdf,.doc,.docx" class="hidden" />
-</label>
-<div class="text-sm text-on-surface-variant">지원서 파일을 업로드하면 AI가 내용을 분석합니다.</div>
-</div>
-<button id="uploadResumeButton" type="button" class="mt-6 px-8 py-4 bg-primary text-white rounded-xl font-label-md hover:opacity-90 transition-all btn-raise disabled:opacity-50 disabled:cursor-not-allowed" disabled>업로드 시작</button>
-<p id="uploadStatusText" class="mt-3 text-sm text-on-surface-variant">PDF, DOC, DOCX 파일을 업로드하세요.</p>
-<div id="uploadResultCard" class="hidden w-full mt-6 rounded-3xl border border-primary/20 bg-primary/5 p-6 text-left">
-<div class="flex items-start gap-4 mb-4">
-<span class="material-symbols-outlined text-primary text-[28px]">analytics</span>
-<div>
-<p class="font-label-md text-label-md text-on-background mb-1">AI 분석 완료</p>
-<p class="text-body-sm text-on-surface-variant">업로드된 이력서에서 추출된 핵심 항목을 미리보기로 확인할 수 있습니다.</p>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-<div class="rounded-2xl bg-white p-4 border border-border-subtle">
-<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mb-2">이름</p>
-<p id="parsedName" class="font-body-md text-body-md text-on-background">홍길동</p>
-</div>
-<div class="rounded-2xl bg-white p-4 border border-border-subtle">
-<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mb-2">직무</p>
-<p id="parsedTitle" class="font-body-md text-body-md text-on-background">시니어 Java 개발자 / SI 전문가</p>
-</div>
-<div class="rounded-2xl bg-white p-4 border border-border-subtle">
-<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mb-2">파일</p>
-<p id="parsedFileName" class="font-body-md text-body-md text-on-background">resume.pdf</p>
-</div>
-</div>
-<div class="bg-white rounded-2xl border border-border-subtle p-4 mb-4">
-<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mb-2">요약</p>
-<p id="parsedSummary" class="text-body-sm text-on-surface-variant">AI가 핵심 경력 및 성과를 분석하여 요약합니다...</p>
-</div>
-<div class="bg-white rounded-2xl border border-border-subtle p-4">
-<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mb-3">추출된 기술</p>
-<div id="parsedSkills" class="flex flex-wrap gap-2"></div>
-</div>
-<button id="uploadContinueButton" type="button" disabled class="mt-5 px-6 py-3 rounded-lg bg-primary text-white hover:opacity-90 transition-all font-label-md text-label-md disabled:opacity-50 disabled:cursor-not-allowed">분석 결과로 이어가기</button>
-</div>
-<span class="px-4 py-2 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm">가장 빠름 (AI 파싱)</span>
-</div>
-<!-- Option 2: Direct Entry -->
-<div class="bg-white p-12 rounded-xl shadow-sm border border-border-subtle hover:border-primary hover:shadow-xl transition-all cursor-pointer group flex flex-col items-center text-center" onclick="document.getElementById('start-selection-overlay').remove()">
-<div class="w-20 h-20 rounded-full bg-surface-container flex items-center justify-center mb-8 group-hover:bg-primary-container transition-colors">
-<span class="material-symbols-outlined text-primary text-[32px] group-hover:text-white">edit_note</span>
-</div>
-<h2 class="font-headline-md text-headline-md mb-4">마스터 폼 직접 입력</h2>
-<p class="text-body-md text-on-surface-variant mb-8">상세한 프로젝트와 자기소개서를<br/>통합 양식에 꼼꼼하게 작성합니다.</p>
-<span class="px-4 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">AI 자소서 보조 지원</span>
-</div>
-</div>
-<div class="absolute top-8 right-8 flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-container/10 border border-primary/20"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span><span class="text-label-sm font-label-sm text-primary uppercase tracking-wider">수정 모드</span></div></div>
+<main class="flex min-h-screen pt-[120px]">
 <!-- SideNavBar -->
 <aside class="h-screen w-64 fixed left-0 top-0 pt-20 bg-surface-gray flex flex-col gap-2 py-4">
 <div class="px-6 py-4 flex items-center gap-3">
