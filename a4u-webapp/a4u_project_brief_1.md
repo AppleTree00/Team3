@@ -1,7 +1,7 @@
-# Project Brief: a4u.com Career Management Platform
+# Project Brief: a4u Career Management Platform
 
 ## 1. Project Overview
-**a4u.com** is an AI-powered career management and resume-building platform designed to help professionals navigate complex recruitment processes using data intelligence. The platform specializes in translating professional experience into high-impact resumes and visualizing career progression.
+**a4u** is an AI-powered career management and resume-building platform designed to help professionals navigate complex recruitment processes using data intelligence. The platform specializes in translating professional experience into high-impact resumes and visualizing career progression.
 
 ## 2. Target Audience & Persona
 The primary audience includes mid-to-senior level professionals seeking career transitions or retirement planning.
