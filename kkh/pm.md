@@ -38,9 +38,9 @@
 | 1단계 | **[Dev]** 개발 환경 구성 및 API 연동 테스트 | Lead Developer | 가상환경 설정 가이드, Google Calendar API 연동 프로토타입 | **완료** |
 | 2단계 | **[UI]** 대화 흐름 시나리오 설계 | UI Designer | `ui.md` 내 대화 흐름, 요약 카드 디자인 초안 | **완료** |
 | 3단계 | **[Dev]** NLU 및 Function Calling 구현 | Lead Developer | `agent.py` 내 Function Calling 프롬프트 및 파싱 로직 | **완료** |
-| 4단계 | **[QA]** NLU 엣지 케이스 TC 설계 | QA Engineer | `qa.md` 기반 시간 파싱 테스트 케이스 | **진행 중** |
+| 4단계 | **[QA]** NLU 엣지 케이스 TC 설계 | QA Engineer | `qa.md` 기반 시간 파싱 테스트 케이스 | **완료** |
 | 5단계 | **[Dev/UI]** UI 컴포넌트 개발 및 DB 연동 | UI Designer / Dev | Streamlit UI 구현, SQLite 연동 로직 | **완료** |
-| 6단계 | **[QA]** 통합 테스트 및 엣지 케이스 검증 | QA Engineer | 테스트 시나리오 결과서, 결함 보고서 | **대기** |
+| 6단계 | **[QA]** 통합 테스트 및 엣지 케이스 검증 | QA Engineer | 테스트 시나리오 결과서, 결함 보고서 | **진행 중** |
 | 7단계 | **[All]** MVP 출시 및 피드백 수집 | Project Manager / All | 사용자 피드백 리포트, 차기 버전 백로그 | **대기** |
 
 ## **6\. 개발 가이드라인 및 실행 지침**
