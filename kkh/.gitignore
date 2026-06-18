@@ -1,0 +1,22 @@
+# Environment variables
+# .env 파일은 API 키 등 민감한 정보를 포함하므로 Git에 포함하지 않습니다.
+.env
+
+# Virtual Environment
+# 가상 환경 폴더는 용량이 크고 사용자마다 환경이 다르므로 제외합니다.
+.venv/
+
+# Python cache
+# Python 실행 시 자동으로 생성되는 캐시 파일 및 폴더입니다.
+__pycache__/
+*.pyc
+
+# Build artifacts
+# 패키지 빌드 시 생성되는 폴더입니다.
+build/
+dist/
+*.egg-info/
+
+# Local data
+# ChromaDB 데이터가 저장되는 'data' 폴더를 제외합니다.
+data/
