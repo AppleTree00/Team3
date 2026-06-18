@@ -11,8 +11,8 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 # dev.md '4-C' 요구사항에 따라 db_manager에서 토큰 관리 함수를 가져옵니다.
-from .exceptions import AuthTokenExpiredError, ApiQuotaExceededError, CalendarAPIError, CalendarEventNotFoundError, CalendarEventConflictError, AuthRequiredError
-from ..database.db_manager import get_auth_token, save_auth_token
+from core.exceptions import AuthTokenExpiredError, ApiQuotaExceededError, CalendarAPIError, CalendarEventNotFoundError, CalendarEventConflictError, AuthRequiredError
+from database.db_manager import get_auth_token, save_auth_token
 
 # Google Calendar API의 권한 범위(Scope)를 정의합니다.
 # 여기서는 읽기/쓰기 권한을 모두 요청합니다.

@@ -7,10 +7,10 @@ import pytz
 from dotenv import load_dotenv
 
 # dev.md 가이드에 따라 calendar_api 모듈을 연동합니다.
-from .calendar_api import create_calendar_event, get_calendar_events, delete_calendar_event, delete_calendar_event_by_id, update_calendar_event, get_authorization_url
-from .exceptions import CalendarAPIError, AuthTokenExpiredError, ApiQuotaExceededError, CalendarEventNotFoundError, CalendarEventConflictError, AuthRequiredError
+from core.calendar_api import create_calendar_event, get_calendar_events, delete_calendar_event, delete_calendar_event_by_id, update_calendar_event, get_authorization_url
+from core.exceptions import CalendarAPIError, AuthTokenExpiredError, ApiQuotaExceededError, CalendarEventNotFoundError, CalendarEventConflictError, AuthRequiredError
 # dev.md '4-C', '4-E'에 따라 데이터베이스 모듈을 연동합니다.
-from ..database.db_manager import add_or_get_user, update_event_history, get_last_event_id
+from database.db_manager import add_or_get_user, update_event_history, get_last_event_id
 
 # .env 파일에서 환경 변수 로드
 load_dotenv()

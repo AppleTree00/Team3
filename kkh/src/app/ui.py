@@ -15,7 +15,7 @@ if SRC_ROOT not in sys.path:
 from core.agent import Agent
 from core.exceptions import CalendarAPIError, AuthTokenExpiredError, ApiQuotaExceededError, CalendarEventNotFoundError, CalendarEventConflictError, AuthRequiredError
 from core.calendar_api import get_calendar_events, create_calendar_event, exchange_code_for_token
-from database.db_manager import update_event_history, get_auth_token
+from database.db_manager import update_event_history, get_auth_token, delete_auth_token
 
 # --- Streamlit 페이지 설정 ---
 st.set_page_config(
@@ -90,7 +90,9 @@ with st.sidebar:
     if is_authenticated:
         st.success(f"'{st.session_state.user_id}' 계정과 연결됨")
         if st.button("연결 해제"):
-            st.warning("연결 해제 기능은 아직 구현되지 않았습니다.")
+            delete_auth_token(st.session_state.user_id)
+            st.success("✅ 연결이 해제되었습니다.")
+            st.rerun()
     else:
         st.error(f"'{st.session_state.user_id}' 계정이 연결되지 않았습니다.")
         st.info("캘린더 기능을 사용하려면 인증이 필요합니다. 채팅을 시작하면 인증 절차가 진행됩니다.")
@@ -160,43 +162,46 @@ if st.session_state.pending_action:
 
 # 사용자 입력을 받습니다.
 if prompt := st.chat_input("내일 오후 3시에 개발팀 주간 회의 잡아줘"):
-    if st.session_state.pending_action:
+    if len(prompt) > 300:
+        st.error("⚠️ 입력이 너무 깁니다. 간결한 문장으로 다시 시도해주세요.")
+    elif st.session_state.pending_action:
         st.toast("먼저 제안된 일정을 확인 또는 취소해주세요.")
     else:
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
 
-        with st.spinner("생각 중..."):
-            agent = Agent(user_id=st.session_state.user_id)
-            try:
-                response = agent.invoke(prompt)
-            except AuthTokenExpiredError:
-                st.error("🚨 Google Calendar 인증이 만료되었거나 유효하지 않습니다. 다시 인증해주세요.")
-                response = "인증이 필요합니다. 잠시 후 페이지를 새로고침하여 다시 시도해주세요."
-            except ApiQuotaExceededError:
-                st.error("🚨 Google Calendar API 할당량을 초과했습니다. 잠시 후 다시 시도해주세요.")
-                response = "API 할당량을 초과하여 요청을 처리할 수 없습니다."
-            except CalendarEventNotFoundError as e:
-                st.warning(f"🤔 일정을 찾을 수 없습니다: {e}")
-                response = str(e)
-            except CalendarEventConflictError as e:
-                st.warning(f"🤔 여러 일정이 해당됩니다: {e}")
-                response = str(e)
-            except CalendarAPIError as e:
-                st.error(f"🚨 캘린더 API 오류: {e}")
-                response = "캘린더 기능 사용 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요."
-            except Exception as e:
-                st.error(f"처리 중 예상치 못한 오류가 발생했습니다: {e}")
-                response = f"죄송합니다, 요청을 처리하는 중에 예상치 못한 오류가 발생했습니다."
+        with st.chat_message("assistant"):
+            with st.spinner("생각 중..."):
+                agent = Agent(user_id=st.session_state.user_id)
+                try:
+                    response = agent.invoke(prompt)
+                except AuthTokenExpiredError:
+                    st.error("🚨 Google Calendar 인증이 만료되었거나 유효하지 않습니다. 다시 인증해주세요.")
+                    response = "인증이 필요합니다. 잠시 후 페이지를 새로고침하여 다시 시도해주세요."
+                except ApiQuotaExceededError:
+                    st.error("🚨 Google Calendar API 할당량을 초과했습니다. 잠시 후 다시 시도해주세요.")
+                    response = "API 할당량을 초과하여 요청을 처리할 수 없습니다."
+                except CalendarEventNotFoundError as e:
+                    st.warning(f"🤔 일정을 찾을 수 없습니다: {e}")
+                    response = str(e)
+                except CalendarEventConflictError as e:
+                    st.warning(f"🤔 여러 일정이 해당됩니다: {e}")
+                    response = str(e)
+                except CalendarAPIError as e:
+                    st.error(f"🚨 캘린더 API 오류: {e}")
+                    response = "캘린더 기능 사용 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요."
+                except Exception as e:
+                    st.error(f"처리 중 예상치 못한 오류가 발생했습니다: {e}")
+                    response = f"죄송합니다, 요청을 처리하는 중에 예상치 못한 오류가 발생했습니다."
 
-    if isinstance(response, dict):
-        if response.get("action") == "confirm_creation":
-            st.session_state.pending_action = response
+        if isinstance(response, dict):
+            if response.get("action") == "confirm_creation":
+                st.session_state.pending_action = response
+                st.rerun()
+            elif response.get("action") == "request_auth":
+                st.session_state.messages.append({"role": "assistant", "content": f"{response.get('message', '인증이 필요합니다.')} [여기]({response.get('auth_url')})를 클릭해주세요."})
+                st.rerun()
+        else:
+            st.session_state.messages.append({"role": "assistant", "content": str(response)})
             st.rerun()
-        elif response.get("action") == "request_auth":
-            st.session_state.messages.append({"role": "assistant", "content": f"{response.get('message', '인증이 필요합니다.')} [여기]({response.get('auth_url')})를 클릭해주세요."})
-            st.rerun()
-    else:
-        st.session_state.messages.append({"role": "assistant", "content": str(response)})
-        st.rerun()

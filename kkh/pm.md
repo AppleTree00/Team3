@@ -40,8 +40,13 @@
 | 3단계 | **[Dev]** NLU 및 Function Calling 구현 | Lead Developer | `agent.py` 내 Function Calling 프롬프트 및 파싱 로직 | **완료** |
 | 4단계 | **[QA]** NLU 엣지 케이스 TC 설계 | QA Engineer | `qa.md` 기반 시간 파싱 테스트 케이스 | **완료** |
 | 5단계 | **[Dev/UI]** UI 컴포넌트 개발 및 DB 연동 | UI Designer / Dev | Streamlit UI 구현, SQLite 연동 로직 | **완료** |
+<<<<<<< HEAD
 | 6단계 | **[QA]** 통합 테스트 및 엣지 케이스 검증 | QA Engineer | 테스트 시나리오 결과서, 결함 보고서 | **진행 중** |
 | 7단계 | **[All]** MVP 출시 및 피드백 수집 | Project Manager / All | 사용자 피드백 리포트, 차기 버전 백로그 | **대기** |
+=======
+| 6단계 | **[QA]** 통합 테스트 및 엣지 케이스 검증 | QA Engineer | 테스트 시나리오 결과서, 결함 보고서 | **완료** |
+| 7단계 | **[All]** MVP 출시 및 피드백 수집 | Project Manager / All | 사용자 피드백 리포트, 차기 버전 백로그 | **진행 중** |
+>>>>>>> f720528d090278694310b75f07d514d643f18301
 
 ## **6\. 개발 가이드라인 및 실행 지침**
 
@@ -104,3 +109,4 @@ pytz
 | ISSUE-04 | **UI 사이드바 렌더링 오류** | 중 | Dev | `ui.py`에서 `is_authenticated` 변수가 사용되기 전에 정의되지 않아 발생하는 `NameError` 버그 수정. | **완료** |
 | ISSUE-05 | **Agent 로직 내 불필요한 코드 존재** | 하 | Dev | `agent.py`에서 `create_calendar_event` 처리 로직이 UI 단으로 위임됨에 따라, Agent 내부에 남아있는 중복(실행 불가능) 코드를 제거하여 가독성 향상. | **완료** |
 | ISSUE-06 | **LLM 프롬프트 언어 불일치** | 하 | Dev | `agent.py`의 시스템 프롬프트를 한글로 번역하여 모델의 일관된 언어 처리를 유도. | **완료** |
+| ISSUE-07 | **코어 모듈의 상대 경로 임포트 오류** | 중 | Dev | 단위 테스트 실행 시 `attempted relative import beyond top-level package` 에러가 발생하는 상위 폴더 상대 임포트를 절대 경로 임포트로 전환. | **완료** |
