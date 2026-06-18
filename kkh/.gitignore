@@ -1,80 +1,25 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
+# =================================================================
+# Git Ignore File for "개인 일정 관리 AI 에이전트" Project
+# =================================================================
 
-# C extensions
-*.so
-
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# PyInstaller
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
-
-# Environments
+# 1. 환경 변수 파일
+# OpenAI API 키, DB 암호화 키 등 민감 정보를 포함합니다.
 .env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
 
-# IDE settings
-.idea/
-.vscode/
-
-# OS-specific files
-.DS_Store
-Thumbs.db
-
-# Sensitive files from this project
-# Google API credentials mentioned in calendar_api.py
-token.json
+# 2. Google Cloud 인증 관련 파일
+# Google Calendar API 접근을 위한 클라이언트 보안 비밀 파일입니다.
 credentials.json
+# OAuth 인증 후 생성되는 사용자 토큰 파일입니다. (현재는 DB에 저장)
+token.json
 
-# Environment variables
-.env
+# 3. 로컬 데이터베이스 파일
+# 사용자의 인증 정보, 대화 기록 등이 저장될 수 있습니다.
+agent_data.db
 
-# Local database files (SQLite)
-*.db
-*.sqlite
-*.sqlite3
+# 4. Python 관련
+__pycache__/
+*.py[cod]
+
+# 5. 가상환경 폴더
+venv/
+.venv/

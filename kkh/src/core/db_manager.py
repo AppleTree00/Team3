@@ -148,7 +148,7 @@ if __name__ == '__main__':
     
     # 2. 환경 변수 확인 및 테스트 진행
     if not cipher_suite:
-        print("\n테스트를 건너뜁니다. DB_ENCRYPTION_KEY 환경 변수를 설정해주세요.")
+        print("\n테스트를 건너뛸 수 없습니다. DB_ENCRYPTION_KEY 환경 변수를 설정해주세요.")
     else:
         # 여기에 테스트 코드를 추가할 수 있습니다.
         print("\n데이터베이스 모듈이 준비되었습니다. (암호화 활성화)")
