@@ -20,7 +20,7 @@ def index():
     return redirect('/main.html')
 
 # 서버 설정
-PORT = os.environ.get('PORT', 3000)
+PORT = os.environ.get('PORT', 5000)
 UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024  # 10MB 파일 크기 제한
