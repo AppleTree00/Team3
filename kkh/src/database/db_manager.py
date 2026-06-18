@@ -118,6 +118,14 @@ def get_auth_token(user_id: str) -> dict | None:
         return json.loads(decrypted_token.decode('utf-8'))
     return None
 
+def delete_auth_token(user_id: str):
+    """데이터베이스에서 사용자의 인증 토큰을 삭제합니다."""
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM auth_tokens WHERE user_id = ?", (user_id,))
+    conn.commit()
+    conn.close()
+
 # Event History CRUD
 def update_event_history(user_id: str, last_event_id: str):
     """사용자의 마지막 이벤트 ID를 기록합니다."""
