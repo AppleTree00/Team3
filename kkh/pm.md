@@ -140,8 +140,6 @@
     uvicorn src.app.main:app --reload
     ```
     `--reload` 옵션은 코드 변경 시 서버를 자동으로 재시작하여 개발 편의성을 높입니다.
-```
-
 ---
 
 ## 5단계 UI/UX 개선
