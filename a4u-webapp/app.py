@@ -58,6 +58,10 @@ def is_allowed_mimetype(mimetype):
 def index():
     return redirect('/main.html')
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(BASE_DIR, 'favicon.svg', mimetype='image/svg+xml')
+
 @app.route('/upload-resume', methods=['POST'])
 def upload_resume():
     if 'resumeFile' not in request.files:
