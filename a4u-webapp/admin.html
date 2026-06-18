@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>a4u 어드민</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#3525cd',
+        'primary-dark': '#2a1ca8',
+        'surface': '#f9f9ff',
+        'on-surface': '#111c2d',
+        'surface-container': '#e7eeff',
+        'outline-variant': '#c7c4d8',
+      },
+      fontFamily: { sans: ['Inter', 'sans-serif'] }
+    }
+  }
+}
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; }
+  .ms { font-family: 'Material Symbols Outlined'; font-size: 20px; vertical-align: middle; }
+  .nav-item { @apply flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-slate-600 hover:bg-surface-container hover:text-primary cursor-pointer transition-all; }
+  .nav-item.active { @apply bg-primary text-white hover:bg-primary-dark hover:text-white; }
+  .card { @apply bg-white rounded-xl border border-slate-200 shadow-sm; }
+  .btn { @apply inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-all; }
+  .btn-primary { @apply btn bg-primary text-white hover:bg-primary-dark; }
+  .btn-outline { @apply btn border border-slate-300 text-slate-700 hover:bg-slate-50; }
+  .btn-danger { @apply btn bg-red-50 text-red-600 border border-red-200 hover:bg-red-100; }
+  .input { @apply w-full px-3 py-2 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary; }
+  .badge { @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium; }
+  .section { display: none; }
+  .section.active { display: block; }
+  .table-row { @apply border-b border-slate-100 hover:bg-slate-50 transition-colors; }
+  textarea.input { resize: vertical; }
+</style>
+</head>
+<body class="bg-surface min-h-screen">
+
+<!-- 로그인 화면 -->
+<div id="login-screen" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 to-surface">
+  <div class="card p-8 w-full max-w-sm">
+    <div class="text-center mb-8">
+      <div class="text-3xl font-bold text-primary mb-1">a4u</div>
+      <div class="text-sm text-slate-500">어드민 콘솔</div>
+    </div>
+    <div class="space-y-4">
+      <div>
+        <label class="block text-xs font-medium text-slate-600 mb-1">관리자 비밀번호</label>
+        <input id="login-password" type="password" class="input" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')doLogin()"/>
+      </div>
+      <button onclick="doLogin()" class="btn-primary w-full justify-center py-2.5">
+        <span class="ms">lock_open</span> 로그인
+      </button>
+      <div id="login-error" class="text-xs text-red-500 text-center hidden">비밀번호가 올바르지 않습니다.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 어드민 레이아웃 -->
+<div id="admin-layout" class="hidden flex min-h-screen">
+
+  <!-- 사이드바 -->
+  <aside class="w-60 bg-white border-r border-slate-200 flex flex-col fixed top-0 left-0 h-full z-10">
+    <div class="px-5 py-5 border-b border-slate-100">
+      <div class="text-xl font-bold text-primary">a4u</div>
+      <div class="text-xs text-slate-400 mt-0.5">Admin Console</div>
+    </div>
+    <nav class="flex-1 p-3 space-y-1 overflow-y-auto">
+      <div class="nav-item active" onclick="showSection('stats')" id="nav-stats">
+        <span class="ms">dashboard</span> 대시보드
+      </div>
+      <div class="nav-item" onclick="showSection('users')" id="nav-users">
+        <span class="ms">group</span> 회원 관리
+      </div>
+      <div class="nav-item" onclick="showSection('templates')" id="nav-templates">
+        <span class="ms">description</span> 이력서 템플릿
+      </div>
+      <div class="nav-item" onclick="showSection('files')" id="nav-files">
+        <span class="ms">folder_open</span> 파일 관리
+      </div>
+      <div class="nav-item" onclick="showSection('schema')" id="nav-schema">
+        <span class="ms">terminal</span> AI 스키마 콘솔
+      </div>
+    </nav>
+    <div class="p-3 border-t border-slate-100">
+      <a href="/main.html" target="_blank" class="nav-item">
+        <span class="ms">open_in_new</span> 사이트 보기
+      </a>
+      <div class="nav-item text-red-500 hover:text-red-600 hover:bg-red-50" onclick="doLogout()">
+        <span class="ms">logout</span> 로그아웃
+      </div>
+    </div>
+  </aside>
+
+  <!-- 메인 콘텐츠 -->
+  <main class="ml-60 flex-1 p-8 overflow-y-auto">
+
+    <!-- ── 대시보드 ── -->
+    <div id="section-stats" class="section active">
+      <h1 class="text-xl font-bold text-on-surface mb-6">대시보드</h1>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="card p-5">
+          <div class="text-xs text-slate-500 mb-1">전체 회원</div>
+          <div class="text-3xl font-bold text-on-surface" id="stat-users">-</div>
+          <div class="text-xs text-green-600 mt-1" id="stat-users-week"></div>
+        </div>
+        <div class="card p-5">
+          <div class="text-xs text-slate-500 mb-1">활성 회원</div>
+          <div class="text-3xl font-bold text-primary" id="stat-active">-</div>
+        </div>
+        <div class="card p-5">
+          <div class="text-xs text-slate-500 mb-1">업로드 파일</div>
+          <div class="text-3xl font-bold text-on-surface" id="stat-files">-</div>
+          <div class="text-xs text-blue-600 mt-1" id="stat-files-week"></div>
+        </div>
+        <div class="card p-5">
+          <div class="text-xs text-slate-500 mb-1">이력서 템플릿</div>
+          <div class="text-3xl font-bold text-on-surface" id="stat-templates">-</div>
+        </div>
+      </div>
+      <div class="card p-5">
+        <h2 class="text-sm font-semibold text-slate-700 mb-4">최근 가입 회원</h2>
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-xs text-slate-500 border-b border-slate-100">
+              <th class="text-left pb-2 font-medium">이름</th>
+              <th class="text-left pb-2 font-medium">이메일</th>
+              <th class="text-left pb-2 font-medium">가입일</th>
+              <th class="text-left pb-2 font-medium">상태</th>
+            </tr>
+          </thead>
+          <tbody id="recent-users-table"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── 회원 관리 ── -->
+    <div id="section-users" class="section">
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-xl font-bold text-on-surface">회원 관리</h1>
+        <button class="btn-primary" onclick="openUserModal()">
+          <span class="ms">person_add</span> 회원 추가
+        </button>
+      </div>
+      <div class="card mb-4 p-4 flex gap-3">
+        <input id="user-search" type="text" class="input" placeholder="이름 또는 이메일 검색..." oninput="debounce(loadUsers, 400)()" style="max-width:280px"/>
+        <select id="user-status-filter" class="input" onchange="loadUsers()" style="max-width:140px">
+          <option value="">전체 상태</option>
+          <option value="active">활성</option>
+          <option value="suspended">정지</option>
+        </select>
+      </div>
+      <div class="card overflow-hidden">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-50">
+            <tr class="text-xs text-slate-500">
+              <th class="text-left px-4 py-3 font-medium">ID</th>
+              <th class="text-left px-4 py-3 font-medium">이름</th>
+              <th class="text-left px-4 py-3 font-medium">이메일</th>
+              <th class="text-left px-4 py-3 font-medium">이력서</th>
+              <th class="text-left px-4 py-3 font-medium">상태</th>
+              <th class="text-left px-4 py-3 font-medium">가입일</th>
+              <th class="text-left px-4 py-3 font-medium">액션</th>
+            </tr>
+          </thead>
+          <tbody id="users-table"></tbody>
+        </table>
+        <div class="px-4 py-3 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-xs text-slate-500" id="users-count"></span>
+          <div class="flex gap-1" id="users-pagination"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 이력서 템플릿 ── -->
+    <div id="section-templates" class="section">
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-xl font-bold text-on-surface">이력서 템플릿 관리</h1>
+        <button class="btn-primary" onclick="openTemplateModal()">
+          <span class="ms">add</span> 템플릿 추가
+        </button>
+      </div>
+      <div id="templates-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
+
+    <!-- ── 파일 관리 ── -->
+    <div id="section-files" class="section">
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-xl font-bold text-on-surface">파일 관리</h1>
+        <span class="text-sm text-slate-500" id="files-total-size"></span>
+      </div>
+      <div class="card mb-4 p-4">
+        <input id="file-search" type="text" class="input" placeholder="파일명 검색..." oninput="debounce(loadFiles, 400)()" style="max-width:280px"/>
+      </div>
+      <div class="card overflow-hidden">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-50">
+            <tr class="text-xs text-slate-500">
+              <th class="text-left px-4 py-3 font-medium">파일명</th>
+              <th class="text-left px-4 py-3 font-medium">업로더</th>
+              <th class="text-left px-4 py-3 font-medium">크기</th>
+              <th class="text-left px-4 py-3 font-medium">형식</th>
+              <th class="text-left px-4 py-3 font-medium">업로드일</th>
+              <th class="text-left px-4 py-3 font-medium">액션</th>
+            </tr>
+          </thead>
+          <tbody id="files-table"></tbody>
+        </table>
+        <div class="px-4 py-3 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-xs text-slate-500" id="files-count"></span>
+          <div class="flex gap-1" id="files-pagination"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── AI 스키마 콘솔 ── -->
+    <div id="section-schema" class="section">
+      <h1 class="text-xl font-bold text-on-surface mb-6">AI 스키마 콘솔</h1>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <!-- 현재 스키마 -->
+        <div class="card p-5">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-sm font-semibold text-slate-700">현재 DB 스키마</h2>
+            <button class="btn-outline text-xs" onclick="loadSchema()"><span class="ms" style="font-size:16px">refresh</span> 새로고침</button>
+          </div>
+          <div id="schema-display" class="bg-slate-900 text-green-400 rounded-lg p-4 text-xs font-mono overflow-auto max-h-80"></div>
+        </div>
+
+        <!-- AI 마이그레이션 생성 -->
+        <div class="card p-5">
+          <h2 class="text-sm font-semibold text-slate-700 mb-3">자연어 → SQL 생성</h2>
+          <div id="ai-status-badge" class="badge bg-yellow-100 text-yellow-700 mb-3">
+            <span class="ms" style="font-size:14px">smart_toy</span>&nbsp;AI 미연동 (구조만 활성화)
+          </div>
+          <textarea id="schema-description" class="input mb-3" rows="3" placeholder="예: users 테이블에 phone 컬럼 추가, VARCHAR(20), nullable&#10;예: 새로운 job_applications 테이블 생성"></textarea>
+          <button class="btn-primary w-full justify-center mb-4" onclick="generateSQL()">
+            <span class="ms">auto_awesome</span> SQL 생성
+          </button>
+          <div id="generated-sql-wrapper" class="hidden">
+            <div class="flex items-center justify-between mb-1">
+              <label class="text-xs font-medium text-slate-600">생성된 SQL (수정 가능)</label>
+              <span id="ai-used-badge" class="badge"></span>
+            </div>
+            <textarea id="generated-sql" class="input font-mono text-xs mb-3" rows="8"></textarea>
+            <input id="migration-desc" type="text" class="input text-xs mb-3" placeholder="마이그레이션 설명 (선택)"/>
+            <button class="btn-primary w-full justify-center" onclick="applyMigration()">
+              <span class="ms">play_arrow</span> 마이그레이션 적용
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 직접 SQL 실행 -->
+      <div class="card p-5 mb-6">
+        <h2 class="text-sm font-semibold text-slate-700 mb-3">SQL 직접 실행</h2>
+        <textarea id="direct-sql" class="input font-mono text-xs mb-3" rows="5" placeholder="ALTER TABLE users ADD COLUMN phone VARCHAR(20);"></textarea>
+        <input id="direct-desc" type="text" class="input text-xs mb-3" placeholder="마이그레이션 설명"/>
+        <button class="btn-primary" onclick="applyDirectSQL()">
+          <span class="ms">terminal</span> 직접 실행
+        </button>
+      </div>
+
+      <!-- 마이그레이션 이력 -->
+      <div class="card p-5">
+        <h2 class="text-sm font-semibold text-slate-700 mb-4">마이그레이션 이력</h2>
+        <div id="migrations-list" class="space-y-2"></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- 회원 모달 -->
+<div id="user-modal" class="fixed inset-0 bg-black/40 z-50 hidden flex items-center justify-center p-4">
+  <div class="card w-full max-w-md p-6">
+    <h2 class="text-base font-semibold text-on-surface mb-4" id="user-modal-title">회원 추가</h2>
+    <input type="hidden" id="user-modal-id"/>
+    <div class="space-y-3">
+      <div>
+        <label class="block text-xs font-medium text-slate-600 mb-1">이름</label>
+        <input id="user-modal-name" type="text" class="input" placeholder="홍길동"/>
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-slate-600 mb-1">이메일</label>
+        <input id="user-modal-email" type="email" class="input" placeholder="hong@example.com"/>
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-slate-600 mb-1">비밀번호 <span class="text-slate-400">(수정 시 빈칸=변경 없음)</span></label>
+        <input id="user-modal-password" type="password" class="input" placeholder="비밀번호"/>
+      </div>
+      <div class="flex gap-4">
+        <div class="flex-1">
+          <label class="block text-xs font-medium text-slate-600 mb-1">상태</label>
+          <select id="user-modal-status" class="input">
+            <option value="active">활성</option>
+            <option value="suspended">정지</option>
+          </select>
+        </div>
+        <div class="flex items-center gap-2 mt-5">
+          <input id="user-modal-admin" type="checkbox" class="rounded"/>
+          <label class="text-xs font-medium text-slate-600">관리자</label>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-end gap-2 mt-5">
+      <button class="btn-outline" onclick="closeModal('user-modal')">취소</button>
+      <button class="btn-primary" onclick="saveUser()">저장</button>
+    </div>
+  </div>
+</div>
+
+<!-- 템플릿 모달 -->
+<div id="template-modal" class="fixed inset-0 bg-black/40 z-50 hidden flex items-center justify-center p-4">
+  <div class="card w-full max-w-2xl p-6">
+    <h2 class="text-base font-semibold text-on-surface mb-4" id="template-modal-title">템플릿 추가</h2>
+    <input type="hidden" id="template-modal-id"/>
+    <div class="grid grid-cols-2 gap-3 mb-3">
+      <div>
+        <label class="block text-xs font-medium text-slate-600 mb-1">템플릿 이름</label>
+        <input id="template-modal-name" type="text" class="input" placeholder="IT 전문가형"/>
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-slate-600 mb-1">카테고리</label>
+        <select id="template-modal-category" class="input">
+          <option value="general">일반</option>
+          <option value="it">IT/개발</option>
+          <option value="finance">금융/회계</option>
+          <option value="design">디자인</option>
+          <option value="management">경영/관리</option>
+        </select>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label class="block text-xs font-medium text-slate-600 mb-1">설명</label>
+      <input id="template-modal-desc" type="text" class="input" placeholder="IT 개발자를 위한 기술 중심 이력서 템플릿"/>
+    </div>
+    <div class="mb-3">
+      <label class="block text-xs font-medium text-slate-600 mb-1">HTML 내용</label>
+      <textarea id="template-modal-html" class="input font-mono text-xs" rows="10" placeholder="이력서 HTML 템플릿 코드..."></textarea>
+    </div>
+    <div class="mb-3">
+      <label class="block text-xs font-medium text-slate-600 mb-1">썸네일 URL (선택)</label>
+      <input id="template-modal-thumb" type="text" class="input" placeholder="https://..."/>
+    </div>
+    <div class="flex items-center gap-2 mb-4">
+      <input id="template-modal-active" type="checkbox" class="rounded" checked/>
+      <label class="text-xs font-medium text-slate-600">활성화</label>
+    </div>
+    <div class="flex justify-end gap-2">
+      <button class="btn-outline" onclick="closeModal('template-modal')">취소</button>
+      <button class="btn-primary" onclick="saveTemplate()">저장</button>
+    </div>
+  </div>
+</div>
+
+<!-- 토스트 -->
+<div id="toast" class="fixed bottom-6 right-6 hidden z-50">
+  <div class="card px-4 py-3 flex items-center gap-2 text-sm shadow-lg">
+    <span class="ms" id="toast-icon">check_circle</span>
+    <span id="toast-msg"></span>
+  </div>
+</div>
+
+<script>
+const API = '/api/admin';
+let usersPage = 1, filesPage = 1;
+
+// ── 인증 ─────────────────────────────────────────────────────────────
+async function checkAuth() {
+  const r = await fetch(`${API}/check`);
+  const d = await r.json();
+  if (d.authenticated) showAdmin();
+  else showLogin();
+}
+
+async function doLogin() {
+  const pw = document.getElementById('login-password').value;
+  const r = await fetch(`${API}/login`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({password:pw}) });
+  if (r.ok) { showAdmin(); loadStats(); }
+  else { document.getElementById('login-error').classList.remove('hidden'); }
+}
+
+async function doLogout() {
+  await fetch(`${API}/logout`, {method:'POST'});
+  showLogin();
+}
+
+function showLogin() {
+  document.getElementById('login-screen').classList.remove('hidden');
+  document.getElementById('admin-layout').classList.add('hidden');
+}
+
+function showAdmin() {
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('admin-layout').classList.remove('hidden');
+  loadStats();
+}
+
+// ── 내비게이션 ────────────────────────────────────────────────────────
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById(`section-${name}`).classList.add('active');
+  document.getElementById(`nav-${name}`).classList.add('active');
+  if (name === 'users') loadUsers();
+  if (name === 'templates') loadTemplates();
+  if (name === 'files') loadFiles();
+  if (name === 'schema') { loadSchema(); loadMigrations(); }
+}
+
+// ── 대시보드 ──────────────────────────────────────────────────────────
+async function loadStats() {
+  const r = await fetch(`${API}/stats`);
+  const d = await r.json();
+  document.getElementById('stat-users').textContent = d.total_users;
+  document.getElementById('stat-active').textContent = d.active_users;
+  document.getElementById('stat-files').textContent = d.total_files;
+  document.getElementById('stat-templates').textContent = d.total_templates;
+  document.getElementById('stat-users-week').textContent = `이번 주 +${d.new_users_week}명`;
+  document.getElementById('stat-files-week').textContent = `이번 주 +${d.new_files_week}개`;
+  const tbody = document.getElementById('recent-users-table');
+  tbody.innerHTML = (d.recent_users || []).map(u => `
+    <tr class="table-row">
+      <td class="px-0 py-2 font-medium">${u.name}</td>
+      <td class="px-4 py-2 text-slate-500">${u.email}</td>
+      <td class="px-4 py-2 text-slate-400 text-xs">${fmtDate(u.created_at)}</td>
+      <td class="px-4 py-2">${statusBadge(u.status)}</td>
+    </tr>`).join('');
+}
+
+// ── 회원 관리 ────────────────────────────────────────────────────────
+async function loadUsers() {
+  const search = document.getElementById('user-search').value;
+  const status = document.getElementById('user-status-filter').value;
+  const r = await fetch(`${API}/users?page=${usersPage}&search=${encodeURIComponent(search)}&status=${status}`);
+  const d = await r.json();
+  const tbody = document.getElementById('users-table');
+  tbody.innerHTML = (d.users || []).map(u => `
+    <tr class="table-row text-sm">
+      <td class="px-4 py-3 text-slate-400">#${u.id}</td>
+      <td class="px-4 py-3 font-medium">${u.name}${u.is_admin ? ' <span class="badge bg-primary/10 text-primary">관리자</span>' : ''}</td>
+      <td class="px-4 py-3 text-slate-600">${u.email}</td>
+      <td class="px-4 py-3 text-slate-500">${u.resume_count}개</td>
+      <td class="px-4 py-3">${statusBadge(u.status)}</td>
+      <td class="px-4 py-3 text-slate-400 text-xs">${fmtDate(u.created_at)}</td>
+      <td class="px-4 py-3">
+        <button class="btn-outline text-xs py-1 px-2 mr-1" onclick="openUserModal(${JSON.stringify(u)})"><span class="ms" style="font-size:15px">edit</span></button>
+        <button class="btn-danger text-xs py-1 px-2" onclick="deleteUser(${u.id},'${u.name}')"><span class="ms" style="font-size:15px">delete</span></button>
+      </td>
+    </tr>`).join('') || '<tr><td colspan="7" class="text-center py-8 text-slate-400">회원이 없습니다</td></tr>';
+  document.getElementById('users-count').textContent = `총 ${d.total}명`;
+  document.getElementById('users-pagination').innerHTML = buildPagination(d.pages, usersPage, p => { usersPage = p; loadUsers(); });
+}
+
+function openUserModal(user = null) {
+  document.getElementById('user-modal-title').textContent = user ? '회원 수정' : '회원 추가';
+  document.getElementById('user-modal-id').value = user ? user.id : '';
+  document.getElementById('user-modal-name').value = user ? user.name : '';
+  document.getElementById('user-modal-email').value = user ? user.email : '';
+  document.getElementById('user-modal-password').value = '';
+  document.getElementById('user-modal-status').value = user ? user.status : 'active';
+  document.getElementById('user-modal-admin').checked = user ? user.is_admin : false;
+  document.getElementById('user-modal').classList.remove('hidden');
+}
+
+async function saveUser() {
+  const id = document.getElementById('user-modal-id').value;
+  const payload = {
+    name: document.getElementById('user-modal-name').value,
+    email: document.getElementById('user-modal-email').value,
+    password: document.getElementById('user-modal-password').value,
+    status: document.getElementById('user-modal-status').value,
+    is_admin: document.getElementById('user-modal-admin').checked
+  };
+  const url = id ? `${API}/users/${id}` : `${API}/users`;
+  const method = id ? 'PUT' : 'POST';
+  const r = await fetch(url, {method, headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
+  const d = await r.json();
+  if (d.success) { closeModal('user-modal'); loadUsers(); toast('저장되었습니다.'); }
+  else toast(d.message, 'error');
+}
+
+async function deleteUser(id, name) {
+  if (!confirm(`'${name}' 회원을 삭제하시겠습니까?`)) return;
+  const r = await fetch(`${API}/users/${id}`, {method:'DELETE'});
+  if (r.ok) { loadUsers(); toast('삭제되었습니다.'); }
+}
+
+// ── 이력서 템플릿 ─────────────────────────────────────────────────────
+async function loadTemplates() {
+  const r = await fetch(`${API}/templates`);
+  const d = await r.json();
+  const grid = document.getElementById('templates-grid');
+  grid.innerHTML = (d.templates || []).map(t => `
+    <div class="card p-4">
+      ${t.thumbnail_url ? `<img src="${t.thumbnail_url}" class="w-full h-32 object-cover rounded-lg mb-3 bg-slate-100"/>` : `<div class="w-full h-32 rounded-lg mb-3 bg-surface-container flex items-center justify-center text-slate-400"><span class="ms" style="font-size:40px">description</span></div>`}
+      <div class="flex items-start justify-between mb-1">
+        <div class="font-medium text-sm">${t.name}</div>
+        ${t.is_active ? '<span class="badge bg-green-100 text-green-700">활성</span>' : '<span class="badge bg-slate-100 text-slate-500">비활성</span>'}
+      </div>
+      <div class="text-xs text-slate-500 mb-1">${categoryLabel(t.category)}</div>
+      <div class="text-xs text-slate-400 mb-3 line-clamp-2">${t.description || ''}</div>
+      <div class="flex gap-2">
+        <button class="btn-outline text-xs flex-1" onclick="previewTemplate(${t.id})"><span class="ms" style="font-size:15px">visibility</span> 미리보기</button>
+        <button class="btn-outline text-xs flex-1" onclick="openTemplateModal(${JSON.stringify(t).replace(/"/g,'&quot;')})"><span class="ms" style="font-size:15px">edit</span> 수정</button>
+        <button class="btn-danger text-xs" onclick="deleteTemplate(${t.id})"><span class="ms" style="font-size:15px">delete</span></button>
+      </div>
+    </div>`).join('') || '<div class="col-span-3 text-center py-12 text-slate-400">템플릿이 없습니다</div>';
+}
+
+function openTemplateModal(t = null) {
+  document.getElementById('template-modal-title').textContent = t ? '템플릿 수정' : '템플릿 추가';
+  document.getElementById('template-modal-id').value = t ? t.id : '';
+  document.getElementById('template-modal-name').value = t ? t.name : '';
+  document.getElementById('template-modal-desc').value = t ? (t.description || '') : '';
+  document.getElementById('template-modal-category').value = t ? t.category : 'general';
+  document.getElementById('template-modal-html').value = t ? t.html_content : '';
+  document.getElementById('template-modal-thumb').value = t ? (t.thumbnail_url || '') : '';
+  document.getElementById('template-modal-active').checked = t ? t.is_active : true;
+  document.getElementById('template-modal').classList.remove('hidden');
+}
+
+async function saveTemplate() {
+  const id = document.getElementById('template-modal-id').value;
+  const payload = {
+    name: document.getElementById('template-modal-name').value,
+    description: document.getElementById('template-modal-desc').value,
+    category: document.getElementById('template-modal-category').value,
+    html_content: document.getElementById('template-modal-html').value,
+    thumbnail_url: document.getElementById('template-modal-thumb').value,
+    is_active: document.getElementById('template-modal-active').checked
+  };
+  const url = id ? `${API}/templates/${id}` : `${API}/templates`;
+  const method = id ? 'PUT' : 'POST';
+  const r = await fetch(url, {method, headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
+  const d = await r.json();
+  if (d.success) { closeModal('template-modal'); loadTemplates(); toast('저장되었습니다.'); }
+  else toast(d.message || '오류 발생', 'error');
+}
+
+async function deleteTemplate(id) {
+  if (!confirm('이 템플릿을 삭제하시겠습니까?')) return;
+  const r = await fetch(`${API}/templates/${id}`, {method:'DELETE'});
+  if (r.ok) { loadTemplates(); toast('삭제되었습니다.'); }
+}
+
+function previewTemplate(id) {
+  window.open(`/api/admin/templates/${id}/preview`, '_blank');
+}
+
+// ── 파일 관리 ─────────────────────────────────────────────────────────
+async function loadFiles() {
+  const search = document.getElementById('file-search').value;
+  const r = await fetch(`${API}/files?page=${filesPage}&search=${encodeURIComponent(search)}`);
+  const d = await r.json();
+  const tbody = document.getElementById('files-table');
+  tbody.innerHTML = (d.files || []).map(f => `
+    <tr class="table-row text-sm">
+      <td class="px-4 py-3">
+        <div class="font-medium">${f.original_name}</div>
+        <div class="text-xs text-slate-400">${f.saved_name}</div>
+      </td>
+      <td class="px-4 py-3 text-slate-600">${f.user_name}</td>
+      <td class="px-4 py-3 text-slate-500">${f.size_kb} KB</td>
+      <td class="px-4 py-3">
+        <span class="badge ${mimeColor(f.mime_type)}">${mimeLabel(f.mime_type)}</span>
+      </td>
+      <td class="px-4 py-3 text-slate-400 text-xs">${fmtDate(f.uploaded_at)}</td>
+      <td class="px-4 py-3">
+        <button class="btn-danger text-xs py-1 px-2" onclick="deleteFile(${f.id},'${f.original_name}')"><span class="ms" style="font-size:15px">delete</span></button>
+      </td>
+    </tr>`).join('') || '<tr><td colspan="6" class="text-center py-8 text-slate-400">파일이 없습니다</td></tr>';
+  document.getElementById('files-count').textContent = `총 ${d.total}개`;
+  document.getElementById('files-pagination').innerHTML = buildPagination(d.pages, filesPage, p => { filesPage = p; loadFiles(); });
+}
+
+async function deleteFile(id, name) {
+  if (!confirm(`'${name}' 파일을 삭제하시겠습니까?`)) return;
+  const r = await fetch(`${API}/files/${id}`, {method:'DELETE'});
+  if (r.ok) { loadFiles(); toast('삭제되었습니다.'); }
+}
+
+// ── AI 스키마 콘솔 ────────────────────────────────────────────────────
+async function loadSchema() {
+  const r = await fetch(`${API}/schema/tables`);
+  const d = await r.json();
+  const el = document.getElementById('schema-display');
+  let html = '';
+  for (const [table, cols] of Object.entries(d.tables || {})) {
+    html += `<div class="mb-4"><span class="text-yellow-400 font-bold">TABLE</span> <span class="text-white font-bold">${table}</span>\n`;
+    cols.forEach(c => {
+      html += `  <span class="text-slate-400">├─</span> <span class="text-cyan-300">${c.name}</span> <span class="text-green-300">${c.type}</span>${c.nullable ? '' : ' <span class="text-red-400">NOT NULL</span>'}\n`;
+    });
+    html += '</div>';
+  }
+  el.innerHTML = html || '<span class="text-slate-500">스키마 정보 없음</span>';
+}
+
+async function generateSQL() {
+  const desc = document.getElementById('schema-description').value.trim();
+  if (!desc) return toast('설명을 입력하세요.', 'error');
+  const r = await fetch(`${API}/schema/generate`, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({description:desc})});
+  const d = await r.json();
+  document.getElementById('generated-sql').value = d.suggested_sql;
+  document.getElementById('migration-desc').value = desc;
+  document.getElementById('generated-sql-wrapper').classList.remove('hidden');
+  const badge = document.getElementById('ai-used-badge');
+  if (d.ai_used) {
+    badge.className = 'badge bg-green-100 text-green-700';
+    badge.textContent = 'AI 생성';
+  } else {
+    badge.className = 'badge bg-yellow-100 text-yellow-700';
+    badge.textContent = 'AI 미연동 (직접 수정 필요)';
+  }
+}
+
+async function applyMigration() {
+  const sql = document.getElementById('generated-sql').value.trim();
+  const desc = document.getElementById('migration-desc').value;
+  const nl = document.getElementById('schema-description').value;
+  if (!sql) return toast('SQL이 비어 있습니다.', 'error');
+  const r = await fetch(`${API}/schema/apply`, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({sql_query:sql, description:desc, natural_language:nl})});
+  const d = await r.json();
+  if (d.success) { toast('마이그레이션 적용 완료!'); loadSchema(); loadMigrations(); }
+  else toast('오류: ' + d.message, 'error');
+}
+
+async function applyDirectSQL() {
+  const sql = document.getElementById('direct-sql').value.trim();
+  const desc = document.getElementById('direct-desc').value || '직접 실행';
+  if (!sql) return toast('SQL을 입력하세요.', 'error');
+  const r = await fetch(`${API}/schema/apply`, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({sql_query:sql, description:desc})});
+  const d = await r.json();
+  if (d.success) { toast('실행 완료!'); loadSchema(); loadMigrations(); document.getElementById('direct-sql').value = ''; }
+  else toast('오류: ' + d.message, 'error');
+}
+
+async function loadMigrations() {
+  const r = await fetch(`${API}/schema/migrations`);
+  const d = await r.json();
+  const el = document.getElementById('migrations-list');
+  el.innerHTML = (d.migrations || []).map(m => `
+    <div class="rounded-lg border border-slate-100 p-3">
+      <div class="flex items-center justify-between mb-1">
+        <span class="text-sm font-medium">${m.description}</span>
+        <span class="badge ${m.status === 'applied' ? 'bg-green-100 text-green-700' : m.status === 'failed' ? 'bg-red-100 text-red-600' : 'bg-slate-100 text-slate-500'}">${m.status}</span>
+      </div>
+      ${m.natural_language ? `<div class="text-xs text-slate-400 mb-1">💬 ${m.natural_language}</div>` : ''}
+      <pre class="text-xs bg-slate-900 text-green-400 rounded p-2 overflow-x-auto mt-2">${m.sql_query}</pre>
+      <div class="text-xs text-slate-400 mt-1">${fmtDate(m.applied_at || m.created_at)}</div>
+      ${m.error_message ? `<div class="text-xs text-red-500 mt-1">⚠ ${m.error_message}</div>` : ''}
+    </div>`).join('') || '<div class="text-sm text-slate-400 text-center py-4">마이그레이션 이력이 없습니다</div>';
+}
+
+// ── 유틸 ──────────────────────────────────────────────────────────────
+function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+function fmtDate(iso) { if (!iso) return '-'; return new Date(iso).toLocaleDateString('ko-KR', {year:'2-digit', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit'}); }
+function statusBadge(s) { return s === 'active' ? '<span class="badge bg-green-100 text-green-700">활성</span>' : '<span class="badge bg-red-100 text-red-600">정지</span>'; }
+function categoryLabel(c) { return {general:'일반', it:'IT/개발', finance:'금융/회계', design:'디자인', management:'경영/관리'}[c] || c; }
+function mimeLabel(m) { return {'application/pdf':'PDF', 'application/msword':'DOC', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':'DOCX'}[m] || m; }
+function mimeColor(m) { return m === 'application/pdf' ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'; }
+function buildPagination(pages, current, cb) {
+  if (pages <= 1) return '';
+  let html = '';
+  for (let i = 1; i <= pages; i++) {
+    html += `<button class="px-2.5 py-1 rounded text-xs ${i === current ? 'bg-primary text-white' : 'border border-slate-200 text-slate-600 hover:bg-slate-50'}" onclick="(${cb.toString()})(${i})">${i}</button>`;
+  }
+  return html;
+}
+function toast(msg, type='success') {
+  const t = document.getElementById('toast');
+  const icon = document.getElementById('toast-icon');
+  icon.textContent = type === 'error' ? 'error' : 'check_circle';
+  icon.className = `ms ${type === 'error' ? 'text-red-500' : 'text-green-500'}`;
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.remove('hidden');
+  setTimeout(() => t.classList.add('hidden'), 3000);
+}
+let debounceTimers = {};
+function debounce(fn, ms) {
+  return function() {
+    clearTimeout(debounceTimers[fn]);
+    debounceTimers[fn] = setTimeout(fn, ms);
+  };
+}
+
+// ── 초기화 ────────────────────────────────────────────────────────────
+checkAuth();
+</script>
+</body>
+</html>

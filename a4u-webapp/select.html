@@ -545,6 +545,8 @@
         uploadButton.disabled = false;
     }
 
+    if (uploadInput && uploadDropZone && uploadButton && uploadStatusText) {
+
     uploadInput.addEventListener('change', event => {
         setUploadReady(event.target.files[0]);
     });
@@ -629,6 +631,8 @@
         xhr.send(formData);
     });
 
+    } // end if (uploadInput && uploadDropZone && uploadButton && uploadStatusText)
+
     function persistFormChanges() {
         [personalFirstName, personalLastName, personalSummary, personalEmail, personalPhone].forEach(el => {
             el.addEventListener('input', saveResumeState);
@@ -649,14 +653,16 @@
         saveResumeState();
     }
 
-    uploadContinueButton.addEventListener('click', () => {
-        if (uploadResultCard.classList.contains('hidden')) {
-            return;
-        }
-        applyParsedResumeData();
-        const overlay = document.getElementById('start-selection-overlay');
-        if (overlay) overlay.remove();
-    });
+    if (uploadContinueButton) {
+        uploadContinueButton.addEventListener('click', () => {
+            if (uploadResultCard && uploadResultCard.classList.contains('hidden')) {
+                return;
+            }
+            applyParsedResumeData();
+            const overlay = document.getElementById('start-selection-overlay');
+            if (overlay) overlay.remove();
+        });
+    }
 
     persistFormChanges();
     loadResumeState();
