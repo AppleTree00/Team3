@@ -229,8 +229,11 @@ def coaching():
 @coaching_bp.route('/coaching/samples', methods=['GET'])
 def coaching_samples():
     """지원 가능한 샘플 타입 목록"""
+    import os
+    ai_available = bool(os.environ.get('OPENAI_API_KEY') or os.environ.get('ANTHROPIC_API_KEY'))
     return jsonify(
         success=True,
+        ai_available=ai_available,
         samples=[
             {'type': k, 'label': v['label']}
             for k, v in FEW_SHOT_EXAMPLES.items()

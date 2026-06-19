@@ -68,7 +68,13 @@ PROTECTED_PAGES = {
 @app.before_request
 def require_login():
     path = request.path.lstrip('/')
-    # 정적 파일 + 보호 페이지만 체크
+    # 어드민 페이지 보호: 로그인 필요 + 어드민 권한 필요
+    if path in ('admin', 'admin.html'):
+        if not session.get('user_id'):
+            return redirect('/login.html?next=admin&reason=auth')
+        if not session.get('is_admin'):
+            return redirect('/dashboard.html')
+    # 일반 보호 페이지: 로그인만 필요
     if path in PROTECTED_PAGES:
         if not session.get('user_id'):
             return redirect(f'/login.html?next={path}&reason=auth')
