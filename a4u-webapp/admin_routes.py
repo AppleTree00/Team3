@@ -214,6 +214,58 @@ def delete_template(template_id):
     return jsonify(success=True)
 
 
+# ── 이력서 관리 ──────────────────────────────────────────────────────
+
+@admin_bp.route('/resumes', methods=['GET'])
+@admin_required
+def list_all_resumes():
+    from models import Resume
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 20, type=int)
+    search = request.args.get('search', '')
+    sample_filter = request.args.get('is_sample', '')
+
+    query = Resume.query
+    if search:
+        query = query.filter(Resume.title.ilike(f'%{search}%'))
+    if sample_filter == 'true':
+        query = query.filter_by(is_sample=True)
+    elif sample_filter == 'false':
+        query = query.filter_by(is_sample=False)
+
+    pagination = query.order_by(Resume.created_at.desc()).paginate(page=page, per_page=per_page, error_out=False)
+
+    resumes_data = []
+    for r in pagination.items:
+        d = r.to_dict()
+        # 작성자 이름 추가
+        if r.user_id:
+            user = User.query.get(r.user_id)
+            d['author_name'] = user.name if user else '알 수 없음'
+        else:
+            d['author_name'] = '시스템'
+        resumes_data.append(d)
+
+    return jsonify(
+        resumes=resumes_data,
+        total=pagination.total,
+        pages=pagination.pages,
+        current_page=page
+    )
+
+
+@admin_bp.route('/resumes/<int:resume_id>', methods=['DELETE'])
+@admin_required
+def delete_resume(resume_id):
+    from models import Resume
+    r = Resume.query.get_or_404(resume_id)
+    if r.is_sample:
+        return jsonify(success=False, message='샘플 이력서는 삭제할 수 없습니다.'), 400
+    db.session.delete(r)
+    db.session.commit()
+    return jsonify(success=True)
+
+
 # ── 파일 관리 ─────────────────────────────────────────────────────────
 
 @admin_bp.route('/files', methods=['GET'])

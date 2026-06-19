@@ -215,6 +215,52 @@
 
     setActiveLink(navLinks);
     setActiveLink(mobileNavLinks);
+
+    // ── 네비게이션 인증 상태 동적 표시 ────────────────────────────────
+    (async function updateNavAuth() {
+        try {
+            const r = await fetch('/api/auth/me', { credentials: 'same-origin' });
+            const data = await r.json();
+            const profileLink = document.querySelector('a[href="profile-menu.html"]');
+            if (!profileLink) return;
+            if (data.success && data.user) {
+                const nameEl = document.createElement('span');
+                nameEl.className = 'hidden sm:block text-sm font-semibold text-on-surface truncate max-w-[80px]';
+                nameEl.textContent = data.user.name;
+                profileLink.parentNode.insertBefore(nameEl, profileLink);
+            }
+        } catch (_) {}
+    })();
+
+    // ── 미구현 기능 안내 팝업 ──────────────────────────────────────────
+    function handleUnavailableFeature() {
+        alert('현재 이 기능은 고도화 단계에 있습니다. 업데이트 이후 사용 가능하니 잠시만 기다려주세요.');
+    }
+
+    // ── 알림 버튼 ──────────────────────────────────────────────────────
+    document.querySelectorAll('button').forEach(btn => {
+        const icon = btn.querySelector('.material-symbols-outlined');
+        if (!icon) return;
+        const iconText = icon.textContent.trim();
+        const text = btn.textContent.trim();
+        if (iconText === 'notifications') {
+            btn.addEventListener('click', handleUnavailableFeature);
+        } else if (['download', 'share', 'file_download'].includes(iconText)
+                   || text.includes('다운로드') || text.includes('PDF') || text.includes('공유')) {
+            btn.addEventListener('click', handleUnavailableFeature);
+        } else if (iconText === 'print' || text.includes('인쇄')) {
+            btn.addEventListener('click', () => window.print());
+        }
+    });
+
+    // ── 이력서 목록 API 연동 ───────────────────────────────────────────
+    fetch('/api/resumes', { credentials: 'same-origin' })
+        .then(r => r.json())
+        .then(data => {
+            if (!data.success) return;
+            console.log('[a4u] 이력서 목록:', data.resumes.length, '건');
+        })
+        .catch(() => {});
 </script>
 
 </body>

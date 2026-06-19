@@ -293,6 +293,54 @@
 
     setActiveLink(navLinks);
     setActiveLink(mobileNavLinks);
+
+    // ── 네비게이션 인증 상태 동적 표시 ────────────────────────────────
+    (async function updateNavAuth() {
+        try {
+            const r = await fetch('/api/auth/me', { credentials: 'same-origin' });
+            const data = await r.json();
+            const profileLink = document.querySelector('a[href="profile-menu.html"]');
+            if (!profileLink) return;
+            if (data.success && data.user) {
+                const nameEl = document.createElement('span');
+                nameEl.className = 'hidden sm:block text-sm font-semibold text-on-surface truncate max-w-[80px]';
+                nameEl.textContent = data.user.name;
+                profileLink.parentNode.insertBefore(nameEl, profileLink);
+            }
+        } catch (_) {}
+    })();
+
+    // ── 미구현 기능 안내 팝업 ──────────────────────────────────────────
+    function handleUnavailableFeature() {
+        alert('현재 이 기능은 고도화 단계에 있습니다. 업데이트 이후 사용 가능하니 잠시만 기다려주세요.');
+    }
+
+    // ── 알림 버튼 ──────────────────────────────────────────────────────
+    document.querySelectorAll('button').forEach(btn => {
+        const icon = btn.querySelector('.material-symbols-outlined');
+        if (icon && icon.textContent.trim() === 'notifications') {
+            btn.addEventListener('click', handleUnavailableFeature);
+        }
+    });
+
+    // ── 일정 추가 / 필터 / 기타 미구현 버튼 ────────────────────────────
+    document.querySelectorAll('button').forEach(btn => {
+        const icon = btn.querySelector('.material-symbols-outlined');
+        const text = btn.textContent.trim();
+        if (!icon && !text) return;
+        const iconText = icon ? icon.textContent.trim() : '';
+        if (['add', 'add_circle', 'filter_list', 'tune', 'share', 'download', 'print'].includes(iconText)) {
+            btn.addEventListener('click', handleUnavailableFeature);
+        }
+        if (text.includes('일정 추가') || text.includes('내보내기') || text.includes('공유')) {
+            btn.addEventListener('click', handleUnavailableFeature);
+        }
+    });
+
+    // ── 풋터 링크 ──────────────────────────────────────────────────────
+    document.querySelectorAll('footer a[href="#"]').forEach(a => {
+        a.addEventListener('click', e => { e.preventDefault(); handleUnavailableFeature(); });
+    });
 </script>
 
 
