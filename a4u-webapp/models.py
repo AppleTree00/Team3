@@ -69,6 +69,7 @@ class UploadedFile(db.Model):
     size = db.Column(db.Integer)
     mime_type = db.Column(db.String(100))
     uploaded_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+    resume_analysis = db.Column(db.Text) # AI 코칭 결과 저장
 
     def to_dict(self):
         return {
@@ -80,7 +81,8 @@ class UploadedFile(db.Model):
             'size': self.size,
             'size_kb': round(self.size / 1024, 1) if self.size else 0,
             'mime_type': self.mime_type,
-            'uploaded_at': self.uploaded_at.isoformat() if self.uploaded_at else None
+            'uploaded_at': self.uploaded_at.isoformat() if self.uploaded_at else None,
+            'resume_analysis': self.resume_analysis
         }
 
 
