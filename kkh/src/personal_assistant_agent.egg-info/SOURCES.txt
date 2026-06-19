@@ -1,0 +1,16 @@
+pyproject.toml
+src/app/dashboard.py
+src/app/ui.py
+src/core/agent.py
+src/core/calendar_api.py
+src/core/db_manager.py
+src/core/exceptions.py
+src/core/reporting.py
+src/core/ui.py
+src/database/db_manager.py
+src/personal_assistant_agent.egg-info/PKG-INFO
+src/personal_assistant_agent.egg-info/SOURCES.txt
+src/personal_assistant_agent.egg-info/dependency_links.txt
+src/personal_assistant_agent.egg-info/requires.txt
+src/personal_assistant_agent.egg-info/top_level.txt
+tests/test_time_parser.py

@@ -16,30 +16,32 @@
 ## **3\. 프로젝트 핵심 가치 및 목표**
 
 * **제품명:** 개인 일정 관리 AI 에이전트 (Personal Assistant Agent)  
-* **핵심 가치:** 복잡한 인터페이스 없이 자연어 입력만으로 직관적이고 스마트하게 일정을 관리하는 혁신적 경험 제공  
-* **주요 기술 스택:** Python, Google Calendar API, LLM API (Gemini / OpenAI), SQLite
+* **핵심 가치:** 복잡한 GUI 대신, 자연어 대화만으로 가장 빠르고 직관적인 일정 관리 경험을 제공합니다.
+* **주요 기술 스택:** Python, LLM API (OpenAI/Gemini), Google Calendar API, SQLite
 
 ## **4\. MVP 기능 요구사항 명세 (PRD)**
 
 초기 시장 진입 및 검증을 위한 핵심 기능 목록입니다.
 
-| 기능 ID | 기능명 | 상세 설명 | 우선순위   |
-| :---- | :---- | :---- | :---- |
-| REQ-01 | 자연어 기반 일정 등록 | 사용자가 대화형 인터페이스에 입력한 문장(예: "내일 오후 3시 팀 미팅 잡아줘")을 분석하여 일정 정보 파싱 후 등록 | 최상 (Must Have) |
-| REQ-02 | 일정 조회 및 확인 | 특정 날짜나 기간의 일정을 텍스트 또는 캘린더 형태로 조회 (예: "이번 주 일정이 어떻게 돼?") | 최상 (Must Have) |
-| REQ-03 | 일정 변경 및 삭제 | 기존 등록된 일정을 수정하거나 제거 (예: "내일 미팅 4시로 미뤄줘", "팀 미팅 취소해줘") | 상 (Should Have) |
-| REQ-04 | 중요 일정 알림 | 사용자가 지정한 중요 일정에 대해 사전 리마인더 제공 | 중 (Could Have) |
-| REQ-05 | 일정 우선순위 추천 | LLM 분석을 통해 겹치는 일정이나 업무 밀도를 고려한 우선순위 제안 (2단계 확장 마일스톤) | 하 (Nice to Have) |
+| 기능 ID | 기능명 | 상세 설명 | 우선순위 |
+| :--- | :--- | :--- | :--- |
+| REQ-01 | **자연어 기반 일정 등록** | 사용자가 입력한 문장(예: "내일 오후 3시 팀 미팅")을 분석하여 구글 캘린더에 신규 일정을 등록합니다. | **최상 (Must Have)** |
+| REQ-02 | **일정 조회** | 특정 날짜나 기간의 일정을 조회합니다. (예: "이번 주 금요일 일정 알려줘") | **최상 (Must Have)** |
+| REQ-03 | **일정 변경 및 삭제** | 맥락을 이해하여 기존 일정을 수정하거나 삭제합니다. (예: "아까 잡은 회의 4시로 변경해", "팀 미팅 취소") | **상 (Should Have)** |
+| REQ-04 | **중요 일정 알림** | 사용자가 지정하거나 시스템이 중요하다고 판단한 일정에 대해 사전에 리마인더를 제공합니다. | **중 (Could Have)** |
+| REQ-05 | **AI 우선순위 추천** | 겹치는 일정이나 업무 밀도를 분석하여 사용자에게 일정 조율을 제안합니다. (MVP 이후) | **하 (Nice to Have)** |
 
 ## **5\. 프로젝트 마일스톤 및 WBS (작업 분할 구조)**
 
-| 단계 | 주요 태스크 | 담당 역할 | 기대 산출물   |
-| :---- | :---- | :---- | :---- |
-| 1단계 | 개발 환경 구성 및 API 연동 테스트 | Lead Developer | 가상환경 설정 가이드, Google Calendar API 연동 프로토타입 |
-| 2단계 | 자연어 이해(NLU) 및 프롬프트 엔지니어링 | Lead Developer / UI | Function Calling 프롬프트 셋, 대화 흐름 시나리오(VUI 가이드) |
-| 3단계 | 사용자 인터페이스(UI) 및 DB 설계 | UI Designer / Dev | Streamlit 대화형 UI 컴포넌트, SQLite 테이블 스키마 |
-| 4단계 | 통합 테스트 및 엣지 케이스 검증 | QA Engineer | 테스트 시나리오 결과서, 결함 보고서(예외 처리 검증) |
-| 5단계 | MVP 출시 및 피드백 수집 | Project Manager / All | 사용자 피드백 리포트, 차기 버전 백로그 |
+| 단계 | 주요 태스크 | 담당 역할 | 기대 산출물 | 진행 상태 |
+| :---- | :---- | :---- | :---- |:----|
+| 1단계 | **[Dev]** 개발 환경 구성 및 API 연동 테스트 | Lead Developer | 가상환경 설정 가이드, Google Calendar API 연동 프로토타입 | **완료** |
+| 2단계 | **[UI]** 대화 흐름 시나리오 설계 | UI Designer | `ui.md` 내 대화 흐름, 요약 카드 디자인 초안 | **완료** |
+| 3단계 | **[Dev]** NLU 및 Function Calling 구현 | Lead Developer | `agent.py` 내 Function Calling 프롬프트 및 파싱 로직 | **완료** |
+| 4단계 | **[QA]** NLU 엣지 케이스 TC 설계 | QA Engineer | `qa.md` 기반 시간 파싱 테스트 케이스 | **완료** |
+| 5단계 | **[Dev/UI]** UI 컴포넌트 개발 및 DB 연동 | UI Designer / Dev | Streamlit UI 구현, SQLite 연동 로직 | **완료** |
+| 6단계 | **[QA]** 통합 테스트 및 엣지 케이스 검증 | QA Engineer | 테스트 시나리오 결과서, 결함 보고서 | **완료** |
+| 7단계 | **[All]** MVP 출시 및 피드백 수집 | Project Manager / All | 사용자 피드백 리포트, 차기 버전 백로그 | **진행 중** |
 
 ## **6\. 개발 가이드라인 및 실행 지침**
 
@@ -51,7 +53,7 @@
 
 프로젝트의 확장성과 유지보수성을 고려한 디렉토리 구조입니다.
 
-`.`  
+`kkh/`
 `├── src/`  
 `│   ├── app/`  
 `│   │   ├── main.py          # FastAPI 또는 서비스 진입점`  
@@ -63,10 +65,24 @@
 `│   │   └── db_manager.py    # SQLite 로컬 데이터베이스 제어`  
 `│   └── schemas/`  
 `│       └── models.py        # 데이터 규격 정의 (Pydantic, JSON 등)`  
-`├── tests/                   # QA 및 단위 테스트 스크립트 폴더`  
-`├── .env.example             # 환경변수 템플릿 파일`  
-`├── requirements.txt         # 의존성 패키지 목록`  
-`└── README.md                # 프로젝트 안내 문서`
+`├── tests/                   # 단위/통합 테스트 스크립트`  
+`├── .env.example             # 환경변수 템플릿`  
+`├── requirements.txt         # 파이썬 의존성 패키지 목록`  
+`└── README.md                # 프로젝트 개요 및 실행 가이드`
+
+### **의존성 패키지 (`requirements.txt`)**
+새로운 기술 스택에 따른 필수 패키지 목록입니다.
+
+```
+google-api-python-client
+google-auth-oauthlib
+openai
+sqlalchemy
+pydantic
+streamlit
+python-dotenv
+pytz
+```
 
 ## **8\. 리스크 관리 대책 (Risk Management)**
 
@@ -75,4 +91,41 @@
 | LLM의 날짜/시간 파싱 오류 (환각 현상) | 상 | 일정 최종 등록 전, 파싱된 결과를 사용자에게 UI로 명확히 보여주고 컨펌(확인)을 받는 단계를 필수화함. |
 | Google Calendar API 인증(OAuth) 만료 | 중 | Token Refresh 로직을 세밀하게 구현하고, 인증 실패 시 사용자에게 재인증을 유도하는 친절한 UI 가이드 제공. |
 | 다양한 표현의 시간대(Timezone) 혼선 | 상 | 시스템 기준 시간(UTC)과 사용자 로컬 시간(KST)을 명확히 정의하고, LLM 프롬프트에 '현재 날짜/시간'을 컨텍스트로 매번 주입함. |
+| 과도한 토큰 소모 발생 | 중 | 장문(Long Text) 입력이나 연속적인 API 호출 시, 예상 토큰 사용량을 계산하여 임계값 초과 시 실행을 중지하고 사용자에게 경고 알림을 표시함. |
 
+## **9\. 주요 이슈 및 개선 계획 (Issues & Improvement Plan)**
+
+프로젝트 진행 중 식별된 주요 기술적 이슈 및 아키텍처 개선 항목입니다.
+
+| 이슈 ID | 이슈 내용 | 심각도 | 담당자 | 조치 계획 | 상태 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| ISSUE-01 | **UI 파일 위치 불일치** (`src/core/ui.py`) | 중 | Dev | `ui.py` 파일을 `pm.md` 아키텍처 계획에 맞게 `src/app/` 디렉토리로 이동. | **완료** |
+| ISSUE-02 | **웹 환경에 부적합한 OAuth 인증 방식** | 상 | Dev | `calendar_api.py`의 `InstalledAppFlow`를 웹 기반 OAuth2 인증 흐름(예: `google-auth-oauthlib`의 `Flow` 웹 지원 기능 사용)으로 교체. | **완료** |
+| ISSUE-03 | **UI 코드 내 사용자 ID 하드코딩** | 상 | Dev | `ui.py`의 하드코딩된 `USER_ID`를 실제 사용자 인증 시스템과 연동하여 동적으로 할당하는 로직으로 변경. | **완료** |
+| ISSUE-04 | **UI 사이드바 렌더링 오류** | 중 | Dev | `ui.py`에서 `is_authenticated` 변수가 사용되기 전에 정의되지 않아 발생하는 `NameError` 버그 수정. | **완료** |
+| ISSUE-05 | **Agent 로직 내 불필요한 코드 존재** | 하 | Dev | `agent.py`에서 `create_calendar_event` 처리 로직이 UI 단으로 위임됨에 따라, Agent 내부에 남아있는 중복(실행 불가능) 코드를 제거하여 가독성 향상. | **완료** |
+| ISSUE-06 | **LLM 프롬프트 언어 불일치** | 하 | Dev | `agent.py`의 시스템 프롬프트를 한글로 번역하여 모델의 일관된 언어 처리를 유도. | **완료** |
+| ISSUE-07 | **코어 모듈의 상대 경로 임포트 오류** | 중 | Dev | 단위 테스트 실행 시 `attempted relative import beyond top-level package` 에러가 발생하는 상위 폴더 상대 임포트를 절대 경로 임포트로 전환. | **완료** |
+| ISSUE-08 | **과거 날짜 일정 등록 시 확인 UI 누락** | 중 | Dev | `qa.md`의 `TC-NLU-06` 시나리오에 따라, Agent가 과거 날짜를 감지하여 `confirm_past_creation` 액션을 반환하지만 UI에서 이를 처리하는 로직이 누락됨. `ui.py`에 관련 UI 및 핸들러를 추가하여 개선. | **완료** |
+
+## 10. 운영 가이드 (Operations Guide)
+
+### 10.1. 주간 리포트 자동 발송
+
+MVP 출시 후 서비스의 주요 지표를 정기적으로 확인하기 위해 주간 리포트 발송 기능을 구현했습니다.
+
+*   **기능:** `ai_interaction_log` 테이블의 데이터를 기반으로 지난 7일간의 AI 성능 지표(Function Call 성공률, Top 3 사용 기능 등)를 요약하여 지정된 이메일로 발송합니다.
+*   **실행 방법:**
+    1.  `.env` 파일에 아래의 SMTP 및 수신자 정보를 추가합니다.
+        ```
+        SMTP_SERVER="your_smtp_server.com"
+        SMTP_PORT=587
+        SMTP_USERNAME="your_email@example.com"
+        SMTP_PASSWORD="your_app_password"
+        REPORT_RECIPIENT_EMAIL="recipient@example.com"
+        ```
+    2.  프로젝트 루트 디렉토리에서 아래 명령어를 실행합니다.
+        ```bash
+        python run_weekly_report.py
+        ```
+*   **자동화:** 운영 서버의 `cron`이나 `Windows 작업 스케줄러`에 위 명령어를 매주 1회 실행하도록 등록하여 자동화할 수 있습니다. (예: `0 9 * * 1 python /path/to/project/run_weekly_report.py`)

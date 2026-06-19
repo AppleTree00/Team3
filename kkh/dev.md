@@ -25,11 +25,39 @@ get_calendar_events(date_str: str)
 delete_calendar_event(event_id: str)
 C. 데이터베이스 (SQLite) 설계
 가벼운 로컬 DB를 사용하여 다음 정보를 관리합니다.
-users: 사용자 ID, 시간대(기본 KST), 선호 알림 시간
-auth_tokens: Google API Refresh Token 보관 (보안 암호화 적용 필요)
+
+*   **구현 지침:** 아래 스키마를 기반으로 `database/db_manager.py`에 CRUD 로직을 구현합니다. `auth_tokens`의 `token_data`는 반드시 `cryptography`와 같은 라이브러리를 사용하여 암호화 후 저장해야 합니다.
+
+```sql
+-- 사용자 정보 테이블
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id TEXT NOT NULL UNIQUE,
+    timezone TEXT DEFAULT 'Asia/Seoul'
+);
+
+-- Google API 인증 토큰 저장 테이블
+CREATE TABLE IF NOT EXISTS auth_tokens (
+    user_id TEXT PRIMARY KEY,
+    token_data BLOB NOT NULL, -- 암호화된 JSON 토큰 데이터
+    FOREIGN KEY (user_id) REFERENCES users (user_id)
+);
+
+-- 대화 컨텍스트 관리를 위한 최근 이벤트 기록 테이블
+CREATE TABLE IF NOT EXISTS event_history (
+    user_id TEXT PRIMARY KEY,
+    last_event_id TEXT, -- "아까 등록한 회의"와 같은 맥락 이해를 위해 마지막으로 생성/조회된 이벤트의 ID 저장
+    updated_at DATETIME NOT NULL
+);
+```
 D. 에러 및 예외 처리 로직
 API 할당량 초과 / Rate Limit: 지수 백오프(Exponential Backoff) 적용 재시도 로직 구현
 인증 만료: Token 만료 시 자동으로 Refresh Token을 사용하여 갱신하는 로직 필수
+*   **구현 지침:** `core/agent.py`에서 API 호출 시 발생할 수 있는 예외(e.g., `googleapiclient.errors.HttpError`)를 잡아내고, `AuthTokenExpiredError`, `ApiQuotaExceededError` 와 같은 커스텀 예외를 정의하여 `app/ui.py`로 전달합니다. UI 레이어에서는 이 예외를 받아 `ui.md`에 정의된 사용자 친화적 메시지를 표시해야 합니다.
+E. 단위 테스트 및 세션 관리 구현
+*   **단위 테스트 (Unit Test):** `qa.md`의 요구사항에 따라, `tests/` 디렉토리 내에 `test_time_parser.py`와 같은 테스트 파일을 생성하고, 복잡한 시간 변환 로직에 대한 `pytest` 기반 단위 테스트 케이스를 작성하여 코드 변경 시 안정성을 확보합니다.
+*   **세션 관리:** `pm.md`의 `REQ-03` 기능("아까 잡은 회의 변경")을 구현하기 위해, `event_history` 테이블을 활용하여 사용자의 마지막 인터랙션 컨텍스트를 유지하는 로직을 `core/agent.py`에 구현합니다.
+
 5. 협업 가이드 (Collaboration Guide)
-To UI/UX: 데이터 처리 지연 시 발생하는 로딩 상태(Spinner 등)를 UI에 어떻게 반영할지 논의합니다.
-To QA: 날짜 변환 로직의 단위 테스트(Unit Test)를 작성하여 QA 팀에 1차 검증 자료로 제공합니다.
+*   **To UI/UX:** 데이터 처리 지연 시 발생하는 로딩 상태(Spinner 등)를 UI에 어떻게 반영할지 논의합니다.
+*   **To QA:** 날짜 변환 로직의 단위 테스트(Unit Test)를 작성하여 QA 팀에 1차 검증 자료로 제공합니다. `event_history`를 활용한 컨텍스트 기반 테스트 시나리오 검증을 요청합니다.

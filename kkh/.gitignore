@@ -1,22 +1,25 @@
-# Environment variables
-# .env 파일은 API 키 등 민감한 정보를 포함하므로 Git에 포함하지 않습니다.
+# =================================================================
+# Git Ignore File for "개인 일정 관리 AI 에이전트" Project
+# =================================================================
+
+# 1. 환경 변수 파일
+# OpenAI API 키, DB 암호화 키 등 민감 정보를 포함합니다.
 .env
 
-# Virtual Environment
-# 가상 환경 폴더는 용량이 크고 사용자마다 환경이 다르므로 제외합니다.
-.venv/
+# 2. Google Cloud 인증 관련 파일
+# Google Calendar API 접근을 위한 클라이언트 보안 비밀 파일입니다.
+credentials.json
+# OAuth 인증 후 생성되는 사용자 토큰 파일입니다. (현재는 DB에 저장)
+token.json
 
-# Python cache
-# Python 실행 시 자동으로 생성되는 캐시 파일 및 폴더입니다.
+# 3. 로컬 데이터베이스 파일
+# 사용자의 인증 정보, 대화 기록 등이 저장될 수 있습니다.
+agent_data.db
+
+# 4. Python 관련
 __pycache__/
-*.pyc
+*.py[cod]
 
-# Build artifacts
-# 패키지 빌드 시 생성되는 폴더입니다.
-build/
-dist/
-*.egg-info/
-
-# Local data
-# ChromaDB 데이터가 저장되는 'data' 폴더를 제외합니다.
-data/
+# 5. 가상환경 폴더
+venv/
+.venv/
