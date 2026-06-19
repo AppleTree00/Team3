@@ -40,13 +40,8 @@
 | 3단계 | **[Dev]** NLU 및 Function Calling 구현 | Lead Developer | `agent.py` 내 Function Calling 프롬프트 및 파싱 로직 | **완료** |
 | 4단계 | **[QA]** NLU 엣지 케이스 TC 설계 | QA Engineer | `qa.md` 기반 시간 파싱 테스트 케이스 | **완료** |
 | 5단계 | **[Dev/UI]** UI 컴포넌트 개발 및 DB 연동 | UI Designer / Dev | Streamlit UI 구현, SQLite 연동 로직 | **완료** |
-<<<<<<< HEAD
-| 6단계 | **[QA]** 통합 테스트 및 엣지 케이스 검증 | QA Engineer | 테스트 시나리오 결과서, 결함 보고서 | **진행 중** |
-| 7단계 | **[All]** MVP 출시 및 피드백 수집 | Project Manager / All | 사용자 피드백 리포트, 차기 버전 백로그 | **대기** |
-=======
 | 6단계 | **[QA]** 통합 테스트 및 엣지 케이스 검증 | QA Engineer | 테스트 시나리오 결과서, 결함 보고서 | **완료** |
 | 7단계 | **[All]** MVP 출시 및 피드백 수집 | Project Manager / All | 사용자 피드백 리포트, 차기 버전 백로그 | **진행 중** |
->>>>>>> f720528d090278694310b75f07d514d643f18301
 
 ## **6\. 개발 가이드라인 및 실행 지침**
 
@@ -83,6 +78,7 @@ google-api-python-client
 google-auth-oauthlib
 openai
 sqlalchemy
+pydantic
 streamlit
 python-dotenv
 pytz
@@ -110,3 +106,26 @@ pytz
 | ISSUE-05 | **Agent 로직 내 불필요한 코드 존재** | 하 | Dev | `agent.py`에서 `create_calendar_event` 처리 로직이 UI 단으로 위임됨에 따라, Agent 내부에 남아있는 중복(실행 불가능) 코드를 제거하여 가독성 향상. | **완료** |
 | ISSUE-06 | **LLM 프롬프트 언어 불일치** | 하 | Dev | `agent.py`의 시스템 프롬프트를 한글로 번역하여 모델의 일관된 언어 처리를 유도. | **완료** |
 | ISSUE-07 | **코어 모듈의 상대 경로 임포트 오류** | 중 | Dev | 단위 테스트 실행 시 `attempted relative import beyond top-level package` 에러가 발생하는 상위 폴더 상대 임포트를 절대 경로 임포트로 전환. | **완료** |
+| ISSUE-08 | **과거 날짜 일정 등록 시 확인 UI 누락** | 중 | Dev | `qa.md`의 `TC-NLU-06` 시나리오에 따라, Agent가 과거 날짜를 감지하여 `confirm_past_creation` 액션을 반환하지만 UI에서 이를 처리하는 로직이 누락됨. `ui.py`에 관련 UI 및 핸들러를 추가하여 개선. | **완료** |
+
+## 10. 운영 가이드 (Operations Guide)
+
+### 10.1. 주간 리포트 자동 발송
+
+MVP 출시 후 서비스의 주요 지표를 정기적으로 확인하기 위해 주간 리포트 발송 기능을 구현했습니다.
+
+*   **기능:** `ai_interaction_log` 테이블의 데이터를 기반으로 지난 7일간의 AI 성능 지표(Function Call 성공률, Top 3 사용 기능 등)를 요약하여 지정된 이메일로 발송합니다.
+*   **실행 방법:**
+    1.  `.env` 파일에 아래의 SMTP 및 수신자 정보를 추가합니다.
+        ```
+        SMTP_SERVER="your_smtp_server.com"
+        SMTP_PORT=587
+        SMTP_USERNAME="your_email@example.com"
+        SMTP_PASSWORD="your_app_password"
+        REPORT_RECIPIENT_EMAIL="recipient@example.com"
+        ```
+    2.  프로젝트 루트 디렉토리에서 아래 명령어를 실행합니다.
+        ```bash
+        python run_weekly_report.py
+        ```
+*   **자동화:** 운영 서버의 `cron`이나 `Windows 작업 스케줄러`에 위 명령어를 매주 1회 실행하도록 등록하여 자동화할 수 있습니다. (예: `0 9 * * 1 python /path/to/project/run_weekly_report.py`)

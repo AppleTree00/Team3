@@ -1,16 +1,21 @@
 import os
 import json
-import inspect
 from datetime import datetime
 from openai import OpenAI
 import pytz
 from dotenv import load_dotenv
+from pydantic import ValidationError
 
 # dev.md 가이드에 따라 calendar_api 모듈을 연동합니다.
+from src.core.calendar_api import create_calendar_event, get_calendar_events, delete_calendar_event, delete_calendar_event_by_id, update_calendar_event, get_authorization_url
+from src.core.exceptions import CalendarAPIError, AuthTokenExpiredError, ApiQuotaExceededError, CalendarEventNotFoundError, CalendarEventConflictError, AuthRequiredError
 from core.calendar_api import create_calendar_event, get_calendar_events, delete_calendar_event, delete_calendar_event_by_id, update_calendar_event, get_authorization_url
 from core.exceptions import CalendarAPIError, AuthTokenExpiredError, ApiQuotaExceededError, CalendarEventNotFoundError, CalendarEventConflictError, AuthRequiredError
 # dev.md '4-C', '4-E'에 따라 데이터베이스 모듈을 연동합니다.
-from database.db_manager import add_or_get_user, update_event_history, get_last_event_id
+from src.database.db_manager import add_or_get_user, update_event_history, get_last_event_id, log_interaction
+from src.schemas.models import CreateEventParams, GetEventsParams, DeleteEventParams, DeleteEventByIdParams, UpdateEventParams
+from database.db_manager import add_or_get_user, update_event_history, get_last_event_id, log_interaction
+from schemas.models import CreateEventParams, GetEventsParams, DeleteEventParams, DeleteEventByIdParams, UpdateEventParams
 
 # .env 파일에서 환경 변수 로드
 load_dotenv()
@@ -32,7 +37,10 @@ class Agent:
             "당신은 구글 캘린더 일정을 관리하는 유능한 비서입니다. "
             "사용자와의 대화를 통해 일정을 관리하는 것이 당신의 주요 목표입니다. "
             "사용자가 일정 생성이나 수정을 요청할 때 필요한 정보(예: 제목, 특정 시간, 소요 시간 등)가 누락된 경우, 함수를 호출하지 마세요. "
-            "대신, 빠진 정보를 친절하고 명확하게 사용자에게 다시 질문하세요. 이것을 '정보 채우기(slot-filling)' 과업이라고 합니다.")
+            "대신, 빠진 정보를 친절하고 명확하게 사용자에게 다시 질문하세요. 이것을 '정보 채우기(slot-filling)' 과업이라고 합니다.\n\n"
+            "## 시간 처리 규칙:\n"
+            "**매우 중요한 규칙**: '자정' 또는 '밤 12시'는 날짜가 시작되는 00:00으로 해석해야 합니다. 예를 들어, '내일 자정'은 내일 날짜의 00:00입니다. '오늘 자정'은 오늘 날짜의 00:00입니다."
+        )
 
         # dev.md '4-B' 항목에 따라, LLM이 호출할 수 있는 함수(Tool) 목록을 정의합니다.
         # 실제 실행될 파이썬 함수와 매핑합니다.
@@ -42,6 +50,14 @@ class Agent:
             "delete_calendar_event": delete_calendar_event,
             "delete_calendar_event_by_id": delete_calendar_event_by_id,
             "update_calendar_event": update_calendar_event,
+        }
+        # dev.md '4-B' 및 'pm.md' 아키텍처에 따라, Pydantic 모델을 사용한 인자 유효성 검사를 위해 모델을 매핑합니다.
+        self.function_param_models = {
+            "create_calendar_event": CreateEventParams,
+            "get_calendar_events": GetEventsParams,
+            "delete_calendar_event": DeleteEventParams,
+            "delete_calendar_event_by_id": DeleteEventByIdParams,
+            "update_calendar_event": UpdateEventParams,
         }
 
     def _get_current_kst_time_prompt(self) -> str:
@@ -177,14 +193,35 @@ class Agent:
             for tool_call in tool_calls:
                 if tool_call.function.name == "create_calendar_event":
                     try:
-                        function_args = json.loads(tool_call.function.arguments)
-                        print(f"DEBUG: '{tool_call.function.name}'에 대한 확인 요청을 UI로 보냅니다.")
-                        return {
-                            "action": "confirm_creation",
-                            "details": function_args
-                        }
-                    except json.JSONDecodeError:
-                        return f"오류: 함수 인자 파싱에 실패했습니다. (인자: {tool_call.function.arguments})"
+                        # Pydantic 모델로 유효성 검사
+                        validated_args = CreateEventParams(**json.loads(tool_call.function.arguments))
+
+                        # IMPROVEMENT-01: 과거 날짜 감지 로직 추가 (dev.md, qa.md 기반)
+                        start_dt_str = validated_args.start_datetime
+                        # 현재 KST 시간 (timezone-aware)
+                        kst_timezone = pytz.timezone('Asia/Seoul')
+                        now_kst = datetime.now(kst_timezone)
+
+                        # LLM이 생성한 datetime 문자열을 파싱 (timezone-aware)
+                        start_dt = datetime.fromisoformat(start_dt_str)
+
+                        if start_dt < now_kst:
+                            # 과거 날짜인 경우, 새로운 액션 반환
+                            print(f"DEBUG: 과거 날짜 감지. 'confirm_past_creation' 확인 요청을 UI로 보냅니다.")
+                            return {
+                                "action": "confirm_past_creation",
+                                "details": validated_args.model_dump()
+                            }
+                        else:
+                            # 현재 또는 미래 날짜인 경우, 기존 액션 반환
+                            print(f"DEBUG: '{tool_call.function.name}'에 대한 확인 요청을 UI로 보냅니다.")
+                            return {
+                                "action": "confirm_creation",
+                                "details": validated_args.model_dump()
+                            }
+                    except (json.JSONDecodeError, ValidationError) as e:
+                        log_interaction(self.user_id, 'function_call_fail', {'function_name': tool_call.function.name, 'args': tool_call.function.arguments, 'error': f"Argument validation failed: {str(e)}"})
+                        return f"오류: '{tool_call.function.name}' 함수 인자 파싱 또는 유효성 검사에 실패했습니다. (오류: {e})"
 
             # 생성 확인이 필요 없는 다른 tool_call들을 처리합니다.
             # 여러 함수를 동시에 호출하는 경우(parallel function calling)도 처리합니다.
@@ -197,27 +234,49 @@ class Agent:
                     try:
                         function_args = json.loads(tool_call.function.arguments)
 
-                        # dev.md '4-C' DB 연동에 따라, calendar_api 함수에 user_id를 주입합니다.
-                        sig = inspect.signature(function_to_call)
-                        if 'user_id' in sig.parameters:
-                            function_args['user_id'] = self.user_id
+                        # Pydantic 모델을 사용한 유효성 검사
+                        param_model = self.function_param_models.get(function_name)
+                        if param_model:
+                            validated_args = param_model(**function_args)
+                            # 실제 함수 호출에는 검증된 dict를 사용합니다. exclude_unset=True는 LLM이 선택적으로 인자를 넘길 때 유용합니다.
+                            function_args = validated_args.model_dump(exclude_unset=True)
 
+                        # dev.md '4-C' DB 연동에 따라, calendar_api 함수에 user_id를 주입합니다.
+                        function_args['user_id'] = self.user_id
                         print(f"DEBUG: LLM이 '{function_name}' 함수 호출을 요청했습니다.")
                         print(f"DEBUG: 전달된 인자: {function_args}")
                         
                         # 실제 함수를 실행합니다.
                         function_response = function_to_call(**function_args)
+                        
+                        # 로깅: Function Call 성공
+                        log_interaction(self.user_id, 'function_call_success', details={
+                            'function_name': function_name, 'args': function_args
+                        })
 
                         results.append(function_response)
-                    except json.JSONDecodeError:
-                        results.append(f"오류: 함수 인자 파싱에 실패했습니다. (인자: {tool_call.function.arguments})")
+                    except (json.JSONDecodeError, ValidationError) as e:
+                        log_interaction(self.user_id, 'function_call_fail', details={
+                            'function_name': function_name,
+                            'args': tool_call.function.arguments,
+                            'error': f"Argument validation failed: {str(e)}"
+                        })
+                        results.append(f"오류: '{function_name}' 함수 인자 유효성 검사에 실패했습니다. (오류: {e})")
                     except (AuthTokenExpiredError, ApiQuotaExceededError, CalendarEventNotFoundError, CalendarEventConflictError) as e:
                         # Re-raise custom exceptions to be handled by the UI layer
                         raise e
-                    except AuthRequiredError as e:
+                    except AuthRequiredError as e: # AuthRequiredError는 특별히 처리
                         # If authentication is required, generate an authorization URL and return it to the UI.
                         # The redirect_uri here must match the one registered in Google Cloud Console
                         # and the one Streamlit will use.
+                        
+                        # 로깅: Function Call 실패 (인증)
+                        log_interaction(self.user_id, 'function_call_fail', details={
+                            'function_name': function_name, 
+                            'args': function_args if 'function_args' in locals() else {},
+                            'error': 'AuthRequiredError'
+                        })
+
                         # For local development with Streamlit, it's typically http://localhost:8501
                         # For the purpose of this task, we will assume a fixed redirect_uri.
                         redirect_uri = "http://localhost:8501" # Placeholder, will be passed from UI later
@@ -229,9 +288,21 @@ class Agent:
                             "message": "Google Calendar 인증이 필요합니다. 아래 링크를 클릭하여 로그인해주세요."
                         }
                     except CalendarAPIError as e: # Catch our own generic custom error
+                        # 로깅: Function Call 실패 (API)
+                        log_interaction(self.user_id, 'function_call_fail', details={
+                            'function_name': function_name, 
+                            'args': function_args if 'function_args' in locals() else {},
+                            'error': str(e)
+                        })
                         # Re-raise to be handled by the UI layer
                         raise e
                     except Exception as e: # Catch any other truly unexpected errors
+                        # 로깅: Function Call 실패 (기타)
+                        log_interaction(self.user_id, 'function_call_fail', details={
+                            'function_name': function_name, 
+                            'args': function_args if 'function_args' in locals() else {},
+                            'error': f"Unexpected: {str(e)}"
+                        })
                         # Wrap unexpected errors in a generic CalendarAPIError
                         raise CalendarAPIError(f"'{function_name}' 함수 실행 중 예상치 못한 오류 발생: {e}", original_error=e)
                 else:
@@ -241,6 +312,10 @@ class Agent:
             return "\n".join(results)
         else:
             # 함수 호출 없이 일반 텍스트로 응답한 경우
+            # 응답이 질문으로 끝나면 'slot_filling'으로 간주
+            if response_message.content and response_message.content.strip().endswith('?'):
+                log_interaction(self.user_id, 'slot_filling')
+            
             return response_message.content
 
 if __name__ == '__main__':

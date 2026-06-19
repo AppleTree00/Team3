@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "personal-assistant-agent"
+version = "0.1.0"
+description = "자연어 대화로 개인 일정을 관리하는 AI 에이전트"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "google-api-python-client",
+    "google-auth-oauthlib",
+    "openai",
+    "sqlalchemy",
+    "pydantic",
+    "streamlit",
+    "python-dotenv",
+    "pytz",
+    "pandas",
+    "altair",
+    "cryptography",
+]
+
+[tool.setuptools.packages.find]
+# 'src' 디렉토리 아래의 모든 패키지를 자동으로 찾도록 설정합니다.
+# 이를 통해 'from src.core...'와 같은 임포트가 가능해집니다.
+where = ["src"]
