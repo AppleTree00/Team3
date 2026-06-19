@@ -7,15 +7,11 @@ from dotenv import load_dotenv
 from pydantic import ValidationError
 
 # dev.md 가이드에 따라 calendar_api 모듈을 연동합니다.
-from src.core.calendar_api import create_calendar_event, get_calendar_events, delete_calendar_event, delete_calendar_event_by_id, update_calendar_event, get_authorization_url
-from src.core.exceptions import CalendarAPIError, AuthTokenExpiredError, ApiQuotaExceededError, CalendarEventNotFoundError, CalendarEventConflictError, AuthRequiredError
-from core.calendar_api import create_calendar_event, get_calendar_events, delete_calendar_event, delete_calendar_event_by_id, update_calendar_event, get_authorization_url
-from core.exceptions import CalendarAPIError, AuthTokenExpiredError, ApiQuotaExceededError, CalendarEventNotFoundError, CalendarEventConflictError, AuthRequiredError
+from .calendar_api import create_calendar_event, get_calendar_events, delete_calendar_event, delete_calendar_event_by_id, update_calendar_event, get_authorization_url
+from .exceptions import CalendarAPIError, AuthTokenExpiredError, ApiQuotaExceededError, CalendarEventNotFoundError, CalendarEventConflictError, AuthRequiredError
 # dev.md '4-C', '4-E'에 따라 데이터베이스 모듈을 연동합니다.
-from src.database.db_manager import add_or_get_user, update_event_history, get_last_event_id, log_interaction
-from src.schemas.models import CreateEventParams, GetEventsParams, DeleteEventParams, DeleteEventByIdParams, UpdateEventParams
-from database.db_manager import add_or_get_user, update_event_history, get_last_event_id, log_interaction
-from schemas.models import CreateEventParams, GetEventsParams, DeleteEventParams, DeleteEventByIdParams, UpdateEventParams
+from ..database.db_manager import add_or_get_user, update_event_history, get_last_event_id, log_interaction
+from ..schemas.models import CreateEventParams, GetEventsParams, DeleteEventParams, DeleteEventByIdParams, UpdateEventParams
 
 # .env 파일에서 환경 변수 로드
 load_dotenv()
@@ -198,12 +194,13 @@ class Agent:
 
                         # IMPROVEMENT-01: 과거 날짜 감지 로직 추가 (dev.md, qa.md 기반)
                         start_dt_str = validated_args.start_datetime
-                        # 현재 KST 시간 (timezone-aware)
+                        
+                        # LLM이 생성한 naive datetime 문자열을 KST-aware datetime으로 변환하여 비교합니다.
+                        # 이는 timezone-naive와 timezone-aware datetime을 비교할 때 발생하는 TypeError를 방지합니다.
                         kst_timezone = pytz.timezone('Asia/Seoul')
+                        start_dt_naive = datetime.fromisoformat(start_dt_str)
+                        start_dt = kst_timezone.localize(start_dt_naive)
                         now_kst = datetime.now(kst_timezone)
-
-                        # LLM이 생성한 datetime 문자열을 파싱 (timezone-aware)
-                        start_dt = datetime.fromisoformat(start_dt_str)
 
                         if start_dt < now_kst:
                             # 과거 날짜인 경우, 새로운 액션 반환

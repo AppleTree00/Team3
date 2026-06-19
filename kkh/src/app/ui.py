@@ -2,10 +2,10 @@ import streamlit as st
 import os
 from datetime import datetime
 
-from src.core.agent import Agent
-from src.core.calendar_api import create_calendar_event, exchange_code_for_token, get_authorization_url
-from src.core.exceptions import AuthRequiredError, CalendarAPIError
-from src.database.db_manager import create_tables, update_event_history
+from ..core.agent import Agent
+from ..core.calendar_api import create_calendar_event, exchange_code_for_token, get_authorization_url
+from ..core.exceptions import AuthRequiredError, CalendarAPIError
+from ..database.db_manager import create_tables, update_event_history
 
 # --- 1. 초기 설정 및 세션 상태 관리 ---
 
