@@ -223,12 +223,113 @@
         <h3 class="font-label-md text-on-surface-variant uppercase tracking-wider">총 사용자</h3>
         <p id="total-users" class="text-4xl font-bold text-on-background mt-2">0</p>
         <p class="text-body-sm text-on-surface-variant mt-1"><span id="new-users-week">0</span> 신규 (지난 7일)</p>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+    <!-- Left Column -->
+    <div class="lg:col-span-2 space-y-gutter">
+        <!-- Quick Actions -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-gutter">
+            <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-border-subtle flex flex-col gap-3">
+                <h3 class="font-label-md text-on-surface-variant uppercase tracking-wider">빠른 작업</h3>
+                <button class="w-full text-left p-4 bg-surface-container-low hover:bg-surface-container rounded-lg transition-colors flex items-center gap-4">
+                    <span class="material-symbols-outlined text-primary">add_circle</span>
+                    <span class="font-label-md text-on-surface">새 이력서 작성</span>
+                </button>
+                <button class="w-full text-left p-4 bg-surface-container-low hover:bg-surface-container rounded-lg transition-colors flex items-center gap-4">
+                    <span class="material-symbols-outlined text-primary">person</span>
+                    <span class="font-label-md text-on-surface">프로필 정보 업데이트</span>
+                </button>
+            </div>
+            <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-border-subtle flex flex-col justify-center items-center text-center">
+                <div class="h-16 w-16 bg-primary-fixed text-primary flex items-center justify-center rounded-full mb-4">
+                    <span class="material-symbols-outlined text-4xl">workspace_premium</span>
+                </div>
+                <h3 class="font-headline-md text-headline-md text-on-background">나의 이력서 경쟁력</h3>
+                <p class="text-body-sm text-on-surface-variant mt-1">AI가 분석한 내 이력서의 강점을 확인하고 보완점을 찾아보세요.</p>
+                <button class="mt-4 px-6 py-2 bg-primary text-on-primary rounded-full font-label-md hover:opacity-90 transition-all">이력서 보완하기</button>
+            </div>
+        </div>
+
+        <!-- Application Status -->
+        <section>
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="font-headline-md text-headline-md text-on-background">지원 현황</h2>
+                <div class="flex items-center gap-2">
+                    <button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors"><span class="material-symbols-outlined">filter_list</span></button>
+                    <button class="px-4 py-2 bg-primary text-on-primary rounded-full font-label-md text-sm hover:opacity-90 transition-all flex items-center gap-1"><span class="material-symbols-outlined text-base">add</span> 새로 추가</button>
+                </div>
+            </div>
+            <!-- Kanban-style board -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+                <!-- Column: Applied -->
+                <div class="bg-surface-container-low rounded-xl p-4 space-y-4">
+                    <h3 class="font-label-md text-on-surface-variant px-2">지원 완료 (1)</h3>
+                    <div class="kanban-card bg-surface-container-lowest rounded-lg p-4 shadow-sm border border-border-subtle">
+                        <h4 class="font-label-md text-on-background">프로덕트 디자이너</h4>
+                        <p class="text-body-sm text-on-surface-variant">Naver</p>
+                        <div class="mt-3 pt-3 border-t border-border-subtle text-xs text-on-surface-variant">5일 전 지원</div>
+                    </div>
+                </div>
+                <!-- Column: Interview -->
+                <div class="bg-surface-container-low rounded-xl p-4 space-y-4">
+                    <h3 class="font-label-md text-on-surface-variant px-2">면접 (2)</h3>
+                    <div class="kanban-card bg-surface-container-lowest rounded-lg p-4 shadow-sm border border-border-subtle">
+                        <h4 class="font-label-md text-on-background">UX/UI 디자이너</h4>
+                        <p class="text-body-sm text-on-surface-variant">Kakao</p>
+                        <div class="mt-3 pt-3 border-t border-border-subtle text-xs text-secondary font-bold">내일, 14:00 (온라인)</div>
+                    </div>
+                    <div class="kanban-card bg-surface-container-lowest rounded-lg p-4 shadow-sm border border-border-subtle">
+                        <h4 class="font-label-md text-on-background">시니어 프로덕트 디자이너</h4>
+                        <p class="text-body-sm text-on-surface-variant">Toss</p>
+                        <div class="mt-3 pt-3 border-t border-border-subtle text-xs text-on-surface-variant">2차 면접 대기</div>
+                    </div>
+                </div>
+                <!-- Column: Offer -->
+                <div class="bg-surface-container-low rounded-xl p-4 space-y-4">
+                    <h3 class="font-label-md text-on-surface-variant px-2">오퍼 (1)</h3>
+                    <div class="kanban-card bg-success-mint rounded-lg p-4 shadow-sm border border-secondary-container">
+                        <h4 class="font-label-md text-on-background">리드 프로덕트 디자이너</h4>
+                        <p class="text-body-sm text-secondary">Coupang</p>
+                        <button onclick="acceptOffer(event)" class="mt-3 w-full py-2 bg-primary text-on-primary rounded-lg text-sm font-semibold hover:opacity-90">오퍼 수락</button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
     <!-- Total Files -->
     <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-border-subtle">
         <h3 class="font-label-md text-on-surface-variant uppercase tracking-wider">총 파일 수</h3>
         <p id="total-files" class="text-4xl font-bold text-on-background mt-2">0</p>
         <p class="text-body-sm text-on-surface-variant mt-1"><span id="new-files-week">0</span> 지난 주 추가</p>
+
+    <!-- Right Column -->
+    <div class="space-y-gutter">
+        <section class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-border-subtle">
+            <h3 class="font-label-md text-on-surface-variant uppercase tracking-wider mb-4">다가오는 인터뷰</h3>
+            <div class="space-y-4">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-primary-fixed text-primary rounded-lg flex flex-col items-center justify-center">
+                        <span class="text-xs font-bold">6월</span>
+                        <span class="text-xl font-bold -mt-1">20</span>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-label-md text-on-background">Kakao 1차 면접</p>
+                        <p class="text-body-sm text-on-surface-variant">14:00 - 15:00 (온라인)</p>
+                    </div>
+                    <span class="material-symbols-outlined text-on-surface-variant">arrow_forward_ios</span>
+                </div>
+                <div class="flex items-center gap-4 opacity-50">
+                    <div class="w-12 h-12 bg-surface-container rounded-lg flex flex-col items-center justify-center">
+                        <span class="text-xs font-bold">6월</span>
+                        <span class="text-xl font-bold -mt-1">25</span>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-label-md text-on-background">Toss 2차 면접</p>
+                        <p class="text-body-sm text-on-surface-variant">일정 조율 중</p>
+                    </div>
+                    <span class="material-symbols-outlined text-on-surface-variant">arrow_forward_ios</span>
+                </div>
+            </div>
+        </section>
     </div>
     <!-- Total Templates -->
     <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-border-subtle">
@@ -398,6 +499,10 @@
         (async function updateNavAuth() {
             try {
                 const r = await fetch('/api/auth/me', { credentials: 'same-origin' });
+                if (r.status === 401) {
+                    window.location.href = 'login.html?next=dashboard.html';
+                    return;
+                }
                 const data = await r.json();
                 if (data.success && data.user) {
                     const u = data.user;
