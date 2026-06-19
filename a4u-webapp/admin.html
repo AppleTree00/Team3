@@ -97,34 +97,6 @@ tailwind.config = {
       </div>
     </div>
 
-<<<<<<< HEAD
-    <script>
-        function handleLogin() {
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('error-message');
-            errorMessage.textContent = '';
-
-            fetch('/api/admin/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ password: password }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // 로그인 성공 시 대시보드 페이지(dashboard.html)로 이동합니다.
-                    window.location.href = 'dashboard.html';
-                } else {
-                    errorMessage.textContent = data.message || '로그인에 실패했습니다.';
-                }
-            })
-            .catch(error => {
-                console.error('Login error:', error);
-                errorMessage.textContent = '서버와 통신 중 오류가 발생했습니다.';
-            });
-=======
     <!-- 네비게이션 -->
     <nav class="flex-1 p-2.5 space-y-0.5 overflow-y-auto">
       <div class="nav-divider">개요</div>
@@ -602,7 +574,6 @@ window.addEventListener('DOMContentLoaded', async () => {
         const d = await r.json();
         if (d.success && d.user) {
             document.getElementById('admin-name').textContent = d.user.name;
->>>>>>> dc5d66d52c548e1336dea24642558ed102dea423
         }
     } catch (_) {}
     loadDashboard();
