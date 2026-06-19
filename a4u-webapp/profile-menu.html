@@ -274,6 +274,62 @@
     
         setActiveLink(navLinks);
         setActiveLink(mobileNavLinks);
+
+        // ── 미구현 기능 안내 팝업 ──────────────────────────────────────
+        function handleUnavailableFeature() {
+            alert('현재 이 기능은 고도화 단계에 있습니다. 업데이트 이후 사용 가능하니 잠시만 기다려주세요.');
+        }
+
+        // ── 알림 버튼 ──────────────────────────────────────────────────
+        document.querySelectorAll('button').forEach(btn => {
+            const icon = btn.querySelector('.material-symbols-outlined');
+            if (icon && icon.textContent.trim() === 'notifications') {
+                btn.addEventListener('click', handleUnavailableFeature);
+            }
+        });
+
+        // ── 사이드바 메뉴 항목 팝업 연결 ──────────────────────────────
+        document.querySelectorAll('nav .menu-item').forEach(item => {
+            const text = item.textContent.trim();
+            // 로그아웃은 별도 처리
+            if (text.includes('로그아웃')) {
+                item.addEventListener('click', async e => {
+                    e.preventDefault();
+                    try {
+                        await fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' });
+                    } catch (_) {}
+                    window.location.href = 'main.html';
+                });
+                return;
+            }
+            // 나머지 메뉴 → 미구현 팝업
+            item.addEventListener('click', e => {
+                e.preventDefault();
+                handleUnavailableFeature();
+            });
+        });
+
+        // ── 계정 삭제 버튼 ─────────────────────────────────────────────
+        document.querySelectorAll('button').forEach(btn => {
+            if (btn.textContent.trim().includes('계정 삭제')) {
+                btn.addEventListener('click', handleUnavailableFeature);
+            }
+        });
+
+        // ── 통계 API 연동 ──────────────────────────────────────────────
+        fetch('/api/stats')
+            .then(r => r.json())
+            .then(data => {
+                if (!data.success) return;
+                const s = data.stats;
+                const statEls = document.querySelectorAll('.grid.grid-cols-3 .text-2xl, .grid.grid-cols-3 .text-xl');
+                if (statEls.length >= 3) {
+                    statEls[0].textContent = s.total_resumes;
+                    statEls[1].textContent = s.total_applications;
+                    statEls[2].textContent = s.total_uploads;
+                }
+            })
+            .catch(() => {});
     </script>
 </body>
 </html>

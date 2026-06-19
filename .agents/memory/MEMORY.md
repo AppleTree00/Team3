@@ -1,0 +1,2 @@
+- [a4u project architecture](a4u-arch.md) — Flask MVP: resume_routes.py(인증+CRUD+통계), coaching_routes.py(AI Few-shot 3종), admin_routes.py; SQLite 6테이블
+- [a4u QA patterns](a4u-qa.md) — 미구현 기능은 handleUnavailableFeature() 팝업, 파일업로드 400/PDF 200, 인증없이 PUT 401 패턴 확인됨
