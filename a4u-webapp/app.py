@@ -3,7 +3,7 @@ import re
 import json
 import time
 from datetime import datetime, timezone, timedelta
-from flask import Flask, request, jsonify, redirect, send_from_directory
+from flask import Flask, request, jsonify, redirect, send_from_directory, session
 from flask_cors import CORS
 from werkzeug.exceptions import RequestEntityTooLarge, HTTPException
 from models import db, User, UploadedFile, Resume, ResumeTemplate, JobApplication
@@ -58,10 +58,33 @@ if not os.path.exists(UPLOAD_FOLDER):
 def is_allowed_mimetype(mimetype):
     return mimetype in ALLOWED_MIMETYPES
 
+# ── 인증 미들웨어 ─────────────────────────────────────────────────────
+# 로그인 없이 접근 시 login.html으로 리디렉션하는 보호 페이지 목록
+PROTECTED_PAGES = {
+    'dashboard.html', 'builder.html', 'resume.html',
+    'timeline.html', 'profile-menu.html', 'select.html'
+}
+
+@app.before_request
+def require_login():
+    path = request.path.lstrip('/')
+    # 정적 파일 + 보호 페이지만 체크
+    if path in PROTECTED_PAGES:
+        if not session.get('user_id'):
+            return redirect(f'/login.html?next={path}&reason=auth')
+
 # ── 기본 라우트 ───────────────────────────────────────────────────────
 @app.route('/')
 def index():
     return redirect('/main.html')
+
+@app.route('/login')
+@app.route('/login.html')
+def login_page():
+    # 이미 로그인된 경우 대시보드로
+    if session.get('user_id'):
+        return redirect('/dashboard.html')
+    return send_from_directory(BASE_DIR, 'login.html')
 
 @app.route('/favicon.ico')
 def favicon():

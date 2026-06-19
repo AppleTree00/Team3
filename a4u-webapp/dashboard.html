@@ -533,6 +533,22 @@
         setActiveLink(navLinks);
         setActiveLink(mobileNavLinks);
 
+        // ── 네비게이션 인증 상태 동적 표시 ────────────────────────────
+        (async function updateNavAuth() {
+            try {
+                const r = await fetch('/api/auth/me', { credentials: 'same-origin' });
+                const data = await r.json();
+                const profileLink = document.querySelector('a[href="profile-menu.html"]');
+                if (!profileLink) return;
+                if (data.success && data.user) {
+                    const nameEl = document.createElement('span');
+                    nameEl.className = 'hidden sm:block text-sm font-semibold text-on-surface truncate max-w-[80px]';
+                    nameEl.textContent = data.user.name;
+                    profileLink.parentNode.insertBefore(nameEl, profileLink);
+                }
+            } catch (_) {}
+        })();
+
         // ── 알림 버튼 ──────────────────────────────────────────────────
         document.querySelectorAll('button').forEach(btn => {
             const icon = btn.querySelector('.material-symbols-outlined');
