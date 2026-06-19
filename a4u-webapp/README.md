@@ -24,3 +24,39 @@
 ## **5\. 협업 규칙**
 
 모든 팀원은 PROJECT\_MASTER.md를 기준으로 단위 업무를 업데이트하며, 변경적용 시 PM의 컨펌을 받습니다.
+
+## **6. 로컬 개발 환경 설정 및 실행**
+
+### **6.1. 사전 준비**
+*   Python 3.8 이상
+*   pip (Python 패키지 관리자)
+
+### **6.2. 설치 및 실행**
+
+1.  **가상 환경 생성 및 활성화:**
+    프로젝트 루트 디렉토리에서 다음 명령어를 실행하여 가상 환경을 설정합니다.
+    ```bash
+    # Windows
+    python -m venv venv
+    venv\Scripts\activate
+
+    # macOS / Linux
+    python3 -m venv venv
+    source venv/bin/activate
+    ```
+
+2.  **의존성 패키지 설치:**
+    ```bash
+    pip install Flask Flask-SQLAlchemy Flask-Cors
+    ```
+
+3.  **애플리케이션 실행:**
+    다음 명령어를 실행하면 `a4u.db` 데이터베이스가 초기화되고 웹 서버가 시작됩니다.
+    ```bash
+    python run.py
+    ```
+
+4.  **접속 정보:**
+    *   **메인 페이지:** `http://localhost:5000`
+    *   **관리자 페이지:** `http://localhost:5000/admin`
+    *   **관리자 초기 비밀번호:** `admin1234` (`ADMIN_PASSWORD` 환경 변수로 변경 가능)
