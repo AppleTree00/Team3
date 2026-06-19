@@ -26,17 +26,30 @@
 
     <script>
         function handleLogin() {
-            const passwordInput = document.getElementById('password');
+            const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
-            // 요청하신대로 초기 비밀번호 '1234'로 진입하도록 처리합니다.
-            // 현재는 아이디 입력 없이 비밀번호만으로 로그인합니다.
-            if (passwordInput.value === '1234') {
-                alert('관리자님 환영합니다');
-                // 로그인 성공 시 대시보드 페이지(dashboard.html)로 이동합니다.
-                window.location.href = 'dashboard.html';
-            } else {
-                errorMessage.textContent = '비밀번호가 올바르지 않습니다.';
-            }
+            errorMessage.textContent = '';
+
+            fetch('/api/admin/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ password: password }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // 로그인 성공 시 대시보드 페이지(dashboard.html)로 이동합니다.
+                    window.location.href = 'dashboard.html';
+                } else {
+                    errorMessage.textContent = data.message || '로그인에 실패했습니다.';
+                }
+            })
+            .catch(error => {
+                console.error('Login error:', error);
+                errorMessage.textContent = '서버와 통신 중 오류가 발생했습니다.';
+            });
         }
     </script>
 </body>

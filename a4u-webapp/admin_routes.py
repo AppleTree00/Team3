@@ -1,8 +1,8 @@
 import os
 import json
 from datetime import datetime, timezone
-from flask import Blueprint, request, jsonify, session, send_from_directory, current_app
-from models import db, User, ResumeTemplate, UploadedFile, SchemaMigration
+from flask import Blueprint, request, jsonify, session, current_app
+from .models import db, User, ResumeTemplate, UploadedFile, SchemaMigration
 from sqlalchemy import text, inspect
 
 admin_bp = Blueprint('admin', __name__, url_prefix='/api/admin')
