@@ -99,16 +99,16 @@
 
                 <!-- 프로필 정보 -->
                 <div class="flex-1">
-                    <h1 class="text-3xl font-bold text-gray-900 mb-2">김철수</h1>
-                    <p class="text-gray-600 mb-4">시니어 프론트엔드 개발자 | 5년 경력</p>
+                    <h1 class="text-3xl font-bold text-gray-900 mb-2" id="profile-name">—</h1>
+                    <p class="text-gray-600 mb-4" id="profile-role">a4u 플랫폼 회원</p>
                     <div class="flex flex-wrap gap-4">
                         <div>
                             <p class="text-sm text-gray-500 mb-1">이메일</p>
-                            <p class="font-medium text-gray-900">kim.chulsu@a4u.com</p>
+                            <p class="font-medium text-gray-900" id="profile-email">—</p>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500 mb-1">전화</p>
-                            <p class="font-medium text-gray-900">010-1234-5678</p>
+                            <p class="text-sm text-gray-500 mb-1">가입일</p>
+                            <p class="font-medium text-gray-900" id="profile-joined">—</p>
                         </div>
                     </div>
                 </div>
@@ -178,16 +178,16 @@
                     </h3>
                     <div class="grid grid-cols-3 gap-4">
                         <div class="text-center">
-                            <p class="text-3xl font-bold text-blue-600">12</p>
-                            <p class="text-sm text-gray-600 mt-1">완성된 경력</p>
+                            <p class="text-3xl font-bold text-blue-600" id="stat-resumes">—</p>
+                            <p class="text-sm text-gray-600 mt-1">총 이력서</p>
                         </div>
                         <div class="text-center">
-                            <p class="text-3xl font-bold text-cyan-600">5</p>
-                            <p class="text-sm text-gray-600 mt-1">프로젝트</p>
+                            <p class="text-3xl font-bold text-cyan-600" id="stat-applications">—</p>
+                            <p class="text-sm text-gray-600 mt-1">입사 지원</p>
                         </div>
                         <div class="text-center">
-                            <p class="text-3xl font-bold text-purple-600">48</p>
-                            <p class="text-sm text-gray-600 mt-1">프로필 조회</p>
+                            <p class="text-3xl font-bold text-purple-600" id="stat-uploads">—</p>
+                            <p class="text-sm text-gray-600 mt-1">업로드 파일</p>
                         </div>
                     </div>
                 </div>
@@ -298,7 +298,7 @@
                     try {
                         await fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' });
                     } catch (_) {}
-                    window.location.href = 'main.html';
+                    window.location.href = 'login.html';
                 });
                 return;
             }
@@ -316,20 +316,82 @@
             }
         });
 
-        // ── 통계 API 연동 ──────────────────────────────────────────────
-        fetch('/api/stats')
-            .then(r => r.json())
-            .then(data => {
-                if (!data.success) return;
-                const s = data.stats;
-                const statEls = document.querySelectorAll('.grid.grid-cols-3 .text-2xl, .grid.grid-cols-3 .text-xl');
-                if (statEls.length >= 3) {
-                    statEls[0].textContent = s.total_resumes;
-                    statEls[1].textContent = s.total_applications;
-                    statEls[2].textContent = s.total_uploads;
+        // ── 사용자 정보 + 통계 + 최근 활동 로드 ──────────────────────
+        (async function loadUserData() {
+            try {
+                const [meRes, statsRes, resumesRes] = await Promise.all([
+                    fetch('/api/auth/me', { credentials: 'same-origin' }),
+                    fetch('/api/stats', { credentials: 'same-origin' }),
+                    fetch('/api/resumes', { credentials: 'same-origin' })
+                ]);
+
+                // 사용자 정보
+                const meData = await meRes.json();
+                if (meData.success && meData.user) {
+                    const u = meData.user;
+                    const nameEl  = document.getElementById('profile-name');
+                    const emailEl = document.getElementById('profile-email');
+                    const joinedEl = document.getElementById('profile-joined');
+                    const roleEl  = document.getElementById('profile-role');
+                    if (nameEl)  nameEl.textContent  = u.name  || '이름 없음';
+                    if (emailEl) emailEl.textContent = u.email || '—';
+                    if (joinedEl) {
+                        const d = u.created_at ? new Date(u.created_at) : null;
+                        joinedEl.textContent = d
+                            ? `${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일`
+                            : '—';
+                    }
+                    if (roleEl && u.is_admin) roleEl.textContent = 'a4u 관리자';
+
+                    // 네비게이션 사용자 이름 표시
+                    const profileLink = document.querySelector('a[href="profile-menu.html"]');
+                    if (profileLink) {
+                        const span = document.createElement('span');
+                        span.className = 'hidden sm:block text-sm font-semibold text-on-surface truncate max-w-[80px]';
+                        span.textContent = u.name;
+                        profileLink.parentNode.insertBefore(span, profileLink);
+                    }
+                } else if (meRes.status === 401) {
+                    window.location.href = 'login.html?next=profile-menu.html&reason=auth';
+                    return;
                 }
-            })
-            .catch(() => {});
+
+                // 통계
+                const statsData = await statsRes.json();
+                if (statsData.success) {
+                    const s = statsData.stats;
+                    const rEl = document.getElementById('stat-resumes');
+                    const aEl = document.getElementById('stat-applications');
+                    const uEl = document.getElementById('stat-uploads');
+                    if (rEl) rEl.textContent = s.total_resumes  ?? 0;
+                    if (aEl) aEl.textContent = s.total_applications ?? 0;
+                    if (uEl) uEl.textContent = s.total_uploads   ?? 0;
+                }
+
+                // 최근 활동: 이력서 목록 기반 동적 생성
+                const resumesData = await resumesRes.json();
+                const activityContainer = document.querySelector('.space-y-3');
+                if (activityContainer && resumesData.success && resumesData.resumes?.length > 0) {
+                    const recent = resumesData.resumes.slice(0, 3);
+                    activityContainer.innerHTML = recent.map(r => {
+                        const dt = r.updated_at || r.created_at;
+                        const d  = dt ? new Date(dt) : new Date();
+                        const dateStr = `${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일`;
+                        return `<div class="flex items-start gap-3 pb-3 border-b last:border-b-0">
+                            <span class="material-symbols-outlined text-blue-600 flex-shrink-0">article</span>
+                            <div>
+                                <p class="font-medium text-gray-900">${r.title || '이력서'} 이력서 수정됨</p>
+                                <p class="text-sm text-gray-500">${dateStr}</p>
+                            </div>
+                        </div>`;
+                    }).join('');
+                } else if (activityContainer) {
+                    activityContainer.innerHTML = `<p class="text-sm text-gray-500 text-center py-4">아직 활동 내역이 없습니다.</p>`;
+                }
+            } catch (err) {
+                console.warn('프로필 데이터 로드 실패:', err);
+            }
+        })();
     </script>
 </body>
 </html>

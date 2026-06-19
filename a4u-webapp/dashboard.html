@@ -207,8 +207,8 @@
 <main class="pt-24 pb-12 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
 <!-- Welcome Section -->
 <section class="mb-8">
-<h1 class="font-headline-lg text-headline-lg text-on-background mb-2">다시 오신 것을 환영합니다, 알렉산더님</h1>
-<p class="font-body-md text-body-md text-on-surface-variant">이번 주에 2개의 인터뷰 일정이 있습니다. 행운을 빌어요!</p>
+<h1 class="font-headline-lg text-headline-lg text-on-background mb-2">다시 오신 것을 환영합니다, <span id="dashboard-user-name">님</span></h1>
+<p class="font-body-md text-body-md text-on-surface-variant" id="dashboard-subtitle">오늘도 커리어 목표를 향해 나아가세요!</p>
 </section>
 <!-- Bento Grid: Main Insights -->
 <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-gutter">
@@ -533,18 +533,24 @@
         setActiveLink(navLinks);
         setActiveLink(mobileNavLinks);
 
-        // ── 네비게이션 인증 상태 동적 표시 ────────────────────────────
+        // ── 네비게이션 인증 상태 + 웰컴 이름 동적 표시 ───────────────
         (async function updateNavAuth() {
             try {
                 const r = await fetch('/api/auth/me', { credentials: 'same-origin' });
                 const data = await r.json();
-                const profileLink = document.querySelector('a[href="profile-menu.html"]');
-                if (!profileLink) return;
                 if (data.success && data.user) {
-                    const nameEl = document.createElement('span');
-                    nameEl.className = 'hidden sm:block text-sm font-semibold text-on-surface truncate max-w-[80px]';
-                    nameEl.textContent = data.user.name;
-                    profileLink.parentNode.insertBefore(nameEl, profileLink);
+                    const u = data.user;
+                    // 웰컴 메시지 이름 삽입
+                    const welcomeNameEl = document.getElementById('dashboard-user-name');
+                    if (welcomeNameEl) welcomeNameEl.textContent = u.name + '님';
+                    // 네비게이션 프로필 이름 삽입
+                    const profileLink = document.querySelector('a[href="profile-menu.html"]');
+                    if (profileLink) {
+                        const nameEl = document.createElement('span');
+                        nameEl.className = 'hidden sm:block text-sm font-semibold text-on-surface truncate max-w-[80px]';
+                        nameEl.textContent = u.name;
+                        profileLink.parentNode.insertBefore(nameEl, profileLink);
+                    }
                 }
             } catch (_) {}
         })();
