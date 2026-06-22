@@ -1,6 +1,0 @@
-{
-    // 이 설정은 VS Code의 Python 확장 프로그램(Pylance)에 대한 것입니다.
-    "python.analysis.extraPaths": [
-        "${workspaceFolder}"
-    ]
-}
