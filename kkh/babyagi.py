@@ -13,9 +13,9 @@ load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # 2. 초기 목표 및 작업 큐 설정
-OBJECTIVE = "서울 지역 비건 빵집 창업을 위한 시장 조사"
+OBJECTIVE = "국내 자이로토닉 센터 창업을 위한 시장 조사"
 task_queue = deque([
-    {"task_id": 1, "task_name": "서울의 유명 비건 빵집 리스트업 하기"}
+    {"task_id": 1, "task_name": "국내 자이로토닉 센터 리스트업 하기"}
 ])
 task_id_counter = 1
 
@@ -59,8 +59,8 @@ def task_creation_agent(objective: str, result: str, current_task: str) -> list:
 [응답 형식]
 각 작업을 한 줄에 하나씩만 작성해 주세요. 글머리 기호(-나 *)나 번호(1., 2.)는 붙이지 마세요.
 예시:
-홍대 지역 비건 빵집 방문객 유동인구 분석
-비건 베이커리 원재료 공급망 조사"""
+서울 지역 자이로토닉 센터 방문객 유동인구 분석
+자이로토닉 강사에 대한 라이센스 교육 진행 조사"""
 
     response = client.chat.completions.create(
         model=MODEL_NAME,
